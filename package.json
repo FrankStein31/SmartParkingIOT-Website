@@ -14,6 +14,7 @@
         "vite": "^6.2.4"
     },
     "dependencies": {
-        "@creative-tim-official/argon-dashboard-free": "^1.2.0"
+        "@creative-tim-official/argon-dashboard-free": "^1.2.0",
+        "firebase": "^11.8.1"
     }
 }
