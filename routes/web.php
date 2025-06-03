@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\MahasiswaController;
+use App\Http\Controllers\PortalController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -18,6 +20,5 @@ Route::get('/parkir-mobil', function () {
     return view('parkir.mobil');
 });
 
-Route::get('/mahasiswa', function () {
-    return view('mahasiswa.index');
-});
+Route::get('/mahasiswa', [MahasiswaController::class, 'index'])->name('mahasiswa.index');
+Route::get('/portal', [PortalController::class, 'index'])->name('portal.index');
