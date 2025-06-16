@@ -17,12 +17,12 @@
                             <tr>
                                 <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">NIM</th>
                                 <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Nama</th>
-                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Jobdeck</th>
+                                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Jurusan</th>
                                 <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Aksi</th>
                             </tr>
                         </thead>
                         <tbody id="mahasiswaList">
-                            </tbody>
+                        </tbody>
                     </table>
                 </div>
             </div>
@@ -48,8 +48,8 @@
                         <input type="text" class="form-control" id="nama" required>
                     </div>
                     <div class="mb-3">
-                        <label class="form-label">Jobdeck</label>
-                        <input type="text" class="form-control" id="jobdeck" required>
+                        <label class="form-label">Jurusan</label>
+                        <input type="text" class="form-control" id="jurusan" required>
                     </div>
                     <button type="submit" class="btn btn-primary">Simpan</button>
                 </form>
@@ -76,8 +76,8 @@
                         <input type="text" class="form-control" id="edit_nama" required>
                     </div>
                     <div class="mb-3">
-                        <label class="form-label">Jobdeck</label>
-                        <input type="text" class="form-control" id="edit_jobdeck" required>
+                        <label class="form-label">Jurusan</label>
+                        <input type="text" class="form-control" id="edit_jurusan" required>
                     </div>
                     <button type="submit" class="btn btn-primary">Update</button>
                 </form>
@@ -105,21 +105,24 @@
                 let html = '';
                 
                 if (data) {
-                    Object.entries(data).forEach(([key, mhs]) => {
+                    Object.entries(data).forEach(([nim, mhs]) => {
                         html += `
                             <tr>
                                 <td class="ps-3">
-                                    <p class="text-xs font-weight-bold mb-0">${key}</p>
+                                    <p class="text-xs font-weight-bold mb-0">${nim}</p>
                                 </td>
                                 <td>
                                     <p class="text-xs font-weight-bold mb-0">${mhs.nama}</p>
                                 </td>
                                 <td>
-                                    <p class="text-xs font-weight-bold mb-0">${mhs.jobdeck}</p>
+                                    <p class="text-xs font-weight-bold mb-0">${mhs.jurusan}</p>
                                 </td>
                                 <td>
-                                    <button class="btn btn-info btn-sm edit-btn" data-nim="${key}" data-nama="${mhs.nama}" data-jobdeck="${mhs.jobdeck}">Edit</button>
-                                    <button class="btn btn-danger btn-sm delete-btn" data-nim="${key}">Hapus</button>
+                                    <button class="btn btn-info btn-sm edit-btn" 
+                                        data-nim="${nim}"
+                                        data-nama="${mhs.nama}"
+                                        data-jurusan="${mhs.jurusan}">Edit</button>
+                                    <button class="btn btn-danger btn-sm delete-btn" data-nim="${nim}">Hapus</button>
                                 </td>
                             </tr>
                         `;
@@ -129,7 +132,7 @@
                 }
                 
                 document.getElementById('mahasiswaList').innerHTML = html;
-                attachActionListeners(); // Panggil fungsi untuk menambahkan event listener ke tombol baru
+                attachActionListeners();
             } catch (error) {
                 console.error('Error loading data:', error);
                 Swal.fire({
@@ -140,14 +143,13 @@
             }
         }
 
-        // Fungsi untuk menambahkan event listener ke tombol aksi
         function attachActionListeners() {
             document.querySelectorAll('.edit-btn').forEach(button => {
                 button.addEventListener('click', function() {
                     const nim = this.dataset.nim;
                     const nama = this.dataset.nama;
-                    const jobdeck = this.dataset.jobdeck;
-                    window.editMahasiswa(nim, nama, jobdeck);
+                    const jurusan = this.dataset.jurusan;
+                    window.editMahasiswa(nim, nama, jurusan);
                 });
             });
 
@@ -159,47 +161,23 @@
             });
         }
 
-
-        // Load data pertama kali
         loadData();
 
-        // Tambah data
         document.getElementById('addForm').addEventListener('submit', async (e) => {
             e.preventDefault();
             try {
-                const nimInput = document.getElementById('nim');
-                const namaInput = document.getElementById('nama');
-                const jobdeckInput = document.getElementById('jobdeck');
+                const nim = document.getElementById('nim').value.trim();
+                const nama = document.getElementById('nama').value.trim();
+                const jurusan = document.getElementById('jurusan').value.trim();
 
-                const nim = nimInput.value.trim();
-                const nama = namaInput.value.trim();
-                const jobdeck = jobdeckInput.value.trim();
-
-                if (!nim) {
+                if (!nim || !nama || !jurusan) {
                     Swal.fire({
                         icon: 'warning',
                         title: 'Input Tidak Lengkap',
-                        text: 'NIM tidak boleh kosong!',
+                        text: 'Semua field harus diisi!',
                     });
                     return;
                 }
-                if (!nama) {
-                     Swal.fire({
-                        icon: 'warning',
-                        title: 'Input Tidak Lengkap',
-                        text: 'Nama tidak boleh kosong!',
-                    });
-                    return;
-                }
-                 if (!jobdeck) {
-                     Swal.fire({
-                        icon: 'warning',
-                        title: 'Input Tidak Lengkap',
-                        text: 'Jobdeck tidak boleh kosong!',
-                    });
-                    return;
-                }
-
 
                 // Cek duplikat NIM
                 const nimRef = child(mahasiswaRef, nim);
@@ -213,11 +191,14 @@
                     return;
                 }
 
-                const newData = { nama, jobdeck };
+                const newData = {
+                    nama,
+                    jurusan
+                };
 
                 await set(nimRef, newData);
+                
                 document.getElementById('addForm').reset();
-                // Tutup modal Bootstrap
                 const addModalElement = document.getElementById('addModal');
                 const addModalInstance = bootstrap.Modal.getInstance(addModalElement);
                 if (addModalInstance) {
@@ -229,7 +210,7 @@
                     icon: 'success',
                     title: 'Berhasil!',
                     text: 'Data mahasiswa berhasil ditambahkan.',
-                    timer: 1500, // Popup akan hilang setelah 1.5 detik
+                    timer: 1500,
                     showConfirmButton: false
                 });
             } catch (error) {
@@ -242,12 +223,11 @@
             }
         });
 
-        // Edit data
-        window.editMahasiswa = (nim, nama, jobdeck) => {
+        window.editMahasiswa = (nim, nama, jurusan) => {
             document.getElementById('edit_nim').value = nim;
             document.getElementById('edit_nama').value = nama;
-            document.getElementById('edit_jobdeck').value = jobdeck;
-            // Tampilkan modal Bootstrap
+            document.getElementById('edit_jurusan').value = jurusan;
+            
             const editModalElement = document.getElementById('editModal');
             const editModalInstance = new bootstrap.Modal(editModalElement);
             editModalInstance.show();
@@ -257,34 +237,25 @@
             e.preventDefault();
             try {
                 const nim = document.getElementById('edit_nim').value;
-                const namaInput = document.getElementById('edit_nama');
-                const jobdeckInput = document.getElementById('edit_jobdeck');
+                const nama = document.getElementById('edit_nama').value.trim();
+                const jurusan = document.getElementById('edit_jurusan').value.trim();
 
-                const nama = namaInput.value.trim();
-                const jobdeck = jobdeckInput.value.trim();
-
-                 if (!nama) {
-                     Swal.fire({
+                if (!nama || !jurusan) {
+                    Swal.fire({
                         icon: 'warning',
                         title: 'Input Tidak Lengkap',
-                        text: 'Nama tidak boleh kosong!',
-                    });
-                    return;
-                }
-                 if (!jobdeck) {
-                     Swal.fire({
-                        icon: 'warning',
-                        title: 'Input Tidak Lengkap',
-                        text: 'Jobdeck tidak boleh kosong!',
+                        text: 'Semua field harus diisi!',
                     });
                     return;
                 }
 
-                const updatedData = { nama, jobdeck };
+                const updatedData = {
+                    nama,
+                    jurusan
+                };
 
                 await set(child(mahasiswaRef, nim), updatedData);
                 
-                // Tutup modal Bootstrap
                 const editModalElement = document.getElementById('editModal');
                 const editModalInstance = bootstrap.Modal.getInstance(editModalElement);
                 if (editModalInstance) {
@@ -301,7 +272,7 @@
                 });
             } catch (error) {
                 console.error('Error updating data:', error);
-                 Swal.fire({
+                Swal.fire({
                     icon: 'error',
                     title: 'Oops...',
                     text: 'Gagal mengupdate data: ' + error.message,
@@ -309,7 +280,6 @@
             }
         });
 
-        // Hapus data
         window.deleteMahasiswa = async (nim) => {
             Swal.fire({
                 title: 'Anda Yakin?',
@@ -344,7 +314,6 @@
 
     } catch (error) {
         console.error('Firebase initialization error:', error);
-        // Tampilkan error menggunakan SweetAlert jika library sudah termuat
         if (typeof Swal !== 'undefined') {
             Swal.fire({
                 icon: 'error',
