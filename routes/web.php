@@ -20,5 +20,9 @@ Route::get('/parkir-mobil', function () {
     return view('parkir.mobil');
 });
 
+Route::get('/jam-ramai-motor', function () {
+    return view('parkir.jam-ramai-motor');
+});
+
 Route::get('/mahasiswa', [MahasiswaController::class, 'index'])->name('mahasiswa.index');
 Route::get('/portal', [PortalController::class, 'index'])->name('portal.index');
