@@ -10,4 +10,8 @@ class PortalController extends Controller
     {
         return view('portal.index');
     }
-} 
+    public function indexp()
+    {
+        return view('admin.portal.index');
+    }
+}
