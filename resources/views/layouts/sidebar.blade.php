@@ -36,6 +36,18 @@
                     <span class="nav-link-text ms-1">Parkir Mobil</span>
                 </a>
             </li>
+
+            <!-- Jam Ramai Motor -->
+            <li class="nav-item">
+                <a class="nav-link {{ request()->is('jam-ramai-motor*') ? 'active' : '' }}" href="/jam-ramai-motor">
+                    <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
+                        <i class="fas fa-chart-bar {{ request()->is('jam-ramai-motor*') ? 'text-white' : 'text-dark' }}"></i>
+                    </div>
+                    <span class="nav-link-text ms-1">Jam Ramai Motor</span>
+                </a>
+            </li>
+
+
             <li class="nav-item mt-3">
                 <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6">Data Master</h6>
             </li>
@@ -57,4 +69,4 @@
             </li>
         </ul>
     </div>
-</aside> 
+</aside>
