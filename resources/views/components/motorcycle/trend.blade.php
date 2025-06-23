@@ -13,13 +13,13 @@
                 <div class="row">
                     <div class="col-lg-6">
                         <div class="text-center">
-                            <h1 class="text-primary font-weight-bolder" id="peak-hour-mobil">-</h1>
-                            <p class="text-sm mb-0">Jam dengan <span id="peak-count-mobil">0</span> akses</p>
+                            <h1 class="text-primary font-weight-bolder" id="peak-hour-motor">-</h1>
+                            <p class="text-sm mb-0">Jam dengan <span id="peak-count-motor">0</span> akses</p>
                         </div>
                     </div>
                     <div class="col-lg-6">
                         <div class="text-center">
-                            <h1 class="text-success font-weight-bolder" id="avg-per-hour-mobil">0</h1>
+                            <h1 class="text-success font-weight-bolder" id="avg-per-hour-motor">0</h1>
                             <p class="text-sm mb-0">Rata-rata akses per jam</p>
                         </div>
                     </div>

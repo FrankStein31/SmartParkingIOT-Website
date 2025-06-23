@@ -4,7 +4,7 @@
     <x-car.charts />
     <div class="content-card">
         <div class="card-header d-flex justify-content-between align-items-center">
-            <h6>Status Slot Parkir Mobil</h6>
+            <h3>Status Slot Parkir Mobil</h3>
             <p class="text-sm mb-0">
                 <i class="fa-solid fa-circle text-success me-1"></i> Kosong
                 <i class="fa-solid fa-circle text-danger ms-3 me-1"></i> Terisi

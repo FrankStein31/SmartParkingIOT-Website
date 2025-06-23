@@ -346,7 +346,7 @@
             <a class="navbar-brand" href="#" onclick="showSection('home')">SmartParking</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"
-                    style="background-image: url(\"data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba(255,255,255,0.8)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e\");"></span>
+                    style="background-image: url(\" data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30' %3e%3cpath stroke='rgba(255,255,255,0.8)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22' /%3e%3c/svg%3e\");"></span>
             </button>
             <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
                 <ul class="navbar-nav align-items-center">
@@ -392,43 +392,7 @@
         </div>
         <!-- Parkir Motor Section -->
         <div id="parkir-motor" class="content-section">
-            <div class="container">
-                <h2 class="section-title">Manajemen Parkir Motor</h2>
-                <div class="content-card">
-                    <div class="card-header d-flex justify-content-between align-items-center">
-                        <h6>Status Slot Parkir Motor</h6>
-                        <p class="text-sm mb-0">
-                            <i class="fa-solid fa-circle text-success me-1"></i> Kosong
-                            <i class="fa-solid fa-circle text-danger ms-3 me-1"></i> Terisi
-                        </p>
-                    </div>
-                    <div class="card-body p-3">
-                        <div class="row gy-4" id="slotMotorList">
-                        </div>
-                    </div>
-                </div>
-                <div class="content-card">
-                    <div class="card-header">
-                        <h6><i class="fas fa-history me-2"></i>Riwayat Parkir Motor</h6>
-                    </div>
-                    <div class="card-body px-0 pt-0 pb-2">
-                        <div class="table-responsive p-0">
-                            <table class="table align-items-center mb-0 table-dark-custom">
-                                <thead>
-                                    <tr>
-                                        <th>Tanggal & Waktu</th>
-                                        <th>NIM</th>
-                                        <th>Nama</th>
-                                        <th>Akses</th>
-                                    </tr>
-                                </thead>
-                                <tbody id="motorList">
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <x-motorcycle.page />
         </div>
 
         <!-- Parkir Mobil Section -->
@@ -441,10 +405,10 @@
             <div class="container">
                 <h2 class="section-title">Data Master Mahasiswa</h2>
                 <div class="content-card">
-                <div class="mt-4">
-                    <h6 class="text-white">Grafik Jumlah Mahasiswa per Jurusan</h6>
-                    <canvas id="jurusanChart" height="100"></canvas>
-                </div>
+                    <div class="mt-4">
+                        <h6 class="text-white">Grafik Jumlah Mahasiswa per Jurusan</h6>
+                        <canvas id="jurusanChart" height="100"></canvas>
+                    </div>
                 </div>
                 <div class="content-card">
                     <div class="card-header">
@@ -661,14 +625,19 @@
                             <button class="btn btn-info btn-sm" onclick="editMahasiswa('${nim}', '${mhs.Nama || mhs.nama}', '${mhs.Jurusan || mhs.jurusan}')"><i class="fas fa-edit"></i></button>
                             <button class="btn btn-danger btn-sm" onclick="deleteMahasiswa('${nim}')"><i class="fas fa-trash"></i></button>
                         </td></tr>`;
-                });
-            } else { html = noDataFound(4, "Tidak ada data mahasiswa."); }
-            mhsListEl.innerHTML = html;
-            tampilkanGrafikJurusan();
+                    });
+                } else {
+                    html = noDataFound(4, "Tidak ada data mahasiswa.");
+                }
+                mhsListEl.innerHTML = html;
+                tampilkanGrafikJurusan();
 
-        } catch (error) { console.error(error); mhsListEl.innerHTML = noDataFound(4, "Gagal memuat data."); }
-    }
-    async function tampilkanGrafikJurusan() {
+            } catch (error) {
+                console.error(error);
+                mhsListEl.innerHTML = noDataFound(4, "Gagal memuat data.");
+            }
+        }
+        async function tampilkanGrafikJurusan() {
             try {
                 const snapshot = await get(mahasiswaRef);
                 const data = snapshot.val();
@@ -723,12 +692,12 @@
                 console.error("Gagal memuat grafik jurusan:", error);
             }
         }
-    document.getElementById('addForm').addEventListener('submit', async (e) => {
-        e.preventDefault();
-        const nim = document.getElementById('nim').value.trim();
-        const nama = document.getElementById('nama').value.trim();
-        const jurusan = document.getElementById('jurusan').value.trim();
-        if (!nim || !nama || !jurusan) return;
+        document.getElementById('addForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const nim = document.getElementById('nim').value.trim();
+            const nama = document.getElementById('nama').value.trim();
+            const jurusan = document.getElementById('jurusan').value.trim();
+            if (!nim || !nama || !jurusan) return;
 
             const nimRef = child(mahasiswaRef, nim);
             const snapshot = await get(nimRef);
@@ -812,221 +781,204 @@
             const slotListEl = document.getElementById(`slot${type}List`);
             const iconClass = type === 'Motor' ? 'fa-motorcycle' : 'fa-car';
 
-            let aksesChart = null;
+            Chart.register(ChartDataLabels);
 
+            let aksesChart = null;
             let hourlyChart = null;
 
+            // Get today's date in YYYY-MM-DD format
+            const today = new Date();
+            const todayString = today.getFullYear() + '-' +
+                String(today.getMonth() + 1).padStart(2, '0') + '-' +
+                String(today.getDate()).padStart(2, '0');
 
+            document.getElementById(`last_updated_${type.toLowerCase()}`).textContent = new Date().toLocaleString('id-ID');
 
-
+            // Helper function to filter today's data only
+            function filterTodayData(data) {
+                const todayData = {};
+                Object.entries(data).forEach(([key, value]) => {
+                    if (typeof value === 'object' && (value.nim || value.NIM)) {
+                        // Check if the entry's date matches today
+                        if (value.tanggal === todayString) {
+                            todayData[key] = value;
+                        }
+                    }
+                });
+                return todayData;
+            }
 
             function updateAksesChart(data) {
+                // Filter data for today only
+                const todayData = filterTodayData(data);
+
                 const stats = {
                     ktm: 0,
                     petugas: 0
                 };
 
-                Object.values(data).forEach(entry => {
+                Object.values(todayData).forEach(entry => {
                     if (entry.akses === 'ktm') stats.ktm++;
                     else if (entry.akses === 'petugas') stats.petugas++;
                 });
+
                 const ctx = document.getElementById(`aksesChart${type}`).getContext('2d');
 
                 if (aksesChart) aksesChart.destroy();
 
-
-
-
-
                 aksesChart = new Chart(ctx, {
-
-
                     type: 'doughnut',
-
-
                     data: {
-
-
                         labels: ['Akses via KTM', 'Akses via Petugas'],
-
-
                         datasets: [{
-
-
                             data: [stats.ktm, stats.petugas],
-
-
                             backgroundColor: ['#5e72e4', '#2dce89'],
-
-
                             borderWidth: 0
-
-
                         }]
-
-
                     },
-
-
                     options: {
-
-
                         responsive: true,
-
-
                         plugins: {
-
-
                             legend: {
-
-
                                 position: 'bottom'
-
-
                             },
-
-
                             datalabels: {
-
-
                                 color: 'white',
-
-
+                                font: {
+                                    size: 25,
+                                    weight: 'bold'
+                                },
                                 formatter: (value, ctx) => {
-
-
                                     const total = ctx.dataset.data.reduce((a, b) => a + b, 0);
-
-
                                     const percentage = total ? Math.round((value / total) * 100) : 0;
-
-
                                     return percentage > 5 ? percentage + '%' : '';
-
-
                                 }
-
-
                             }
-
-
                         }
-
-
                     }
-
-
                 });
-
-
             }
 
+            function updateSummaryStats(type, data) {
+                // Filter data for today only
+                const todayData = filterTodayData(data);
 
+                let ktmCount = 0;
+                let petugasCount = 0;
+                let totalCount = 0;
 
-
-
-            function updateHourlyChart(data) {
-
-
-                const hourlyStats = {};
-
-
-                for (let i = 0; i < 24; i++) hourlyStats[i] = 0;
-
-
-
-
-                Object.values(data).forEach(entry => {
-
-
-                    const hour = parseInt(entry.waktu.split(':')[0]);
-
-
-                    hourlyStats[hour]++;
-
-
+                Object.keys(todayData).forEach(key => {
+                    const entry = todayData[key];
+                    if (entry && (entry.nim || entry.NIM)) {
+                        totalCount++;
+                        if (entry.akses === 'ktm') {
+                            ktmCount++;
+                        } else if (entry.akses === 'petugas') {
+                            petugasCount++;
+                        }
+                    }
                 });
 
+                const stats = {
+                    ktm: ktmCount,
+                    petugas: petugasCount,
+                    total: totalCount
+                };
 
+                const typePrefix = type.toLowerCase();
 
+                document.getElementById(`total-ktm-${typePrefix}`).textContent = stats.ktm;
+                document.getElementById(`total-petugas-${typePrefix}`).textContent = stats.petugas;
+                document.getElementById(`total-akses-${typePrefix}`).textContent = stats.total;
 
+                return stats;
+            }
+
+            function updateHourlyChart(data) {
+                // Filter data for today only
+                const todayData = filterTodayData(data);
+
+                const hourlyStats = {};
+                for (let i = 0; i < 24; i++) hourlyStats[i] = 0;
+
+                Object.values(todayData).forEach(entry => {
+                    const hour = parseInt(entry.waktu.split(':')[0]);
+                    hourlyStats[hour]++;
+                });
 
                 const ctx = document.getElementById(`hourlyChart${type}`).getContext('2d');
 
+                // Find peak hour and counts
+                const maxCount = Math.max(...Object.values(hourlyStats));
+                const peakHourIndex = Object.values(hourlyStats).indexOf(maxCount);
+                const peakHour = Object.keys(hourlyStats)[peakHourIndex];
+
+                // Calculate average per hour
+                const nonZeroHours = Object.values(hourlyStats).filter(v => v > 0).length;
+                const totalAccess = Object.values(hourlyStats).reduce((a, b) => a + b, 0);
+                const avgPerHour = nonZeroHours > 0 ? Math.round(totalAccess / nonZeroHours) : 0;
+
+                const typePrefix = type.toLowerCase();
+                document.getElementById(`peak-hour-${typePrefix}`).textContent = `${peakHour}:00`;
+                document.getElementById(`peak-count-${typePrefix}`).textContent = maxCount;
+                document.getElementById(`avg-per-hour-${typePrefix}`).textContent = avgPerHour;
 
                 if (hourlyChart) hourlyChart.destroy();
-
-
-
-
-
                 hourlyChart = new Chart(ctx, {
-
-
                     type: 'line',
-
-
                     data: {
-
-
                         labels: Object.keys(hourlyStats).map(h => h + ':00'),
-
-
                         datasets: [{
-
-
                             label: 'Jumlah Akses',
-
-
                             data: Object.values(hourlyStats),
-
-
                             borderColor: '#5e72e4',
-
-
                             backgroundColor: 'rgba(94, 114, 228, 0.1)',
-
-
                             fill: true,
-
-
                             tension: 0.4
-
-
                         }]
-
-
                     },
-
-
                     options: {
-
-
                         responsive: true,
-
-
                         plugins: {
-
-
                             legend: {
-
-
                                 display: false
-
-
-                            }
-
-
+                            },
                         },
-
-
                         scales: {
-                            y: {
-                                beginAtZero: true,
-
-
+                            x: {
+                                title: {
+                                    display: true,
+                                    text: 'Jam / Hari',
+                                    color: '#cfd8dc',
+                                    font: {
+                                        size: 14,
+                                        weight: 'bold'
+                                    }
+                                },
                                 ticks: {
+                                    color: '#cfd8dc'
+                                },
+                                grid: {
+                                    color: '#2e3c53'
+                                }
+                            },
+                            y: {
+                                title: {
+                                    display: true,
+                                    text: 'Akses Parkir',
+                                    color: '#cfd8dc',
+                                    font: {
+                                        size: 14,
+                                        weight: 'bold'
+                                    }
+                                },
+                                ticks: {
+                                    color: '#cfd8dc',
+                                    beginAtZero: true,
                                     stepSize: 1
+                                },
+                                grid: {
+                                    color: '#2e3c53'
                                 }
                             }
                         }
@@ -1041,40 +993,45 @@
                 const data = snapshot.val() || {};
                 let html = '',
                     entries = [];
+
                 Object.entries(data).forEach(([dateTime, value]) => {
                     if (typeof value === 'object' && (value.nim || value.NIM)) {
-                        entries.push({
-                            tanggal: value.tanggal || '',
-                            waktu: value.waktu || '',
-                            nim: value.nim || value.NIM || '',
-                            nama: value.nama || value.Nama || '',
-                            jurusan: value.jurusan || value.Jurusan || '',
-                            akses: value.akses || '',
-                        });
+                        // Only include entries from today
+                        if (value.tanggal === todayString) {
+                            entries.push({
+                                tanggal: value.tanggal || '',
+                                waktu: value.waktu || '',
+                                nim: value.nim || value.NIM || '',
+                                nama: value.nama || value.Nama || '',
+                                jurusan: value.jurusan || value.Jurusan || '',
+                                akses: value.akses || '',
+                            });
+                        }
                     }
                 });
+
                 entries.sort((a, b) => (b.tanggal + ' ' + b.waktu).localeCompare(a.tanggal + ' ' + a.waktu));
+
                 if (entries.length) {
                     entries.forEach(e => {
-                        console.log(e.akses);
-
                         html +=
                             `<tr>
-                                <td>${e.tanggal}</td>
-                                <td>${e.waktu}</td>
-                                <td>${e.nim}</td>
-                                <td>${e.nama}</td>
-                                <td>${e.jurusan}</td>
-                                <td>
-                                    <span class="badge badge-md bg-gradient-${e.akses === 'ktm' ? 'primary' : 'success'}">${e.akses === 'ktm' ? "KTM" : "Petugas"}</span>
-                                </td>
-                            </tr>`;
+                        <td>${e.tanggal}</td>
+                        <td>${e.waktu}</td>
+                        <td>${e.nim}</td>
+                        <td>${e.nama}</td>
+                        <td>${e.jurusan}</td>
+                        <td>
+                            <span class="badge badge-md bg-gradient-${e.akses === 'ktm' ? 'primary' : 'success'}">${e.akses === 'ktm' ? "KTM" : "Petugas"}</span>
+                        </td>
+                    </tr>`;
                     });
                 } else {
-                    html = noDataFound(4, "Tidak ada riwayat parkir.");
+                    html = noDataFound(6, "Tidak ada riwayat parkir hari ini.");
                 }
                 listEl.innerHTML = html;
 
+                updateSummaryStats(type, data);
                 updateAksesChart(data);
                 updateHourlyChart(data);
             });
@@ -1086,14 +1043,13 @@
                     const status = (data['slot' + i] || 'available');
                     const isAvailable = status === 'available';
                     html += `<div class="col-6 col-md-3">
-                    <div class="slot-card ${isAvailable ? 'available' : 'occupied'}">
-                        <i class="fas ${iconClass} slot-icon"></i>
-                        <div class="slot-number">Slot ${i}</div>
-                        <p class="slot-status mb-0">${isAvailable ? 'Kosong' : 'Terisi'}</p>
-                    </div></div>`;
+            <div class="slot-card ${isAvailable ? 'available' : 'occupied'}">
+                <i class="fas ${iconClass} slot-icon"></i>
+                <div class="slot-number">Slot ${i}</div>
+                <p class="slot-status mb-0">${isAvailable ? 'Kosong' : 'Terisi'}</p>
+            </div></div>`;
                 }
                 slotListEl.innerHTML = html;
-
             });
         }
 
