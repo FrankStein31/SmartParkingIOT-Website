@@ -786,6 +786,8 @@
             let aksesChart = null;
             let hourlyChart = null;
 
+            document.getElementById(`last_updated_${type.toLowerCase()}`).textContent = new Date().toLocaleString('id-ID');
+
             function updateAksesChart(data) {
                 const stats = {
                     ktm: 0,

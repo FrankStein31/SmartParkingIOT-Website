@@ -84,7 +84,7 @@
                     <h6>Trend Akses Parkir Mobil ( Jam / Hari )</h6>
                     <p class="text-sm">
                         <i class="fa fa-clock text-warning" aria-hidden="true"></i>
-                         Distribusi parkir mobil berdasarkan jam dalam sehari
+                        Distribusi parkir mobil berdasarkan jam dalam sehari
                     </p>
                 </div>
                 <div class="card-body p-3">
