@@ -521,7 +521,7 @@
     const noDataFound = (cols, text) => `<tr><td colspan="${cols}" class="text-center py-5">${text}</td></tr>`;
 
     // --- Mahasiswa Management ---
-    const mahasiswaRef = ref(db, 'mahasiswa');
+    const mahasiswaRef = ref(db, 'Mahasiswa');
     const mhsListEl = document.getElementById('mahasiswaList');
 
     async function loadMahasiswaData() {
@@ -533,10 +533,10 @@
             if (data) {
                 Object.entries(data).forEach(([nim, mhs]) => {
                     html += `<tr>
-                        <td><p class="mb-0">${nim}</p></td><td><p class="mb-0">${mhs.nama}</p></td>
-                        <td><p class="mb-0">${mhs.jurusan}</p></td>
+                        <td><p class="mb-0">${nim}</p></td><td><p class="mb-0">${mhs.Nama || mhs.nama}</p></td>
+                        <td><p class="mb-0">${mhs.Jurusan || mhs.jurusan}</p></td>
                         <td>
-                            <button class="btn btn-info btn-sm" onclick="editMahasiswa('${nim}', '${mhs.nama}', '${mhs.jurusan}')"><i class="fas fa-edit"></i></button>
+                            <button class="btn btn-info btn-sm" onclick="editMahasiswa('${nim}', '${mhs.Nama || mhs.nama}', '${mhs.Jurusan || mhs.jurusan}')"><i class="fas fa-edit"></i></button>
                             <button class="btn btn-danger btn-sm" onclick="deleteMahasiswa('${nim}')"><i class="fas fa-trash"></i></button>
                         </td></tr>`;
                 });
@@ -598,8 +598,9 @@
 
     // --- Parking Management ---
     function setupParkingListeners(type) {
-        const parkirRef = ref(db, `parkir/${type}`);
-        const tempatParkirRef = ref(db, `tempat_parkir/${type}`);
+        const typeDb = type === 'Motor' ? 'Motor' : 'Mobil';
+        const parkirRef = ref(db, `parkir/${typeDb}`);
+        const tempatParkirRef = ref(db, `tempat_parkir/${typeDb}`);
         const listEl = document.getElementById(`${type.toLowerCase()}List`);
         const slotListEl = document.getElementById(`slot${type}List`);
         const iconClass = type === 'Motor' ? 'fa-motorcycle' : 'fa-car';
@@ -610,10 +611,21 @@
         onValue(parkirRef, (snapshot) => {
             const data = snapshot.val() || {};
             let html = '', entries = [];
-            Object.keys(data).forEach(date => Object.keys(data[date]).forEach(time => entries.push({ date, time, ...data[date][time] })));
-            entries.sort((a, b) => new Date(`${b.date} ${b.time}`) - new Date(`${a.date} ${a.time}`));
+            Object.entries(data).forEach(([dateTime, value]) => {
+                if (typeof value === 'object' && (value.nim || value.NIM)) {
+                    entries.push({
+                        tanggal: value.tanggal || '',
+                        waktu: value.waktu || '',
+                        nim: value.nim || value.NIM || '',
+                        nama: value.nama || value.Nama || '',
+                        jurusan: value.jurusan || value.Jurusan || '',
+                        akses: value.akses || '',
+                    });
+                }
+            });
+            entries.sort((a, b) => (b.tanggal + ' ' + b.waktu).localeCompare(a.tanggal + ' ' + a.waktu));
             if (entries.length) {
-                entries.forEach(e => { html += `<tr><td>${e.date} ${e.time}</td><td>${e.nim}</td><td>${e.nama}</td><td>${e.akses}</td></tr>`; });
+                entries.forEach(e => { html += `<tr><td>${e.tanggal} ${e.waktu}</td><td>${e.nim}</td><td>${e.nama}</td><td>${e.akses}</td></tr>`; });
             } else { html = noDataFound(4, "Tidak ada riwayat parkir."); }
             listEl.innerHTML = html;
         });
