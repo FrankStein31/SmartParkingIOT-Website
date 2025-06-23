@@ -786,18 +786,42 @@
             let aksesChart = null;
             let hourlyChart = null;
 
+            // Get today's date in YYYY-MM-DD format
+            const today = new Date();
+            const todayString = today.getFullYear() + '-' +
+                String(today.getMonth() + 1).padStart(2, '0') + '-' +
+                String(today.getDate()).padStart(2, '0');
+
             document.getElementById(`last_updated_${type.toLowerCase()}`).textContent = new Date().toLocaleString('id-ID');
 
+            // Helper function to filter today's data only
+            function filterTodayData(data) {
+                const todayData = {};
+                Object.entries(data).forEach(([key, value]) => {
+                    if (typeof value === 'object' && (value.nim || value.NIM)) {
+                        // Check if the entry's date matches today
+                        if (value.tanggal === todayString) {
+                            todayData[key] = value;
+                        }
+                    }
+                });
+                return todayData;
+            }
+
             function updateAksesChart(data) {
+                // Filter data for today only
+                const todayData = filterTodayData(data);
+
                 const stats = {
                     ktm: 0,
                     petugas: 0
                 };
 
-                Object.values(data).forEach(entry => {
+                Object.values(todayData).forEach(entry => {
                     if (entry.akses === 'ktm') stats.ktm++;
                     else if (entry.akses === 'petugas') stats.petugas++;
                 });
+
                 const ctx = document.getElementById(`aksesChart${type}`).getContext('2d');
 
                 if (aksesChart) aksesChart.destroy();
@@ -836,12 +860,15 @@
             }
 
             function updateSummaryStats(type, data) {
+                // Filter data for today only
+                const todayData = filterTodayData(data);
+
                 let ktmCount = 0;
                 let petugasCount = 0;
                 let totalCount = 0;
 
-                Object.keys(data).forEach(key => {
-                    const entry = data[key];
+                Object.keys(todayData).forEach(key => {
+                    const entry = todayData[key];
                     if (entry && (entry.nim || entry.NIM)) {
                         totalCount++;
                         if (entry.akses === 'ktm') {
@@ -868,10 +895,13 @@
             }
 
             function updateHourlyChart(data) {
+                // Filter data for today only
+                const todayData = filterTodayData(data);
+
                 const hourlyStats = {};
                 for (let i = 0; i < 24; i++) hourlyStats[i] = 0;
 
-                Object.values(data).forEach(entry => {
+                Object.values(todayData).forEach(entry => {
                     const hour = parseInt(entry.waktu.split(':')[0]);
                     hourlyStats[hour]++;
                 });
@@ -963,37 +993,41 @@
                 const data = snapshot.val() || {};
                 let html = '',
                     entries = [];
+
                 Object.entries(data).forEach(([dateTime, value]) => {
                     if (typeof value === 'object' && (value.nim || value.NIM)) {
-                        entries.push({
-                            tanggal: value.tanggal || '',
-                            waktu: value.waktu || '',
-                            nim: value.nim || value.NIM || '',
-                            nama: value.nama || value.Nama || '',
-                            jurusan: value.jurusan || value.Jurusan || '',
-                            akses: value.akses || '',
-                        });
+                        // Only include entries from today
+                        if (value.tanggal === todayString) {
+                            entries.push({
+                                tanggal: value.tanggal || '',
+                                waktu: value.waktu || '',
+                                nim: value.nim || value.NIM || '',
+                                nama: value.nama || value.Nama || '',
+                                jurusan: value.jurusan || value.Jurusan || '',
+                                akses: value.akses || '',
+                            });
+                        }
                     }
                 });
+
                 entries.sort((a, b) => (b.tanggal + ' ' + b.waktu).localeCompare(a.tanggal + ' ' + a.waktu));
+
                 if (entries.length) {
                     entries.forEach(e => {
-                        console.log(e.akses);
-
                         html +=
                             `<tr>
-                                <td>${e.tanggal}</td>
-                                <td>${e.waktu}</td>
-                                <td>${e.nim}</td>
-                                <td>${e.nama}</td>
-                                <td>${e.jurusan}</td>
-                                <td>
-                                    <span class="badge badge-md bg-gradient-${e.akses === 'ktm' ? 'primary' : 'success'}">${e.akses === 'ktm' ? "KTM" : "Petugas"}</span>
-                                </td>
-                            </tr>`;
+                        <td>${e.tanggal}</td>
+                        <td>${e.waktu}</td>
+                        <td>${e.nim}</td>
+                        <td>${e.nama}</td>
+                        <td>${e.jurusan}</td>
+                        <td>
+                            <span class="badge badge-md bg-gradient-${e.akses === 'ktm' ? 'primary' : 'success'}">${e.akses === 'ktm' ? "KTM" : "Petugas"}</span>
+                        </td>
+                    </tr>`;
                     });
                 } else {
-                    html = noDataFound(4, "Tidak ada riwayat parkir.");
+                    html = noDataFound(6, "Tidak ada riwayat parkir hari ini.");
                 }
                 listEl.innerHTML = html;
 
@@ -1009,14 +1043,13 @@
                     const status = (data['slot' + i] || 'available');
                     const isAvailable = status === 'available';
                     html += `<div class="col-6 col-md-3">
-                    <div class="slot-card ${isAvailable ? 'available' : 'occupied'}">
-                        <i class="fas ${iconClass} slot-icon"></i>
-                        <div class="slot-number">Slot ${i}</div>
-                        <p class="slot-status mb-0">${isAvailable ? 'Kosong' : 'Terisi'}</p>
-                    </div></div>`;
+            <div class="slot-card ${isAvailable ? 'available' : 'occupied'}">
+                <i class="fas ${iconClass} slot-icon"></i>
+                <div class="slot-number">Slot ${i}</div>
+                <p class="slot-status mb-0">${isAvailable ? 'Kosong' : 'Terisi'}</p>
+            </div></div>`;
                 }
                 slotListEl.innerHTML = html;
-
             });
         }
 
