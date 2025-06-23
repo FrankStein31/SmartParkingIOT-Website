@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
+    <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Smart Parking IOT - Ultimate Dashboard</title>
@@ -234,24 +234,24 @@
     border-color: #333 !important;
 }
         @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
-    </style>
-</head>
+            </style>
+    </head>
 
 <body>
     @include('components.navbar')
     <div class="main-content">
         <div id="home" class="content-section active">
             @include('components.hero')
-        </div>
+                    </div>
         <div id="parkir-motor" class="content-section">
             @include('components.parkir-motor')
-        </div>
+                </div>
         <div id="parkir-mobil" class="content-section">
             @include('components.parkir-mobil')
-        </div>
+                    </div>
         <div id="mahasiswa" class="content-section">
             @include('components.mahasiswa')
-        </div>
+                        </div>
         <div id="portal" class="content-section">
             @include('components.portal')
         </div>
@@ -275,7 +275,7 @@
                 </form>
             </div>
         </div></div>
-    </div>
+                    </div>
 
     <div class="modal fade" id="editModal" tabindex="-1">
         <div class="modal-dialog modal-dialog-centered"><div class="modal-content">
@@ -290,7 +290,7 @@
                 </form>
             </div>
         </div></div>
-    </div>
+        </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.all.min.js"></script>
@@ -491,30 +491,127 @@
         const listEl = document.getElementById(`${type.toLowerCase()}List`);
         const slotListEl = document.getElementById(`slot${type}List`);
         const iconClass = type === 'Motor' ? 'fa-motorcycle' : 'fa-car';
+        let aksesChart = null;
+        let hourlyChart = null;
 
-        listEl.innerHTML = loadingSpinner;
-        slotListEl.innerHTML = '<div class="col-12"><div class="spinner"></div></div>';
+        function updateAksesChart(data) {
+            const stats = {ktm: 0, petugas: 0};
+            Object.values(data).forEach(entry => {
+                if (entry.akses === 'ktm') stats.ktm++;
+                else if (entry.akses === 'petugas') stats.petugas++;
+            });
+
+            const ctx = document.getElementById(`aksesChart${type}`).getContext('2d');
+            if (aksesChart) aksesChart.destroy();
+
+            aksesChart = new Chart(ctx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Akses via KTM', 'Akses via Petugas'],
+                    datasets: [{
+                        data: [stats.ktm, stats.petugas],
+                        backgroundColor: ['#5e72e4', '#2dce89'],
+                        borderWidth: 0
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            position: 'bottom'
+                        },
+                        datalabels: {
+                            color: 'white',
+                            formatter: (value, ctx) => {
+                                const total = ctx.dataset.data.reduce((a,b) => a+b, 0);
+                                const percentage = total ? Math.round((value/total)*100) : 0;
+                                return percentage > 5 ? percentage + '%' : '';
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
+        function updateHourlyChart(data) {
+            const hourlyStats = {};
+            for(let i = 0; i < 24; i++) hourlyStats[i] = 0;
+
+            Object.values(data).forEach(entry => {
+                const hour = parseInt(entry.waktu.split(':')[0]);
+                hourlyStats[hour]++;
+            });
+
+            const ctx = document.getElementById(`hourlyChart${type}`).getContext('2d');
+            if (hourlyChart) hourlyChart.destroy();
+
+            hourlyChart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: Object.keys(hourlyStats).map(h => h+':00'),
+                    datasets: [{
+                        label: 'Jumlah Akses',
+                        data: Object.values(hourlyStats),
+                        borderColor: '#5e72e4',
+                        backgroundColor: 'rgba(94, 114, 228, 0.1)',
+                        fill: true,
+                        tension: 0.4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            display: false
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            ticks: {
+                                stepSize: 1
+                            }
+                        }
+                    }
+                }
+            });
+        }
 
         onValue(parkirRef, (snapshot) => {
             const data = snapshot.val() || {};
-            let html = '', entries = [];
-            Object.entries(data).forEach(([dateTime, value]) => {
+            let html = '';
+            const entries = [];
+
+            Object.entries(data).forEach(([key, value]) => {
                 if (typeof value === 'object' && (value.nim || value.NIM)) {
                     entries.push({
                         tanggal: value.tanggal || '',
                         waktu: value.waktu || '',
                         nim: value.nim || value.NIM || '',
                         nama: value.nama || value.Nama || '',
-                        jurusan: value.jurusan || value.Jurusan || '',
-                        akses: value.akses || '',
+                        akses: value.akses || ''
                     });
                 }
             });
-            entries.sort((a, b) => (b.tanggal + ' ' + b.waktu).localeCompare(a.tanggal + ' ' + a.waktu));
+
+            entries.sort((a,b) => new Date(b.tanggal + ' ' + b.waktu) - new Date(a.tanggal + ' ' + a.waktu));
+
             if (entries.length) {
-                entries.forEach(e => { html += `<tr><td>${e.tanggal} ${e.waktu}</td><td>${e.nim}</td><td>${e.nama}</td><td>${e.akses}</td></tr>`; });
-            } else { html = noDataFound(4, "Tidak ada riwayat parkir."); }
+                entries.forEach(e => {
+                    html += `<tr>
+                        <td>${e.tanggal} ${e.waktu}</td>
+                        <td>${e.nim}</td>
+                        <td>${e.nama}</td>
+                        <td><span class="badge badge-sm bg-gradient-${e.akses === 'ktm' ? 'primary' : 'success'}">${e.akses}</span></td>
+                    </tr>`;
+                });
+            } else {
+                html = '<tr><td colspan="4" class="text-center">Tidak ada riwayat parkir.</td></tr>';
+            }
+
             listEl.innerHTML = html;
+            updateAksesChart(data);
+            updateHourlyChart(data);
         });
 
         onValue(tempatParkirRef, (snapshot) => {
@@ -578,12 +675,12 @@
             else navbar.classList.remove('scrolled');
         };
 
-        // Scroll to Top Button
+            // Scroll to Top Button
         const handleScrollBtn = () => {
             if (document.body.scrollTop > 200 || document.documentElement.scrollTop > 200) {
                 scrollToTopBtn.style.display = "block";
-            } else {
-                scrollToTopBtn.style.display = "none";
+              } else {
+                        scrollToTopBtn.style.display = "none";
             }
         };
         scrollToTopBtn.addEventListener('click', () => window.scrollTo({top: 0, behavior: 'smooth'}));
@@ -606,7 +703,7 @@
 
         // Initial calls
         document.getElementById('currentYear').textContent = new Date().getFullYear();
-    });
-</script>
-</body>
+        });
+    </script>
+    </body>
 </html>
