@@ -441,6 +441,12 @@
             <div class="container">
                 <h2 class="section-title">Data Master Mahasiswa</h2>
                 <div class="content-card">
+                <div class="mt-4">
+                    <h6 class="text-white">Grafik Jumlah Mahasiswa per Jurusan</h6>
+                    <canvas id="jurusanChart" height="100"></canvas>
+                </div>
+                </div>
+                <div class="content-card">
                     <div class="card-header">
                         <div class="d-flex justify-content-between align-items-center">
                             <h6><i class="fas fa-users me-2"></i>Daftar Mahasiswa Terdaftar</h6>
@@ -655,23 +661,74 @@
                             <button class="btn btn-info btn-sm" onclick="editMahasiswa('${nim}', '${mhs.Nama || mhs.nama}', '${mhs.Jurusan || mhs.jurusan}')"><i class="fas fa-edit"></i></button>
                             <button class="btn btn-danger btn-sm" onclick="deleteMahasiswa('${nim}')"><i class="fas fa-trash"></i></button>
                         </td></tr>`;
+                });
+            } else { html = noDataFound(4, "Tidak ada data mahasiswa."); }
+            mhsListEl.innerHTML = html;
+            tampilkanGrafikJurusan();
+
+        } catch (error) { console.error(error); mhsListEl.innerHTML = noDataFound(4, "Gagal memuat data."); }
+    }
+    async function tampilkanGrafikJurusan() {
+            try {
+                const snapshot = await get(mahasiswaRef);
+                const data = snapshot.val();
+                const jurusanCount = {};
+
+                if (data) {
+                    Object.values(data).forEach(mhs => {
+                        jurusanCount[mhs.Jurusan] = (jurusanCount[mhs.Jurusan] || 0) + 1;
                     });
-                } else {
-                    html = noDataFound(4, "Tidak ada data mahasiswa.");
+
+
+                    if (window.jurusanChart instanceof Chart) {
+                        window.jurusanChart.destroy();
+                    }
+
+                    const ctx = document.getElementById('jurusanChart').getContext('2d');
+                    window.jurusanChart = new Chart(ctx, {
+                        type: 'bar',
+                        data: {
+                            labels: Object.keys(jurusanCount),
+                            datasets: [{
+                                label: 'Jumlah Mahasiswa',
+                                data: Object.values(jurusanCount),
+                                backgroundColor: 'rgba(75, 192, 192, 0.6)',
+                                borderColor: 'rgba(75, 192, 192, 1)',
+                                borderWidth: 1
+                            }]
+                        },
+                        options: {
+                            responsive: true,
+                            plugins: {
+                                legend: {
+                                    display: false
+                                },
+                                title: {
+                                    display: false
+                                }
+                            },
+                            scales: {
+                                y: {
+                                    beginAtZero: true,
+                                    ticks: {
+                                        stepSize: 1,
+                                        precision: 0
+                                    }
+                                }
+                            }
+                        }
+                    });
                 }
-                mhsListEl.innerHTML = html;
             } catch (error) {
-                console.error(error);
-                mhsListEl.innerHTML = noDataFound(4, "Gagal memuat data.");
+                console.error("Gagal memuat grafik jurusan:", error);
             }
         }
-
-        document.getElementById('addForm').addEventListener('submit', async (e) => {
-            e.preventDefault();
-            const nim = document.getElementById('nim').value.trim();
-            const nama = document.getElementById('nama').value.trim();
-            const jurusan = document.getElementById('jurusan').value.trim();
-            if (!nim || !nama || !jurusan) return;
+    document.getElementById('addForm').addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const nim = document.getElementById('nim').value.trim();
+        const nama = document.getElementById('nama').value.trim();
+        const jurusan = document.getElementById('jurusan').value.trim();
+        if (!nim || !nama || !jurusan) return;
 
             const nimRef = child(mahasiswaRef, nim);
             const snapshot = await get(nimRef);
