@@ -6,10 +6,8 @@
 <div class="container">
     <h2 class="section-title">Manajemen Parkir Motor</h2>
 
-    @include('components.motorcycle.trend')
-
     @include('components.motorcycle.summary')
-
+    @include('components.motorcycle.charts')
     <div class="content-card">
         <div class="card-header d-flex justify-content-between align-items-center">
             <h6>Status Slot Parkir Motor</h6>
@@ -23,47 +21,22 @@
             </div>
         </div>
     </div>
+    @include('components.motorcycle.trend')
     <div class="content-card">
-        <div class="card-header pb-0">
-            <div class="row align-items-center">
-                <div class="col-6">
-                    <h6>Daftar Parkir Motor</h6>
-                    <p class="text-sm mb-0">
-                        <i class="fa fa-clock text-success" aria-hidden="true"></i>
-                        <span class="font-weight-bold ms-1">Terakhir diperbarui:</span> <span id="last_updated"></span>
-                    </p>
-                </div>
-                <div class="col-6">
-                    <div class="row align-items-center justify-content-end">
-                        <div class="col-auto">
-                            <label for="entriesPerPage" class="form-label text-sm mb-0">Tampilkan:</label>
-                        </div>
-                        <div class="col-auto">
-                            <select id="entriesPerPage" class="form-select form-select-sm">
-                                <option value="10" selected>10</option>
-                                <option value="25">25</option>
-                                <option value="50">50</option>
-                                <option value="100">100</option>
-                            </select>
-                        </div>
-                        <div class="col-auto">
-                            <span class="text-sm">entri</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
+        <div class="card-header pb-3">
+            @include('components.motorcycle.header')
         </div>
         <div class="card-body px-0 pt-0 pb-2">
             <div class="table-responsive p-0">
-                <table class="table align-items-center mb-0">
+                <table class="table align-items-center mb-0 table-dark-custom">
                     <thead>
                         <tr>
-                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Tanggal</th>
-                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Waktu</th>
-                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">NIM</th>
-                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Nama</th>
-                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">jurusan</th>
-                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Akses</th>
+                            <th>Tanggal</th>
+                            <th>Waktu</th>
+                            <th>NIM</th>
+                            <th>Nama</th>
+                            <th>Jurusan</th>
+                            <th>Akses</th>
                         </tr>
                     </thead>
                     <tbody id="motorList">

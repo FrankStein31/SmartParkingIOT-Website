@@ -1,6 +1,6 @@
 <div class="row align-items-center">
     <div class="col-6">
-        <h6>Daftar Parkir Mobil</h6>
+        <h6>Daftar Parkir Motor</h6>
         <p class="text-sm mb-0">
             <i class="fa fa-clock text-success" aria-hidden="true"></i>
             <span class="font-weight-bold ms-1">Terakhir diperbarui:</span> <span id="last_updated"></span>

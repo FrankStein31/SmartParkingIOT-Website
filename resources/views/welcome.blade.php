@@ -781,13 +781,10 @@
             const slotListEl = document.getElementById(`slot${type}List`);
             const iconClass = type === 'Motor' ? 'fa-motorcycle' : 'fa-car';
 
+            Chart.register(ChartDataLabels);
+
             let aksesChart = null;
-
             let hourlyChart = null;
-
-
-
-
 
             function updateAksesChart(data) {
                 const stats = {
@@ -803,199 +800,106 @@
 
                 if (aksesChart) aksesChart.destroy();
 
-
-
-
-
                 aksesChart = new Chart(ctx, {
-
-
                     type: 'doughnut',
-
-
                     data: {
-
-
                         labels: ['Akses via KTM', 'Akses via Petugas'],
-
-
                         datasets: [{
-
-
                             data: [stats.ktm, stats.petugas],
-
-
                             backgroundColor: ['#5e72e4', '#2dce89'],
-
-
                             borderWidth: 0
-
-
                         }]
-
-
                     },
-
-
                     options: {
-
-
                         responsive: true,
-
-
                         plugins: {
-
-
                             legend: {
-
-
                                 position: 'bottom'
-
-
                             },
-
-
                             datalabels: {
-
-
                                 color: 'white',
-
-
+                                font: {
+                                    size: 25,
+                                    weight: 'bold'
+                                },
                                 formatter: (value, ctx) => {
-
-
                                     const total = ctx.dataset.data.reduce((a, b) => a + b, 0);
-
-
                                     const percentage = total ? Math.round((value / total) * 100) : 0;
-
-
                                     return percentage > 5 ? percentage + '%' : '';
-
-
                                 }
-
-
                             }
-
-
                         }
-
-
                     }
-
-
                 });
-
-
             }
 
-
-
-
-
             function updateHourlyChart(data) {
-
-
                 const hourlyStats = {};
-
-
                 for (let i = 0; i < 24; i++) hourlyStats[i] = 0;
 
-
-
-
                 Object.values(data).forEach(entry => {
-
-
                     const hour = parseInt(entry.waktu.split(':')[0]);
-
-
                     hourlyStats[hour]++;
-
-
                 });
-
-
-
-
 
                 const ctx = document.getElementById(`hourlyChart${type}`).getContext('2d');
 
-
                 if (hourlyChart) hourlyChart.destroy();
-
-
-
-
-
                 hourlyChart = new Chart(ctx, {
-
-
                     type: 'line',
-
-
                     data: {
-
-
                         labels: Object.keys(hourlyStats).map(h => h + ':00'),
-
-
                         datasets: [{
-
-
                             label: 'Jumlah Akses',
-
-
                             data: Object.values(hourlyStats),
-
-
                             borderColor: '#5e72e4',
-
-
                             backgroundColor: 'rgba(94, 114, 228, 0.1)',
-
-
                             fill: true,
-
-
                             tension: 0.4
-
-
                         }]
-
-
                     },
-
-
                     options: {
-
-
                         responsive: true,
-
-
                         plugins: {
-
-
                             legend: {
-
-
                                 display: false
-
-
-                            }
-
-
+                            },
                         },
-
-
                         scales: {
-                            y: {
-                                beginAtZero: true,
-
-
+                            x: {
+                                title: {
+                                    display: true,
+                                    text: 'Jam / Hari',
+                                    color: '#cfd8dc',
+                                    font: {
+                                        size: 14,
+                                        weight: 'bold'
+                                    }
+                                },
                                 ticks: {
+                                    color: '#cfd8dc'
+                                },
+                                grid: {
+                                    color: '#2e3c53'
+                                }
+                            },
+                            y: {
+                                title: {
+                                    display: true,
+                                    text: 'Akses Parkir',
+                                    color: '#cfd8dc',
+                                    font: {
+                                        size: 14,
+                                        weight: 'bold'
+                                    }
+                                },
+                                ticks: {
+                                    color: '#cfd8dc',
+                                    beginAtZero: true,
                                     stepSize: 1
+                                },
+                                grid: {
+                                    color: '#2e3c53'
                                 }
                             }
                         }
