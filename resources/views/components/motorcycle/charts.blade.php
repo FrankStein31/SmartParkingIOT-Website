@@ -1,7 +1,7 @@
 <!-- Grafik Perbandingan -->
 <div class="row mb-4">
     <div class="col-lg-4">
-        <div class="card p-5">
+        <div class="card p-2">
             <div class="card-header pb-0">
                 <h6>Perbandingan Akses Parkir Motor</h6>
                 <p class="text-sm">

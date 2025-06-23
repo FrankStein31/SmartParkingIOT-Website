@@ -125,7 +125,7 @@
                     <div class="col-8">
                         <div class="numbers">
                             <p class="text-sm mb-0 text-capitalize font-weight-bold">Total Akses KTM</p>
-                            <h5 class="font-weight-bolder mb-0" id="totalKtm">0</h5>
+                            <h5 class="font-weight-bolder mb-0" id="total-ktm-mobil">0</h5>
                         </div>
                     </div>
                     <div class="col-4 text-end">
@@ -144,7 +144,7 @@
                     <div class="col-8">
                         <div class="numbers">
                             <p class="text-sm mb-0 text-capitalize font-weight-bold">Total Akses Petugas</p>
-                            <h5 class="font-weight-bolder mb-0" id="totalPetugas">0</h5>
+                            <h5 class="font-weight-bolder mb-0" id="total-petugas-mobil">0</h5>
                         </div>
                     </div>
                     <div class="col-4 text-end">
@@ -163,7 +163,7 @@
                     <div class="col-8">
                         <div class="numbers">
                             <p class="text-sm mb-0 text-capitalize font-weight-bold">Total Akses</p>
-                            <h5 class="font-weight-bolder mb-0" id="totalAkses">0</h5>
+                            <h5 class="font-weight-bolder mb-0" id="total-akses-mobil">0</h5>
                         </div>
                     </div>
                     <div class="col-4 text-end">

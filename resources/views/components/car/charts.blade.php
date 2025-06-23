@@ -1,7 +1,7 @@
 <!-- Grafik Perbandingan -->
 <div class="row mb-4">
     <div class="col-lg-4">
-        <div class="card">
+        <div class="card p-2">
             <div class="card-header pb-0">
                 <h6>Perbandingan Akses Parkir Mobil</h6>
                 <p class="text-sm">
@@ -15,7 +15,7 @@
         </div>
     </div>
     <div class="col-lg-8">
-        <div class="card">
+        <div class="card p-3">
             <div class="card-header pb-0">
                 <h6>Trend Akses Parkir Mobil ( Jam / Hari )</h6>
                 <p class="text-sm">

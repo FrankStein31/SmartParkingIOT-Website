@@ -833,6 +833,38 @@
                 });
             }
 
+            function updateSummaryStats(type, data) {
+                let ktmCount = 0;
+                let petugasCount = 0;
+                let totalCount = 0;
+
+                Object.keys(data).forEach(key => {
+                    const entry = data[key];
+                    if (entry && (entry.nim || entry.NIM)) {
+                        totalCount++;
+                        if (entry.akses === 'ktm') {
+                            ktmCount++;
+                        } else if (entry.akses === 'petugas') {
+                            petugasCount++;
+                        }
+                    }
+                });
+
+                const stats = {
+                    ktm: ktmCount,
+                    petugas: petugasCount,
+                    total: totalCount
+                };
+
+                const typePrefix = type.toLowerCase();
+
+                document.getElementById(`total-ktm-${typePrefix}`).textContent = stats.ktm;
+                document.getElementById(`total-petugas-${typePrefix}`).textContent = stats.petugas;
+                document.getElementById(`total-akses-${typePrefix}`).textContent = stats.total;
+
+                return stats;
+            }
+
             function updateHourlyChart(data) {
                 const hourlyStats = {};
                 for (let i = 0; i < 24; i++) hourlyStats[i] = 0;
@@ -948,6 +980,7 @@
                 }
                 listEl.innerHTML = html;
 
+                updateSummaryStats(type, data);
                 updateAksesChart(data);
                 updateHourlyChart(data);
             });
