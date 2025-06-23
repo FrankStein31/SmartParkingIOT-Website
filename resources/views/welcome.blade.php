@@ -346,7 +346,7 @@
             <a class="navbar-brand" href="#" onclick="showSection('home')">SmartParking</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"
-                    style="background-image: url(\"data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba(255,255,255,0.8)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e\");"></span>
+                    style="background-image: url(\" data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30' %3e%3cpath stroke='rgba(255,255,255,0.8)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22' /%3e%3c/svg%3e\");"></span>
             </button>
             <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
                 <ul class="navbar-nav align-items-center">
@@ -392,43 +392,7 @@
         </div>
         <!-- Parkir Motor Section -->
         <div id="parkir-motor" class="content-section">
-            <div class="container">
-                <h2 class="section-title">Manajemen Parkir Motor</h2>
-                <div class="content-card">
-                    <div class="card-header d-flex justify-content-between align-items-center">
-                        <h6>Status Slot Parkir Motor</h6>
-                        <p class="text-sm mb-0">
-                            <i class="fa-solid fa-circle text-success me-1"></i> Kosong
-                            <i class="fa-solid fa-circle text-danger ms-3 me-1"></i> Terisi
-                        </p>
-                    </div>
-                    <div class="card-body p-3">
-                        <div class="row gy-4" id="slotMotorList">
-                        </div>
-                    </div>
-                </div>
-                <div class="content-card">
-                    <div class="card-header">
-                        <h6><i class="fas fa-history me-2"></i>Riwayat Parkir Motor</h6>
-                    </div>
-                    <div class="card-body px-0 pt-0 pb-2">
-                        <div class="table-responsive p-0">
-                            <table class="table align-items-center mb-0 table-dark-custom">
-                                <thead>
-                                    <tr>
-                                        <th>Tanggal & Waktu</th>
-                                        <th>NIM</th>
-                                        <th>Nama</th>
-                                        <th>Akses</th>
-                                    </tr>
-                                </thead>
-                                <tbody id="motorList">
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <x-motorcycle.page />
         </div>
 
         <!-- Parkir Mobil Section -->
@@ -441,10 +405,10 @@
             <div class="container">
                 <h2 class="section-title">Data Master Mahasiswa</h2>
                 <div class="content-card">
-                <div class="mt-4">
-                    <h6 class="text-white">Grafik Jumlah Mahasiswa per Jurusan</h6>
-                    <canvas id="jurusanChart" height="100"></canvas>
-                </div>
+                    <div class="mt-4">
+                        <h6 class="text-white">Grafik Jumlah Mahasiswa per Jurusan</h6>
+                        <canvas id="jurusanChart" height="100"></canvas>
+                    </div>
                 </div>
                 <div class="content-card">
                     <div class="card-header">
@@ -661,14 +625,19 @@
                             <button class="btn btn-info btn-sm" onclick="editMahasiswa('${nim}', '${mhs.Nama || mhs.nama}', '${mhs.Jurusan || mhs.jurusan}')"><i class="fas fa-edit"></i></button>
                             <button class="btn btn-danger btn-sm" onclick="deleteMahasiswa('${nim}')"><i class="fas fa-trash"></i></button>
                         </td></tr>`;
-                });
-            } else { html = noDataFound(4, "Tidak ada data mahasiswa."); }
-            mhsListEl.innerHTML = html;
-            tampilkanGrafikJurusan();
+                    });
+                } else {
+                    html = noDataFound(4, "Tidak ada data mahasiswa.");
+                }
+                mhsListEl.innerHTML = html;
+                tampilkanGrafikJurusan();
 
-        } catch (error) { console.error(error); mhsListEl.innerHTML = noDataFound(4, "Gagal memuat data."); }
-    }
-    async function tampilkanGrafikJurusan() {
+            } catch (error) {
+                console.error(error);
+                mhsListEl.innerHTML = noDataFound(4, "Gagal memuat data.");
+            }
+        }
+        async function tampilkanGrafikJurusan() {
             try {
                 const snapshot = await get(mahasiswaRef);
                 const data = snapshot.val();
@@ -723,12 +692,12 @@
                 console.error("Gagal memuat grafik jurusan:", error);
             }
         }
-    document.getElementById('addForm').addEventListener('submit', async (e) => {
-        e.preventDefault();
-        const nim = document.getElementById('nim').value.trim();
-        const nama = document.getElementById('nama').value.trim();
-        const jurusan = document.getElementById('jurusan').value.trim();
-        if (!nim || !nama || !jurusan) return;
+        document.getElementById('addForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const nim = document.getElementById('nim').value.trim();
+            const nama = document.getElementById('nama').value.trim();
+            const jurusan = document.getElementById('jurusan').value.trim();
+            if (!nim || !nama || !jurusan) return;
 
             const nimRef = child(mahasiswaRef, nim);
             const snapshot = await get(nimRef);
