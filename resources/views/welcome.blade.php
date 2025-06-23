@@ -876,6 +876,21 @@
 
                 const ctx = document.getElementById(`hourlyChart${type}`).getContext('2d');
 
+                // Find peak hour and counts
+                const maxCount = Math.max(...Object.values(hourlyStats));
+                const peakHourIndex = Object.values(hourlyStats).indexOf(maxCount);
+                const peakHour = Object.keys(hourlyStats)[peakHourIndex];
+
+                // Calculate average per hour
+                const nonZeroHours = Object.values(hourlyStats).filter(v => v > 0).length;
+                const totalAccess = Object.values(hourlyStats).reduce((a, b) => a + b, 0);
+                const avgPerHour = nonZeroHours > 0 ? Math.round(totalAccess / nonZeroHours) : 0;
+
+                const typePrefix = type.toLowerCase();
+                document.getElementById(`peak-hour-${typePrefix}`).textContent = `${peakHour}:00`;
+                document.getElementById(`peak-count-${typePrefix}`).textContent = maxCount;
+                document.getElementById(`avg-per-hour-${typePrefix}`).textContent = avgPerHour;
+
                 if (hourlyChart) hourlyChart.destroy();
                 hourlyChart = new Chart(ctx, {
                     type: 'line',
