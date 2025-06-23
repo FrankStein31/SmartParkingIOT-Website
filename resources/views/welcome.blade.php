@@ -238,198 +238,22 @@
 </head>
 
 <body>
-    <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg">
-        <div class="container">
-            <a class="navbar-brand" href="#" onclick="showSection('home')">SmartParking</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                 <span class="navbar-toggler-icon" style="background-image: url(\"data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba(255,255,255,0.8)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e\");"></span>
-            </button>
-            <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
-                <ul class="navbar-nav align-items-center">
-                    <li class="nav-item"><a class="nav-link active" onclick="showSection('home')">Beranda</a></li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">Manajemen Parkir</a>
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" onclick="showSection('parkir-motor')">Parkir Motor</a></li>
-                            <li><a class="dropdown-item" onclick="showSection('parkir-mobil')">Parkir Mobil</a></li>
-                        </ul>
-                    </li>
-                    <li class="nav-item dropdown">
-                         <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">Data Master</a>
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" onclick="showSection('mahasiswa')">Data Mahasiswa</a></li>
-                            <li><a class="dropdown-item" onclick="showSection('portal')">Kelola Portal</a></li>
-                        </ul>
-                    </li>
-                    <li class="nav-item ms-lg-3"><a href="/dashboard" class="btn btn-dashboard-nav">Dashboard</a></li>
-                </ul>
-            </div>
-        </div>
-    </nav>
-
-    <!-- Main Content Area -->
+    @include('components.navbar')
     <div class="main-content">
-        <!-- Home Section -->
         <div id="home" class="content-section active">
-            <div class="hero-section">
-                <div class="container">
-                    <div class="row w-100">
-                        <div class="col-lg-7 text-center text-lg-start">
-                            <h1 class="display-3 mb-4">Solusi Parkir Cerdas di Ujung Jari Anda</h1>
-                            <p class="lead mb-5">Kelola, pantau, dan analisis semua kebutuhan parkir Anda dari satu platform terpusat. Efisien, modern, dan terintegrasi dengan IoT.</p>
-                            <button class="btn btn-cta" onclick="showSection('parkir-motor')">Mulai Kelola</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            @include('components.hero')
         </div>
-        <!-- Parkir Motor Section -->
         <div id="parkir-motor" class="content-section">
-            <div class="container">
-                <h2 class="section-title">Manajemen Parkir Motor</h2>
-                <div class="content-card">
-                     <div class="card-header d-flex justify-content-between align-items-center">
-                        <h6>Status Slot Parkir Motor</h6>
-                        <p class="text-sm mb-0">
-                            <i class="fa-solid fa-circle text-success me-1"></i> Kosong
-                            <i class="fa-solid fa-circle text-danger ms-3 me-1"></i> Terisi
-                        </p>
-                    </div>
-                    <div class="card-body p-3">
-                        <div class="row gy-4" id="slotMotorList">
-                            </div>
-                    </div>
-                </div>
-                <div class="content-card">
-                    <div class="card-header">
-                        <h6><i class="fas fa-history me-2"></i>Riwayat Parkir Motor</h6>
-                    </div>
-                    <div class="card-body px-0 pt-0 pb-2">
-                        <div class="table-responsive p-0">
-                            <table class="table align-items-center mb-0 table-dark-custom">
-                                <thead>
-                                    <tr>
-                                        <th>Tanggal & Waktu</th>
-                                        <th>NIM</th>
-                                        <th>Nama</th>
-                                        <th>Akses</th>
-                                    </tr>
-                                </thead>
-                                <tbody id="motorList">
-                                    </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            @include('components.parkir-motor')
         </div>
-
-        <!-- Parkir Mobil Section -->
         <div id="parkir-mobil" class="content-section">
-            <div class="container">
-                <h2 class="section-title">Manajemen Parkir Mobil</h2>
-                <div class="content-card">
-                     <div class="card-header d-flex justify-content-between align-items-center">
-                        <h6>Status Slot Parkir Mobil</h6>
-                        <p class="text-sm mb-0">
-                            <i class="fa-solid fa-circle text-success me-1"></i> Kosong
-                            <i class="fa-solid fa-circle text-danger ms-3 me-1"></i> Terisi
-                        </p>
-                    </div>
-                    <div class="card-body p-3">
-                        <div class="row gy-4" id="slotMobilList">
-                            </div>
-                    </div>
-                </div>
-                <div class="content-card">
-                    <div class="card-header">
-                         <h6><i class="fas fa-history me-2"></i>Riwayat Parkir Mobil</h6>
-                    </div>
-                    <div class="card-body px-0 pt-0 pb-2">
-                        <div class="table-responsive p-0">
-                            <table class="table align-items-center mb-0 table-dark-custom">
-                                <thead>
-                                    <tr>
-                                        <th>Tanggal & Waktu</th>
-                                        <th>NIM</th>
-                                        <th>Nama</th>
-                                        <th>Akses</th>
-                                    </tr>
-                                </thead>
-                                <tbody id="mobilList">
-                                    </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            @include('components.parkir-mobil')
         </div>
-
-        <!-- Mahasiswa Section -->
         <div id="mahasiswa" class="content-section">
-            <div class="container">
-                <h2 class="section-title">Data Master Mahasiswa</h2>
-                <div class="content-card">
-                <div class="mt-4">
-                    <h6 class="text-white">Grafik Jumlah Mahasiswa per Jurusan</h6>
-                    <canvas id="jurusanChart" height="100"></canvas>
-                </div>
-                </div>
-                <div class="content-card">
-                    <div class="card-header">
-                        <div class="d-flex justify-content-between align-items-center">
-                            <h6><i class="fas fa-users me-2"></i>Daftar Mahasiswa Terdaftar</h6>
-                            <button class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#addModal">
-                                <i class="fas fa-plus me-1"></i> Tambah Mahasiswa
-                            </button>
-                        </div>
-                    </div>
-                    <div class="card-body px-0 pt-0 pb-2">
-                        <div class="table-responsive p-0">
-                            <table class="table align-items-center mb-0 table-dark-custom">
-                                <thead>
-                                    <tr>
-                                        <th>NIM</th><th>Nama</th><th>Jurusan</th><th>Aksi</th>
-                                    </tr>
-                                </thead>
-                                <tbody id="mahasiswaList">
-                                    </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            @include('components.mahasiswa')
         </div>
-
-        <!-- Portal Section -->
         <div id="portal" class="content-section">
-            <div class="container">
-                <h2 class="section-title">Kelola Portal & Jadwal Sistem</h2>
-                <div class="content-card">
-                    <div class="card-header">
-                        <h6><i class="fas fa-cogs me-2"></i>Pengaturan Jadwal Operasional Portal</h6>
-                    </div>
-                    <div class="card-body">
-                        <div class="row gy-5">
-                            <div class="col-md-6">
-                                <h5 class="mb-4 text-light"><i class="fas fa-motorcycle me-2"></i>Portal Motor</h5>
-                                <div class="mb-3"><label class="form-label">Jam Mulai</label><input type="time" class="form-control" id="motor_jam_mulai"></div>
-                                <div class="mb-3"><label class="form-label">Jam Selesai</label><input type="time" class="form-control" id="motor_jam_selesai"></div>
-                                <div class="mb-3"><label class="form-label">Status Operasional</label><select class="form-select" id="motor_operasional"><option value="on">On</option><option value="off">Off</option></select></div>
-                                <button class="btn btn-info" onclick="updateJadwal('motor')">Update Jadwal Motor</button>
-                            </div>
-                            <div class="col-md-6">
-                                <h5 class="mb-4 text-light"><i class="fas fa-car me-2"></i>Portal Mobil</h5>
-                                <div class="mb-3"><label class="form-label">Jam Mulai</label><input type="time" class="form-control" id="mobil_jam_mulai"></div>
-                                <div class="mb-3"><label class="form-label">Jam Selesai</label><input type="time" class="form-control" id="mobil_jam_selesai"></div>
-                                 <div class="mb-3"><label class="form-label">Status Operasional</label><select class="form-select" id="mobil_operasional"><option value="on">On</option><option value="off">Off</option></select></div>
-                                <button class="btn btn-info" onclick="updateJadwal('mobil')">Update Jadwal Mobil</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            @include('components.portal')
         </div>
     </div>
     <footer class="py-4" style="background-color: var(--bg-dark); border-top: 1px solid var(--border-color);">
