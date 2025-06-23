@@ -6,6 +6,7 @@
     <title>Smart Parking IOT - Ultimate Dashboard</title>
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.0/font/bootstrap-icons.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
 
@@ -13,228 +14,9 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
-    <style>
-        :root {
-            --primary-color: #1A2980;
-            --secondary-color: #26D0CE;
-            --bg-dark: #0f172a;
-            --bg-light-transparent: rgba(255, 255, 255, 0.07);
-            --border-color: rgba(255, 255, 255, 0.1);
-            --text-primary: #ffffff;
-            --text-secondary: #a0aec0;
-        }
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
 
-        body {
-            font-family: 'Poppins', sans-serif;
-            background-color: var(--bg-dark);
-            color: var(--text-secondary);
-            overflow-x: hidden;
-        }
-
-        /* --- Navbar --- */
-        .navbar {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            z-index: 1030;
-            padding: 1rem 0;
-            background-color: rgba(15, 23, 42, 0.95);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
-        }
-
-        .navbar-brand {
-            color: var(--text-primary) !important;
-            font-weight: 700;
-            font-size: 1.75rem;
-        }
-
-        .nav-link {
-            color: var(--text-secondary) !important;
-            font-weight: 500;
-            transition: color 0.3s ease;
-            cursor: pointer;
-        }
-        .nav-link:hover, .navbar-brand:hover, .nav-link.active {
-            color: var(--secondary-color) !important;
-        }
-
-        .dropdown-menu {
-            background-color: rgba(30, 41, 59, 0.9);
-            border: 1px solid var(--border-color);
-            border-radius: 0.75rem;
-        }
-        .dropdown-item {
-            color: var(--text-secondary);
-            cursor: pointer;
-        }
-        .dropdown-item:hover {
-            background-color: var(--bg-light-transparent);
-            color: var(--secondary-color);
-        }
-
-        .btn-dashboard-nav {
-            background: var(--secondary-color);
-            color: var(--bg-dark);
-            border: 2px solid var(--secondary-color);
-            padding: 8px 24px;
-            border-radius: 50px;
-            transition: all 0.3s ease;
-            font-weight: 600;
-        }
-        .btn-dashboard-nav:hover {
-            background: transparent;
-            color: var(--secondary-color);
-        }
-
-        /* --- Main Content Area --- */
-        .main-content {
-            margin-top: 80px;
-            min-height: calc(100vh - 80px);
-            padding: 2rem 0;
-        }
-
-        .content-section {
-            display: none;
-            animation: fadeIn 0.5s ease-in-out;
-        }
-
-        .content-section.active {
-            display: block;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        /* --- Hero Section --- */
-        .hero-section {
-            background: linear-gradient(135deg, var(--primary-color) 0%, var(--bg-dark) 100%);
-            min-height: calc(100vh - 80px);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        .hero-section .display-3 { font-weight: 700; }
-        .hero-section .lead { font-size: 1.25rem; color: var(--text-secondary); }
-        .btn-cta {
-            background: var(--secondary-color);
-            color: var(--bg-dark);
-            border-radius: 50px;
-            padding: 16px 40px;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            cursor: pointer;
-        }
-        .btn-cta:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(38, 208, 206, 0.2);
-        }
-
-        /* --- Cards & Components --- */
-        .content-card {
-            background: var(--bg-light-transparent);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border: 1px solid var(--border-color);
-            border-radius: 24px;
-            padding: 2.5rem;
-            color: var(--text-primary);
-            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.15);
-            margin-bottom: 2rem;
-        }
-        .content-card .card-header {
-            background: transparent;
-            border-bottom: 1px solid var(--border-color);
-            padding: 0 0 1.5rem 0;
-            margin-bottom: 1.5rem;
-        }
-
-        .section-title {
-            color: var(--text-primary);
-            font-weight: 700;
-            margin-bottom: 2rem;
-            text-align: center;
-        }
-
-        /* --- Form & Table Enhancements --- */
-        .form-label { color: var(--text-secondary); font-weight: 500; }
-        .form-control, .form-select {
-            background-color: rgba(0,0,0,0.25);
-            color: var(--text-primary);
-            border: 1px solid var(--border-color);
-            padding: 0.75rem 1rem;
-            border-radius: 0.5rem;
-        }
-        .form-control:focus, .form-select:focus {
-            background-color: rgba(0,0,0,0.3);
-            color: var(--text-primary);
-            border-color: var(--secondary-color);
-            box-shadow: 0 0 0 0.25rem rgba(38, 208, 206, 0.25);
-        }
-        .modal-content {
-            background-color: #1e293b;
-            border: 1px solid var(--secondary-color);
-            border-radius: 1rem;
-        }
-        .table { color: var(--text-secondary); }
-        .table thead th {
-            color: var(--text-primary);
-            border: none;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-        .table tbody tr { border-color: var(--border-color); }
-        .table > :not(caption) > * > * { padding: 1rem; }
-
-        /* --- Enhanced Parking Slot Status --- */
-        .slot-card {
-            background: var(--bg-light-transparent);
-            border-radius: 1rem;
-            padding: 1.5rem;
-            text-align: center;
-            border: 1px solid var(--border-color);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-        .slot-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-        }
-        .slot-card .slot-icon { font-size: 2.5rem; }
-        .slot-card .slot-number { font-size: 1.5rem; font-weight: 600; color: var(--text-primary); margin-top: 1rem; }
-        .slot-card .slot-status { font-weight: 500; }
-        .slot-card.available .slot-icon, .slot-card.available .slot-status { color: #34d399; }
-        .slot-card.occupied .slot-icon, .slot-card.occupied .slot-status { color: #f87171; }
-
-        /* --- Loading Spinner --- */
-        .spinner {
-            width: 40px;
-            height: 40px;
-            border: 4px solid var(--border-color);
-            border-top: 4px solid var(--secondary-color);
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-            margin: 2rem auto;
-        }
-        .table-dark-custom {
-    background-color: black !important;
-    color: white !important;
-}
-
-.table-dark-custom th,
-.table-dark-custom td {
-    background-color: #1e293b !important;
-    color: white !important;
-    border-color: #333 !important;
-}
-        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
-    </style>
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 
 <body>
@@ -253,6 +35,15 @@
                         <ul class="dropdown-menu">
                             <li><a class="dropdown-item" onclick="showSection('parkir-motor')">Parkir Motor</a></li>
                             <li><a class="dropdown-item" onclick="showSection('parkir-mobil')">Parkir Mobil</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownPusatPemantauan" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Pusat Pemantauan
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdownPusatPemantauan">
+                            <li><a class="dropdown-item" href="#" onclick="showSection('pusat-pemantauan-dashboard-parkir-motor')">Dashboard Motor</a></li>
+                            <li><a class="dropdown-item" href="#" onclick="showSection('pusat-pemantauan-dashboard-parkir-mobil')">Dashboard Mobil</a></li>
                         </ul>
                     </li>
                     <li class="nav-item dropdown">
@@ -360,6 +151,330 @@
                                 <tbody id="mobilList">
                                     </tbody>
                             </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        {{-- Pusat Pemantauan Dashboard Parkir Motor --}}
+        <div id="pusat-pemantauan-dashboard-parkir-motor" class="content-section">
+            <div class="container">
+                <div class="row mb-5">
+                    <div class="col-12">
+                        <h1 class="header-title section-title">SmartParking Dashboard</h1>
+                        <p class="header-subtitle">Monitoring Parkir Motor Real-time</p>
+                    </div>
+                </div>
+
+                <div class="row mb-5 align-items-stretch">
+                    <div class="col-lg-7 col-md-12 mb-4 mb-lg-4">
+                        <div class="glass-card h-100 d-flex flex-column gap-3">
+                            <div class="p-4 border-bottom border-secondary">
+                                <h5 class="text-white mb-0"><i class="fa-solid fa-motorcycle me-2"></i>Status Slot Parkir</h5>
+                            </div>
+                            <div class="slot-grid px-4" id="slotGridMotor"></div>
+                            <div class="pb-4 px-4">
+                                <div class="system-health mt-auto d-flex flex-row align-items-center">
+                                    <div>
+                                        <span id="statusIndicatorMotor" class="status-indicator"></span>
+                                        <strong class="text-white">Sistem Operasional</strong>
+                                    </div>
+                                    <div class="text-end">
+                                        <span id="jamOperasionalMotor">Memuat...</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-5 col-md-12 mb-4 mb-lg-4">
+                        <div class="row h-100">
+                            <div class="col-6 mb-4">
+                                <div class="glass-card metric-card h-100">
+                                    <div class="d-flex flex-column align-items-center justify-content-center h-100 text-center">
+                                        <div class="metric-number" id="occupancyRateMotor">0%</div>
+                                        <div class="metric-label">
+                                            <i class="fa-solid fa-chart-pie me-2"></i>Tingkat Okupansi
+                                        </div>
+                                        <div class="progress-custom mt-3 w-100">
+                                            <div class="progress-bar-custom" id="progressBarMotor" style="width: 0%"></div>
+                                        </div>
+                                        <small class="text-secondary d-block mt-2 w-100" style="font-size: 0.75rem;">Persentase slot terisi dari total</small>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-6 mb-4">
+                                <div class="glass-card metric-card h-100">
+                                    <div class="d-flex flex-column align-items-center justify-content-center h-100">
+                                        <div class="metric-number" style="color: var(--success-color);" id="todayEntryMotor">0</div>
+                                        <div class="metric-label">
+                                            <i class="fa-solid fa-right-to-bracket me-2"></i>Kendaraan Masuk Hari Ini
+                                        </div>
+                                        <small class="text-secondary d-block mt-2" style="font-size: 0.75rem;">Total mobil masuk per hari ini</small>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="glass-card metric-card h-100">
+                                    <div class="d-flex flex-column align-items-center justify-content-center h-100">
+                                        <div class="metric-number" style="color: var(--warning-color);" id="peakHourMotor">--:--</div>
+                                        <div class="metric-label">
+                                            <i class="fa-solid fa-clock me-2"></i>Jam Masuk Paling Ramai
+                                        </div>
+                                        <small class="text-secondary d-block mt-2 text-center" style="font-size: 0.75rem;">Waktu paling banyak kendaraan masuk hari ini</small>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="glass-card metric-card h-100">
+                                    <div class="metric-number" style="color: var(--info-color);" id="lastEntryTimeMotor">--:--</div>
+                                    <div class="metric-label">
+                                        <i class="fa-solid fa-clock me-2"></i>Kendaraan Masuk Terakhir
+                                    </div>
+                                    <small class="text-secondary d-block mt-2" style="font-size: 0.75rem;">Berdasarkan waktu masuk terakhir hari ini</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row mb-5">
+                    <div class="col-lg-8 col-md-12 mb-4">
+                        <div class="glass-card h-100">
+                            <div class="d-flex justify-content-between align-items-center p-4 border-bottom border-secondary">
+                                <h5 class="text-white mb-0"><i class="bi bi-graph-up me-2"></i>Penggunaan Parkir</h5>
+                                <div class="btn-group btn-group-sm" role="group">
+                                    <button type="button" class="btn btn-outline-light active" onclick="toggleChartMotor('hourly')">Per Jam</button>
+                                    <button type="button" class="btn btn-outline-light" onclick="toggleChartMotor('weekly')">Mingguan</button>
+                                </div>
+                            </div>
+                            <div class="chart-container" style="height: 380px;">
+                                <canvas id="usageChartMotor"></canvas>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4 col-md-12 mb-4">
+                        <div class="glass-card h-100">
+                            <div class="p-4 border-bottom border-secondary">
+                                <h5 class="text-white mb-0"><i class="bi bi-pie-chart me-2"></i>Metode Akses</h5>
+                            </div>
+                            <div class="chart-container">
+                                <canvas id="accessChartMotor"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row mb-5">
+                    <div class="col-lg-4 col-md-12 mb-4">
+                        <div class="glass-card h-100">
+                            <div class="p-4 border-bottom border-secondary">
+                                <h5 class="text-white mb-0"><i class="bi bi-speedometer2 me-2"></i>Quick Stats</h5>
+                            </div>
+                            <div class="quick-stats p-4">
+                                <div class="quick-stat-item">
+                                    <div class="quick-stat-number" id="currentAvailableSlotsMotor">XX</div>
+                                    <div class="quick-stat-label">Slot Tersedia</div>
+                                </div>
+                                <div class="quick-stat-item">
+                                    <div class="quick-stat-number" id="topDepartmentMotor">TI</div>
+                                    <div class="quick-stat-label">Top Jurusan</div>
+                                </div>
+                                <div class="quick-stat-item">
+                                    <div class="quick-stat-number" id="trafficComparisonMotor">+15%</div>
+                                    <div class="quick-stat-label">Lalu Lintas vs Kemarin</div>
+                                </div>
+                                <div class="quick-stat-item">
+                                    <div class="quick-stat-number" id="topAccessMotor">...</div>
+                                    <div class="quick-stat-label">Akses Terbanyak</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-8 col-md-12 mb-4">
+                        <div class="glass-card h-100">
+                            <div class="p-4 border-bottom border-secondary">
+                                <h5 class="text-white mb-0"><i class="fa fa-building me-2"></i>Distribusi Jurusan</h5>
+                            </div>
+                            <div class="chart-container">
+                                <canvas id="departmentChartMotor" style="height: 300px;"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-lg-12 col-md-12 mb-4">
+                        <div class="glass-card h-100">
+                            <div class="p-4 border-bottom border-secondary">
+                                <h5 class="text-white mb-0"><i class="bi bi-clock-history me-2"></i>Aktivitas Terbaru</h5>
+                            </div>
+                            <div id="recentActivityMotor" style="max-height: 680px; overflow-y: auto;"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        {{-- Pusat Pemantauan Dashboard Parkir Mobil --}}
+        <div id="pusat-pemantauan-dashboard-parkir-mobil" class="content-section">
+            <div class="container">
+                <div class="row mb-5">
+                    <div class="col-12">
+                        <h1 class="header-title section-title">SmartParking Dashboard</h1>
+                        <p class="header-subtitle">Monitoring Parkir Mobil Real-time</p>
+                    </div>
+                </div>
+
+                <div class="row mb-5 align-items-stretch">
+                    <div class="col-lg-7 col-md-12 mb-4 mb-lg-4">
+                        <div class="glass-card h-100 d-flex flex-column gap-3">
+                            <div class="p-4 border-bottom border-secondary">
+                                <h5 class="text-white mb-0"><i class="bi bi-car-front me-2"></i>Status Slot Parkir</h5>
+                            </div>
+                            <div class="slot-grid px-4" id="slotGridMobil"></div>
+                            <div class="pb-4 px-4">
+                                <div class="system-health mt-auto d-flex flex-row align-items-center">
+                                    <div>
+                                        <span id="statusIndicatorMobil" class="status-indicator"></span>
+                                        <strong class="text-white">Sistem Operasional</strong>
+                                    </div>
+                                    <div class="text-end">
+                                        <span id="jamOperasionalMobil">Memuat...</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-5 col-md-12 mb-4 mb-lg-4">
+                        <div class="row h-100">
+                            <div class="col-6 mb-4">
+                                <div class="glass-card metric-card h-100">
+                                    <div class="d-flex flex-column align-items-center justify-content-center h-100 text-center">
+                                        <div class="metric-number" id="occupancyRateMobil">0%</div>
+                                        <div class="metric-label">
+                                            <i class="fa-solid fa-chart-pie me-2"></i>Tingkat Okupansi
+                                        </div>
+                                        <div class="progress-custom mt-3 w-100">
+                                            <div class="progress-bar-custom" id="progressBarMobil" style="width: 0%"></div>
+                                        </div>
+                                        <small class="text-secondary d-block mt-2 w-100" style="font-size: 0.75rem;">Persentase slot terisi dari total</small>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-6 mb-4">
+                                <div class="glass-card metric-card h-100">
+                                    <div class="d-flex flex-column align-items-center justify-content-center h-100">
+                                        <div class="metric-number" style="color: var(--success-color);" id="todayEntryMobil">0</div>
+                                        <div class="metric-label">
+                                            <i class="fa-solid fa-right-to-bracket me-2"></i>Kendaraan Masuk Hari Ini
+                                        </div>
+                                        <small class="text-secondary d-block mt-2" style="font-size: 0.75rem;">Total mobil masuk per hari ini</small>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="glass-card metric-card h-100">
+                                    <div class="d-flex flex-column align-items-center justify-content-center h-100">
+                                        <div class="metric-number" style="color: var(--warning-color);" id="peakHourMobil">--:--</div>
+                                        <div class="metric-label">
+                                            <i class="fa-solid fa-clock me-2"></i>Jam Masuk Paling Ramai
+                                        </div>
+                                        <small class="text-secondary d-block mt-2 text-center" style="font-size: 0.75rem;">Waktu paling banyak kendaraan masuk hari ini</small>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="glass-card metric-card h-100">
+                                    <div class="metric-number" style="color: var(--info-color);" id="lastEntryTimeMobil">--:--</div>
+                                    <div class="metric-label">
+                                        <i class="fa-solid fa-clock me-2"></i>Kendaraan Masuk Terakhir
+                                    </div>
+                                    <small class="text-secondary d-block mt-2" style="font-size: 0.75rem;">Berdasarkan waktu masuk terakhir hari ini</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row mb-5">
+                    <div class="col-lg-8 col-md-12 mb-4">
+                        <div class="glass-card h-100">
+                            <div class="d-flex justify-content-between align-items-center p-4 border-bottom border-secondary">
+                                <h5 class="text-white mb-0"><i class="bi bi-graph-up me-2"></i>Penggunaan Parkir</h5>
+                                <div class="btn-group btn-group-sm" role="group">
+                                    <button type="button" class="btn btn-outline-light active" onclick="toggleChart('hourly')">Per Jam</button>
+                                    <button type="button" class="btn btn-outline-light" onclick="toggleChart('weekly')">Mingguan</button>
+                                </div>
+                            </div>
+                            <div class="chart-container" style="height: 380px;">
+                                <canvas id="usageChartMobil"></canvas>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4 col-md-12 mb-4">
+                        <div class="glass-card h-100">
+                            <div class="p-4 border-bottom border-secondary">
+                                <h5 class="text-white mb-0"><i class="bi bi-pie-chart me-2"></i>Metode Akses</h5>
+                            </div>
+                            <div class="chart-container">
+                                <canvas id="accessChartMobil"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row mb-5">
+                    <div class="col-lg-4 col-md-12 mb-4">
+                        <div class="glass-card h-100">
+                            <div class="p-4 border-bottom border-secondary">
+                                <h5 class="text-white mb-0"><i class="bi bi-speedometer2 me-2"></i>Quick Stats</h5>
+                            </div>
+                            <div class="quick-stats p-4">
+                                <div class="quick-stat-item">
+                                    <div class="quick-stat-number" id="currentAvailableSlotsMobil">XX</div>
+                                    <div class="quick-stat-label">Slot Tersedia</div>
+                                </div>
+                                <div class="quick-stat-item">
+                                    <div class="quick-stat-number" id="topDepartmentMobil">TI</div>
+                                    <div class="quick-stat-label">Top Jurusan</div>
+                                </div>
+                                <div class="quick-stat-item">
+                                    <div class="quick-stat-number" id="trafficComparisonMobil">+15%</div>
+                                    <div class="quick-stat-label">Lalu Lintas vs Kemarin</div>
+                                </div>
+                                <div class="quick-stat-item">
+                                    <div class="quick-stat-number" id="topAccessMobil">...</div>
+                                    <div class="quick-stat-label">Akses Terbanyak</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-8 col-md-12 mb-4">
+                        <div class="glass-card h-100">
+                            <div class="p-4 border-bottom border-secondary">
+                                <h5 class="text-white mb-0"><i class="fa fa-building me-2"></i>Distribusi Jurusan</h5>
+                            </div>
+                            <div class="chart-container">
+                                <canvas id="departmentChartMobil" style="height: 300px;"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-lg-12 col-md-12 mb-4">
+                        <div class="glass-card h-100">
+                            <div class="p-4 border-bottom border-secondary">
+                                <h5 class="text-white mb-0"><i class="bi bi-clock-history me-2"></i>Aktivitas Terbaru</h5>
+                            </div>
+                            <div id="recentActivityMobil" style="max-height: 680px; overflow-y: auto;"></div>
                         </div>
                     </div>
                 </div>
@@ -635,6 +750,1041 @@
         });
     }
 
+    const chartColors = {
+        primary: '#1A2980',
+        secondary: '#26D0CE',
+        success: '#10b981',
+        warning: '#f59e0b',
+        danger: '#ef4444',
+        info: '#3b82f6'
+    };
+
+    // Dashboard Mobil
+    function setupDashboardMobil() {
+        const slotRef = ref(db, 'tempat_parkir/Mobil');
+        const jadwalRef = ref(db, 'jadwal_sistem/mobil');
+        const parkirRef = ref(db, 'parkir/Mobil');
+
+        const slotGrid = document.getElementById('slotGridMobil');
+        const occupancyRateEl = document.getElementById('occupancyRateMobil');
+        const progressBar = document.getElementById('progressBarMobil');
+        const jamOperasionalEl = document.getElementById('jamOperasionalMobil');
+        const indicator = document.getElementById('statusIndicatorMobil');
+        const todayEntryEl = document.getElementById('todayEntryMobil');
+
+        const accessChartCanvas = document.getElementById('accessChartMobil');
+        const accessChartCtx = accessChartCanvas ? accessChartCanvas.getContext('2d') : null;
+        const departmentChartCanvas = document.getElementById('departmentChartMobil');
+        const departmentChartCtx = departmentChartCanvas ? departmentChartCanvas.getContext('2d') : null;
+
+        const recentActivityContainer = document.getElementById('recentActivityMobil');
+
+        let accessChart;
+        let departmentChart;
+
+        // Quick Stats
+        const availableSlotEl = document.getElementById('currentAvailableSlotsMobil');
+        const peakHourEl = document.getElementById('peakHourMobil');
+        const topDepartmentEl = document.getElementById('topDepartmentMobil');
+        const trafficComparisonEl = document.getElementById('trafficComparisonMobil');
+        const topAccessEl = document.getElementById('topAccessMobil');
+        const lastEntryTimeEl = document.getElementById('lastEntryTimeMobil');
+
+        // Tampilkan spinner loading
+        slotGrid.innerHTML = `
+            <div class="d-flex justify-content-center align-items-center flex-column text-white">
+                <div class="spinner-border mb-2" role="status"></div>
+                <div>Memuat data slot parkir...</div>
+            </div>
+        `;
+
+        if (recentActivityContainer) {
+            recentActivityContainer.innerHTML = `
+                <div class="d-flex justify-content-center align-items-center flex-column text-white py-4">
+                    <div class="spinner-border mb-2" role="status"></div>
+                    <div>Memuat aktivitas terbaru...</div>
+                </div>
+            `;
+        }
+
+        // --- Listener Slot Parkir ---
+        onValue(slotRef, (snapshot) => {
+            const data = snapshot.val();
+            slotGrid.innerHTML = ''; // Bersihkan
+
+            if (!data) {
+                slotGrid.innerHTML = `
+                    <div class="d-flex justify-content-center align-items-center flex-column text-white">
+                        <p class="text-white mb-0">⚠️ Data slot tidak ditemukan.</p>
+                    </div>
+                `;
+                updateOccupancyStatsMobil(0, 0);
+                return;
+            }
+
+            let occupied = 0, total = 0;
+            Object.entries(data).forEach(([slotKey, status], index) => {
+                const slotDiv = document.createElement('div');
+                slotDiv.classList.add('parking-slot', status);
+                slotDiv.id = slotKey;
+
+                const isOccupied = status === 'occupied';
+                if (isOccupied) occupied++;
+                total++;
+
+                slotDiv.innerHTML = `
+                    <i class="fas fa-car slot-icon" aria-hidden="true"></i>
+                    <div class="slot-info">Slot ${index + 1}</div>
+                    <div class="slot-status">${isOccupied ? 'Terisi' : 'Kosong'}</div>
+                `;
+
+                slotGrid.appendChild(slotDiv);
+            });
+
+            updateOccupancyStatsMobil(occupied, total);
+            // Quick Stats Slot Tersedia
+            if (availableSlotEl) availableSlotEl.textContent = (total - occupied).toString();
+        }, () => {
+            slotGrid.innerHTML = `<p class="text-white">❌ Gagal memuat data slot parkir.</p>`;
+        });
+
+        if (jamOperasionalEl) {
+            jamOperasionalEl.innerHTML = `
+                <div class="d-flex align-items-center gap-2 text-white">
+                    <div class="spinner-border spinner-border-sm" role="status"></div>
+                    <div>Memuat jadwal...</div>
+                </div>
+            `;
+        }
+
+        // --- Listener Jadwal Operasional ---
+        onValue(jadwalRef, (snapshot) => {
+            const data = snapshot.val();
+            const jamMulai = data?.jam_mulai ?? '06:00';
+            const jamSelesai = data?.jam_selesai ?? '18:00';
+            const status = data?.operasional ?? 'off';
+
+            window.jamOperasionalMulai = jamMulai;
+            window.jamOperasionalSelesai = jamSelesai;
+
+            if (jamOperasionalEl) {
+                jamOperasionalEl.textContent = `${jamMulai} - ${jamSelesai} WIB`;
+            }
+            if (indicator) {
+                indicator.classList.remove('status-online', 'status-offline');
+                indicator.classList.add(status === 'on' ? 'status-online' : 'status-offline');
+            }
+        });
+
+        // --- Listener Kendaraan Masuk Hari Ini ---
+        const today = new Date().toISOString().slice(0, 10);
+        if (todayEntryEl) todayEntryEl.textContent = '...';
+
+        onValue(parkirRef, (snapshot) => {
+            const data = snapshot.val() || {};
+            let count = 0;
+            let weeklyCount = [0, 0, 0, 0, 0, 0, 0];
+            let hourlyMap = {};
+            let aksesCount = {
+                ktm: 0,
+                petugas: 0
+            };
+            let aksesData = {};
+            let jurusanCount = {};
+            let yesterdayCount = 0;
+            const yesterday = new Date(Date.now() - 86400000).toISOString().slice(0, 10);
+            let lastEntryTime = '';
+
+            Object.values(data).forEach(entry => {
+                const isFilled = (value) => value && value.trim() !== '' && value !== '-';
+                const isValid = isFilled(entry.nama) && isFilled(entry.nim) && isFilled(entry.jurusan);
+                const isToday = entry.tanggal === today;
+
+                if (isToday && isValid) {
+                    count++;
+
+                    const jam = entry.waktu?.slice(0, 2);
+                    if (jam) {
+                        hourlyMap[jam] = (hourlyMap[jam] || 0) + 1;
+                    }
+
+                    if (entry.waktu) {
+                        if (!lastEntryTime || entry.waktu > lastEntryTime) {
+                            lastEntryTime = entry.waktu;
+                        }
+                    }
+                }
+
+                if (entry.tanggal && isValid) {
+                    const dayIdx = new Date(entry.tanggal).getDay();
+                    const index = dayIdx === 0 ? 6 : dayIdx - 1;
+                    weeklyCount[index]++;
+                }
+
+                if (isValid) {
+                    const akses = entry.akses?.toLowerCase();
+                    if (akses === 'ktm') aksesCount.ktm++;
+                    else if (akses === 'petugas') aksesCount.petugas++;
+                    
+                    aksesData[akses] = (aksesData[akses] || 0) + 1;
+
+                    const jurusan = entry.jurusan.trim();
+                    jurusanCount[jurusan] = (jurusanCount[jurusan] || 0) + 1;
+                }
+
+                if (entry.tanggal === yesterday && isValid) {
+                    yesterdayCount++;
+                }
+            });
+
+            // Kendaaran Masuk Hari Ini
+            if (todayEntryEl) todayEntryEl.textContent = count;
+
+            // Jam Paling Ramai
+            if (peakHourEl) {
+                const sortedHours = Object.entries(hourlyMap).sort((a, b) => b[1] - a[1]);
+                const jamRamai = sortedHours[0]?.[0] || '--';
+                peakHourEl.textContent = `${jamRamai}:00`;
+            }
+
+            // Kendaraan Masuk Terakhir
+            if (lastEntryTimeEl) {
+                lastEntryTimeEl.textContent = lastEntryTime ? lastEntryTime.slice(0, 5) : '--:--';
+            }
+
+            // Update Quick Stats
+            // Top Jurusan
+            if (topDepartmentEl) {
+                const sorted = Object.entries(jurusanCount).sort((a, b) => b[1] - a[1]);
+                topDepartmentEl.textContent = sorted[0]?.[0] || '-';
+            }
+
+            // Lalu Lintas vs Kemarin
+            if (trafficComparisonEl) {
+                let percentage = 0;
+                if (yesterdayCount > 0) {
+                    percentage = (((count - yesterdayCount) / yesterdayCount) * 100).toFixed(1);
+                } else if (count > 0) {
+                    percentage = 100;
+                }
+                const prefix = percentage >= 0 ? '+' : '';
+                trafficComparisonEl.textContent = `${prefix}${percentage}%`;
+            }
+
+            // Akses Terbanyak
+            if (topAccessEl) {
+                const label = aksesCount.ktm > aksesCount.petugas ? 
+                    `KTM (${aksesCount.ktm})` : 
+                    `Petugas (${aksesCount.petugas})`;
+                topAccessEl.textContent = label;
+            }
+
+            // Update Department Chart
+            if (departmentChartCtx) {
+                const sorted = Object.entries(jurusanCount).sort((a, b) => b[1] - a[1]);
+                const labels = sorted.map(([jur]) => jur);
+                const values = sorted.map(([, val]) => val);
+                const colors = labels.map((_, i) => [
+                    chartColors.primary,
+                    chartColors.secondary,
+                    chartColors.success,
+                    chartColors.warning,
+                    chartColors.info,
+                    chartColors.danger
+                ][i % 6]);
+
+                if (!departmentChart) {
+                    departmentChart = new Chart(departmentChartCtx, {
+                        type: 'bar',
+                        data: {
+                            labels,
+                            datasets: [{
+                                label: 'Jumlah Kendaraan',
+                                data: values,
+                                backgroundColor: colors,
+                                borderColor: colors,
+                                borderWidth: 1,
+                                borderRadius: 5
+                            }]
+                        },
+                        options: {
+                            responsive: true,
+                            maintainAspectRatio: false,
+                            plugins: {
+                                legend: { display: false }
+                            },
+                            scales: {
+                                y: {
+                                    beginAtZero: true,
+                                    grid: {
+                                        color: 'rgba(255,255,255,0.08)',
+                                        drawBorder: false
+                                    },
+                                    ticks: { color: '#a0aec0' }
+                                },
+                                x: {
+                                    grid: {
+                                        color: 'rgba(255,255,255,0.08)',
+                                        drawBorder: false
+                                    },
+                                    ticks: { color: '#a0aec0' }
+                                }
+                            }
+                        }
+                    });
+                } else {
+                    window.departmentChart.data.labels = labels;
+                    window.departmentChart.data.datasets[0].data = values;
+                    window.departmentChart.update();
+                }
+            }
+
+            window.latestHourlyMap = hourlyMap;
+            window.latestWeeklyCount = weeklyCount;
+
+            if (window.currentChartMode === 'weekly') {
+                updateWeeklyChartMobil(weeklyCount);
+            } else {
+                updateHourlyChartMobil(hourlyMap);
+            }
+
+            if (accessChartCtx) {
+                if (!accessChart) {
+                    // const total = aksesCount.ktm + aksesCount.petugas;
+                    // const persenKTM = total ? ((aksesCount.ktm / total) * 100).toFixed(1) : 0;
+                    // const persenPetugas = total ? ((aksesCount.petugas / total) * 100).toFixed(1) : 0;
+
+                    const aksesLabels = Object.keys(aksesData);
+                    const aksesValues = Object.values(aksesData);
+                    const total = aksesValues.reduce((sum, val) => sum + val, 0);
+                    const backgroundColors = aksesLabels.map((_, i) => [
+                        chartColors.info,
+                        chartColors.warning,
+                        chartColors.primary,
+                        chartColors.danger,
+                        chartColors.success
+                    ][i % 5]);
+
+                    // Persentase dari masing-masing akses
+                    const aksesPercentages = aksesValues.map(val =>
+                        total ? ((val / total) * 100).toFixed(1) : 0
+                    );
+
+                    accessChart = new Chart(accessChartCtx, {
+                        type: 'doughnut',
+                        data: {
+                            labels: aksesLabels.map(label => label.toUpperCase()),
+                            datasets: [{
+                                data: aksesPercentages,
+                                backgroundColor: [chartColors.info, chartColors.warning],
+                                hoverOffset: 5
+                            }]
+                        },
+                        options: {
+                            responsive: true,
+                            maintainAspectRatio: false,
+                            layout: { padding: 5 },
+                            plugins: {
+                                legend: {
+                                    position: 'bottom',
+                                    labels: {
+                                        color: '#a0aec0',
+                                        font: { size: 12 },
+                                        padding: 30
+                                    }
+                                },
+                                tooltip: {
+                                    padding: 12,
+                                    boxPadding: 6,
+                                    cornerRadius: 6,
+                                    titleFont: { size: 13 },
+                                    bodyFont: { size: 13 },
+                                    callbacks: {
+                                        label: function(context) {
+                                            let label = context.label || '';
+                                            if (label) label += ': ';
+                                            if (context.parsed !== null) label += context.parsed + '%';
+                                            return label;
+                                        }
+                                    }
+                                }
+                            },
+                        }
+                    });
+                } else {
+                    accessChart.data.datasets[0].data = [aksesCount.ktm, aksesCount.petugas];
+                    accessChart.update();
+                }
+            }   
+        }, () => {
+            if (todayEntryEl) todayEntryEl.textContent = '0';
+        });
+
+        // --- Listener Aktivitas Terbaru ---
+        if (recentActivityContainer) {
+            onValue(parkirRef, (snapshot) => {
+                const data = snapshot.val();
+                if (!data) return;
+
+                const isFilled = (value) => value && value.trim() !== '' && value !== '-';
+                const isValid = (entry) => isFilled(entry.nama) && isFilled(entry.nim) && isFilled(entry.jurusan);
+
+                const sorted = Object.values(data).filter(isValid).sort((a, b) => {
+                    const dateTimeA = `${a.tanggal} ${a.waktu}`;
+                    const dateTimeB = `${b.tanggal} ${b.waktu}`;
+
+                    const dateA = new Date(dateTimeA);
+                    const dateB = new Date(dateTimeB);
+
+                    return dateB.getTime() - dateA.getTime();
+                }).slice(0, 14);
+
+                recentActivityContainer.innerHTML = sorted.map((entry, index) => {
+                    const aksesUpper = (entry.akses || '').toUpperCase();
+
+                    const borderClass = (index < sorted.length - 1) ? 'border-bottom border-secondary' : '';
+
+                    return `
+                        <div class="activity-item d-flex align-items-center py-2 px-3 ${borderClass}">
+                            <div class="activity-icon entry me-3">
+                            <i class="bi bi-arrow-up"></i>
+                        </div>
+                        <div>
+                            <h6 class="text-white mb-1">${entry.nama}</h6>
+                            <small class="text-secondary">${entry.nim} • ${entry.jurusan} • ${entry.waktu} • ${aksesUpper}</small>
+                        </div>
+                    </div>`;
+                }).join('');
+            });
+        }
+
+        function updateOccupancyStatsMobil(occupied, total) {
+            const rate = total > 0 ? Math.round((occupied / total) * 100) : 0;
+            if (occupancyRateEl) occupancyRateEl.textContent = `${rate}%`;
+            if (progressBar) progressBar.style.width = `${rate}%`;
+        }
+
+        window.toggleChart = function (mode) {
+            document.querySelectorAll('.btn-group .btn').forEach(btn => btn.classList.remove('active'));
+            document.querySelector(`.btn[onclick="toggleChart('${mode}')"]`)?.classList.add('active');
+
+            window.currentChartMode = mode;
+            if (mode === 'hourly') {
+                updateHourlyChartMobil(window.latestHourlyMap || {});
+            } else if (mode === 'weekly') {
+                updateWeeklyChartMobil(window.latestWeeklyCount || []);
+            }
+        };
+    }
+
+    function updateWeeklyChartMobil(data) {
+        if (window.usageChartMobilInstance) {
+            window.usageChartMobilInstance.data = {
+                labels: ['Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu', 'Minggu'],
+                datasets: [{
+                    label: 'Total Masuk',
+                    data,
+                    backgroundColor: [
+                        chartColors.secondary,
+                        chartColors.primary,
+                        chartColors.success,
+                        chartColors.warning,
+                        chartColors.info,
+                        `${chartColors.secondary}AA`,
+                        `${chartColors.primary}AA`
+                    ],
+                    borderColor: [
+                        chartColors.secondary,
+                        chartColors.primary,
+                        chartColors.success,
+                        chartColors.warning,
+                        chartColors.info,
+                        chartColors.secondary,
+                        chartColors.primary
+                    ],
+                    borderWidth: 1
+                }]
+            };
+            window.usageChartMobilInstance.options.scales.y.max = Math.max(...data, 5) + 2;
+            window.usageChartMobilInstance.type = 'bar';
+            window.usageChartMobilInstance.update();
+        }
+    }
+
+    function updateHourlyChartMobil(hourlyMap) {
+        if (window.usageChartMobilInstance) {
+            const labels = [];
+            const values = [];
+
+            const startHour = parseInt(('06:00').split(':')[0]);
+            const endHour = parseInt(('24:00').split(':')[0]);
+
+            // const startHour = parseInt((window.jamOperasionalMulai || '06:00').split(':')[0]);
+            // const endHour = parseInt((window.jamOperasionalSelesai || '18:00').split(':')[0]);
+
+            for (let hour = startHour; hour <= endHour; hour++) {
+                const label = `${hour.toString().padStart(2, '0')}:00`;
+                labels.push(label);
+                values.push(hourlyMap[hour.toString().padStart(2, '0')] || 0);
+            }
+
+            window.usageChartMobilInstance.data = {
+                labels,
+                datasets: [{
+                    label: 'Mobil Parkir',
+                    data: values,
+                    borderColor: chartColors.secondary,
+                    backgroundColor: (context) => {
+                        const chart = context.chart;
+                        const {ctx, chartArea} = chart;
+                        if (!chartArea) return null;
+                        const gradient = ctx.createLinearGradient(0, chartArea.bottom, 0, chartArea.top);
+                        gradient.addColorStop(0, `${chartColors.secondary}00`);
+                        gradient.addColorStop(1, `${chartColors.secondary}40`);
+                        return gradient;
+                    },
+                    fill: true,
+                    tension: 0.4,
+                    borderWidth: 3,
+                    pointBackgroundColor: chartColors.secondary,
+                    pointBorderColor: '#fff',
+                    pointBorderWidth: 2,
+                    pointRadius: 6,
+                    pointHoverRadius: 8,
+                }]
+            };
+
+            window.usageChartMobilInstance.options.scales.y.max = Math.max(...values, 5);
+            window.usageChartMobilInstance.type = 'line';
+            window.usageChartMobilInstance.update();
+        }
+    }
+
+    function setupDashboardMotor() {
+        // Referensi database untuk Motor
+        const slotRef = ref(db, 'tempat_parkir/Motor');
+        const jadwalRef = ref(db, 'jadwal_sistem/motor');
+        const parkirRef = ref(db, 'parkir/Motor');
+
+        // Elemen HTML untuk Motor
+        const slotGrid = document.getElementById('slotGridMotor');
+        const occupancyRateEl = document.getElementById('occupancyRateMotor');
+        const progressBar = document.getElementById('progressBarMotor');
+        const jamOperasionalEl = document.getElementById('jamOperasionalMotor');
+        const indicator = document.getElementById('statusIndicatorMotor');
+        const todayEntryEl = document.getElementById('todayEntryMotor');
+
+        const accessChartCanvas = document.getElementById('accessChartMotor');
+        const accessChartCtx = accessChartCanvas ? accessChartCanvas.getContext('2d') : null;
+        const departmentChartCanvas = document.getElementById('departmentChartMotor');
+        const departmentChartCtx = departmentChartCanvas ? departmentChartCanvas.getContext('2d') : null;
+
+        const recentActivityContainer = document.getElementById('recentActivityMotor');
+
+        let accessChartMotor; // Perhatikan perubahan nama variabel chart
+        let departmentChartMotor; // Perhatikan perubahan nama variabel chart
+
+        // Quick Stats untuk Motor
+        const availableSlotEl = document.getElementById('currentAvailableSlotsMotor');
+        const peakHourEl = document.getElementById('peakHourMotor');
+        const topDepartmentEl = document.getElementById('topDepartmentMotor');
+        const trafficComparisonEl = document.getElementById('trafficComparisonMotor');
+        const topAccessEl = document.getElementById('topAccessMotor');
+        const lastEntryTimeEl = document.getElementById('lastEntryTimeMotor');
+
+        // Tampilkan spinner loading
+        if (slotGrid) { // Tambahkan pengecekan jika elemen ada
+            slotGrid.innerHTML = `
+                <div class="d-flex justify-content-center align-items-center flex-column text-white">
+                    <div class="spinner-border mb-2" role="status"></div>
+                    <div>Memuat data slot parkir motor...</div>
+                </div>
+            `;
+        }
+
+        if (recentActivityContainer) {
+            recentActivityContainer.innerHTML = `
+                <div class="d-flex justify-content-center align-items-center flex-column text-white py-4">
+                    <div class="spinner-border mb-2" role="status"></div>
+                    <div>Memuat aktivitas terbaru motor...</div>
+                </div>
+            `;
+        }
+
+        // --- Listener Slot Parkir Motor ---
+        onValue(slotRef, (snapshot) => {
+            const data = snapshot.val();
+            if (slotGrid) slotGrid.innerHTML = ''; // Bersihkan
+
+            if (!data) {
+                if (slotGrid) {
+                    slotGrid.innerHTML = `
+                        <div class="d-flex justify-content-center align-items-center flex-column text-white">
+                            <p class="text-white mb-0">⚠️ Data slot motor tidak ditemukan.</p>
+                        </div>
+                    `;
+                }
+                updateOccupancyStatsMotor(0, 0); // Panggil fungsi update untuk Motor
+                return;
+            }
+
+            let occupied = 0, total = 0;
+            Object.entries(data).forEach(([slotKey, status], index) => {
+                const slotDiv = document.createElement('div');
+                slotDiv.classList.add('parking-slot', status);
+                slotDiv.id = slotKey;
+
+                const isOccupied = status === 'occupied';
+                if (isOccupied) occupied++;
+                total++;
+
+                slotDiv.innerHTML = `
+                    <i class="fas fa-motorcycle slot-icon" aria-hidden="true"></i> <div class="slot-info">Slot ${index + 1}</div>
+                    <div class="slot-status">${isOccupied ? 'Terisi' : 'Kosong'}</div>
+                `;
+
+                if (slotGrid) slotGrid.appendChild(slotDiv);
+            });
+
+            updateOccupancyStatsMotor(occupied, total); // Panggil fungsi update untuk Motor
+            // Quick Stats Slot Tersedia
+            if (availableSlotEl) availableSlotEl.textContent = (total - occupied).toString();
+        }, () => {
+            if (slotGrid) slotGrid.innerHTML = `<p class="text-white">❌ Gagal memuat data slot parkir motor.</p>`;
+        });
+
+        if (jamOperasionalEl) {
+            jamOperasionalEl.innerHTML = `
+                <div class="d-flex align-items-center gap-2 text-white">
+                    <div class="spinner-border spinner-border-sm" role="status"></div>
+                    <div>Memuat jadwal...</div>
+                </div>
+            `;
+        }
+
+        // --- Listener Jadwal Operasional Motor ---
+        onValue(jadwalRef, (snapshot) => {
+            const data = snapshot.val();
+            const jamMulai = data?.jam_mulai ?? '06:00';
+            const jamSelesai = data?.jam_selesai ?? '18:00';
+            const status = data?.operasional ?? 'off';
+
+            window.jamOperasionalMulaiMotor = jamMulai; // Simpan di window scope dengan nama unik
+            window.jamOperasionalSelesaiMotor = jamSelesai; // Simpan di window scope dengan nama unik
+
+            if (jamOperasionalEl) {
+                jamOperasionalEl.textContent = `${jamMulai} - ${jamSelesai} WIB`;
+            }
+            if (indicator) {
+                indicator.classList.remove('status-online', 'status-offline');
+                indicator.classList.add(status === 'on' ? 'status-online' : 'status-offline');
+            }
+        });
+
+        // --- Listener Kendaraan Masuk Hari Ini Motor ---
+        const today = new Date().toISOString().slice(0, 10);
+        if (todayEntryEl) todayEntryEl.textContent = '...';
+
+        onValue(parkirRef, (snapshot) => {
+            const data = snapshot.val() || {};
+            let count = 0;
+            let weeklyCount = [0, 0, 0, 0, 0, 0, 0];
+            let hourlyMap = {};
+            let aksesCount = {
+                ktm: 0,
+                petugas: 0
+            };
+            let aksesData = {};
+            let jurusanCount = {};
+            let yesterdayCount = 0;
+            const yesterday = new Date(Date.now() - 86400000).toISOString().slice(0, 10);
+            let lastEntryTime = '';
+
+            Object.values(data).forEach(entry => {
+                const isFilled = (value) => value && value.trim() !== '' && value !== '-';
+                const isValid = isFilled(entry.nama) && isFilled(entry.nim) && isFilled(entry.jurusan);
+                const isToday = entry.tanggal === today;
+
+                if (isToday && isValid) {
+                    count++;
+
+                    const jam = entry.waktu?.slice(0, 2);
+                    if (jam) {
+                        hourlyMap[jam] = (hourlyMap[jam] || 0) + 1;
+                    }
+
+                    if (entry.waktu) {
+                        if (!lastEntryTime || entry.waktu > lastEntryTime) {
+                            lastEntryTime = entry.waktu;
+                        }
+                    }
+                }
+
+                if (entry.tanggal && isValid) {
+                    const dayIdx = new Date(entry.tanggal).getDay();
+                    const index = dayIdx === 0 ? 6 : dayIdx - 1; // Senin (1) -> 0, Minggu (0) -> 6
+                    weeklyCount[index]++;
+                }
+
+                if (isValid) {
+                    const akses = entry.akses?.toLowerCase();
+                    if (akses === 'ktm') aksesCount.ktm++;
+                    else if (akses === 'petugas') aksesCount.petugas++;
+                    
+                    // Kumpulkan data akses secara dinamis (untuk labels di chart)
+                    aksesData[akses] = (aksesData[akses] || 0) + 1;
+
+                    const jurusan = entry.jurusan.trim();
+                    jurusanCount[jurusan] = (jurusanCount[jurusan] || 0) + 1;
+                }
+
+                if (entry.tanggal === yesterday && isValid) {
+                    yesterdayCount++;
+                }
+            });
+
+            // Kendaaran Masuk Hari Ini
+            if (todayEntryEl) todayEntryEl.textContent = count;
+
+            // Jam Paling Ramai
+            if (peakHourEl) {
+                const sortedHours = Object.entries(hourlyMap).sort((a, b) => b[1] - a[1]);
+                const jamRamai = sortedHours[0]?.[0] || '--';
+                peakHourEl.textContent = `${jamRamai}:00`;
+            }
+
+             // Kendaraan Masuk Terakhir
+            if (lastEntryTimeEl) {
+                lastEntryTimeEl.textContent = lastEntryTime ? lastEntryTime.slice(0, 5) : '--:--';
+            }
+
+            // Update Quick Stats Motor
+            // Top Jurusan
+            if (topDepartmentEl) {
+                const sorted = Object.entries(jurusanCount).sort((a, b) => b[1] - a[1]);
+                topDepartmentEl.textContent = sorted[0]?.[0] || '-';
+            }
+
+            // Lalu Lintas vs Kemarin
+            if (trafficComparisonEl) {
+                let percentage = 0;
+                if (yesterdayCount > 0) {
+                    percentage = (((count - yesterdayCount) / yesterdayCount) * 100).toFixed(1);
+                } else if (count > 0) {
+                    percentage = 100;
+                }
+                const prefix = percentage >= 0 ? '+' : '';
+                trafficComparisonEl.textContent = `${prefix}${percentage}%`;
+            }
+
+            // Akses Terbanyak
+            if (topAccessEl) {
+                const label = aksesCount.ktm > aksesCount.petugas ? 
+                    `KTM (${aksesCount.ktm})` : 
+                    `Petugas (${aksesCount.petugas})`;
+                topAccessEl.textContent = label;
+            }
+
+            // Update Department Chart Motor
+            if (departmentChartCtx) {
+                const sorted = Object.entries(jurusanCount).sort((a, b) => b[1] - a[1]);
+                const labels = sorted.map(([jur]) => jur);
+                const values = sorted.map(([, val]) => val);
+                const colors = labels.map((_, i) => [
+                    chartColors.primary,
+                    chartColors.secondary,
+                    chartColors.success,
+                    chartColors.warning,
+                    chartColors.info,
+                    chartColors.danger
+                ][i % 6]);
+
+                if (!departmentChartMotor) { // Gunakan departmentChartMotor
+                    departmentChartMotor = new Chart(departmentChartCtx, {
+                        type: 'bar',
+                        data: {
+                            labels,
+                            datasets: [{
+                                label: 'Jumlah Kendaraan',
+                                data: values,
+                                backgroundColor: colors,
+                                borderColor: colors,
+                                borderWidth: 1,
+                                borderRadius: 5
+                            }]
+                        },
+                        options: {
+                            responsive: true,
+                            maintainAspectRatio: false,
+                            plugins: {
+                                legend: { display: false }
+                            },
+                            scales: {
+                                y: {
+                                    beginAtZero: true,
+                                    grid: {
+                                        color: 'rgba(255,255,255,0.08)',
+                                        drawBorder: false
+                                    },
+                                    ticks: { color: '#a0aec0' }
+                                },
+                                x: {
+                                    grid: {
+                                        color: 'rgba(255,255,255,0.08)',
+                                        drawBorder: false
+                                    },
+                                    ticks: { color: '#a0aec0' }
+                                }
+                            }
+                        }
+                    });
+                } else {
+                    departmentChartMotor.data.labels = labels; // Update departmentChartMotor
+                    departmentChartMotor.data.datasets[0].data = values; // Update departmentChartMotor
+                    departmentChartMotor.update(); // Update departmentChartMotor
+                }
+            }
+
+            // Simpan data terbaru di window scope dengan nama unik
+            window.latestHourlyMapMotor = hourlyMap;
+            window.latestWeeklyCountMotor = weeklyCount;
+
+            // Perbarui chart utama (hourly/weekly) untuk Motor
+            if (window.currentChartModeMotor === 'weekly') { // Gunakan currentChartModeMotor
+                updateWeeklyChartMotor(weeklyCount);
+            } else {
+                updateHourlyChartMotor(hourlyMap);
+            }
+
+            // Update Access Chart Motor
+            if (accessChartCtx) {
+                if (!accessChartMotor) { // Gunakan accessChartMotor
+                    const aksesLabels = Object.keys(aksesData);
+                    const aksesValues = Object.values(aksesData);
+                    const total = aksesValues.reduce((sum, val) => sum + val, 0);
+                    const backgroundColors = aksesLabels.map((_, i) => [
+                        chartColors.info,
+                        chartColors.warning,
+                        chartColors.primary,
+                        chartColors.danger,
+                        chartColors.success
+                    ][i % 5]);
+
+                    // Persentase dari masing-masing akses
+                    const aksesPercentages = aksesValues.map(val =>
+                        total ? parseFloat(((val / total) * 100).toFixed(1)) : 0
+                    );
+
+                    accessChartMotor = new Chart(accessChartCtx, { // Buat accessChartMotor
+                        type: 'doughnut',
+                        data: {
+                            labels: aksesLabels.map(label => label.toUpperCase()),
+                            datasets: [{
+                                data: aksesPercentages,
+                                backgroundColor: backgroundColors, // Gunakan backgroundColors yang dinamis
+                                hoverOffset: 5
+                            }]
+                        },
+                        options: {
+                            responsive: true,
+                            maintainAspectRatio: false,
+                            layout: { padding: 5 },
+                            plugins: {
+                                legend: {
+                                    position: 'bottom',
+                                    labels: {
+                                        color: '#a0aec0',
+                                        font: { size: 12 },
+                                        padding: 30
+                                    }
+                                },
+                                tooltip: {
+                                    padding: 12,
+                                    boxPadding: 6,
+                                    cornerRadius: 6,
+                                    titleFont: { size: 13 },
+                                    bodyFont: { size: 13 },
+                                    callbacks: {
+                                        label: function(context) {
+                                            let label = context.label || '';
+                                            if (label) label += ': ';
+                                            if (context.parsed !== null) label += context.parsed + '%';
+                                            return label;
+                                        }
+                                    }
+                                }
+                            },
+                        }
+                    });
+                } else {
+                    // Update data untuk accessChartMotor
+                    const aksesLabels = Object.keys(aksesData);
+                    const aksesValues = Object.values(aksesData);
+                    const total = aksesValues.reduce((sum, val) => sum + val, 0);
+                    const aksesPercentages = aksesValues.map(val =>
+                        total ? parseFloat(((val / total) * 100).toFixed(1)) : 0
+                    );
+
+                    accessChartMotor.data.labels = aksesLabels.map(label => label.toUpperCase());
+                    accessChartMotor.data.datasets[0].data = aksesPercentages;
+                    accessChartMotor.update();
+                }
+            }   
+        }, () => {
+            if (todayEntryEl) todayEntryEl.textContent = '0';
+        });
+
+        // --- Listener Aktivitas Terbaru Motor ---
+        if (recentActivityContainer) {
+            onValue(parkirRef, (snapshot) => {
+                const data = snapshot.val();
+                if (!data) {
+                    recentActivityContainer.innerHTML = `
+                        <div class="d-flex justify-content-center align-items-center flex-column text-white py-4">
+                            <p class="text-white mb-0">Tidak ada aktivitas terbaru.</p>
+                        </div>
+                    `;
+                    return;
+                }
+
+                const isFilled = (value) => value && value.trim() !== '' && value !== '-';
+                const isValid = (entry) => isFilled(entry.nama) && isFilled(entry.nim) && isFilled(entry.jurusan);
+
+                const sorted = Object.values(data).filter(isValid).sort((a, b) => {
+                    const dateTimeA = `${a.tanggal} ${a.waktu}`;
+                    const dateTimeB = `${b.tanggal} ${b.waktu}`;
+
+                    const dateA = new Date(dateTimeA);
+                    const dateB = new Date(dateTimeB);
+
+                    return dateB.getTime() - dateA.getTime();
+                }).slice(0, 14);
+
+                recentActivityContainer.innerHTML = sorted.map((entry, index) => {
+                    const aksesUpper = (entry.akses || '').toUpperCase();
+
+                    const borderClass = (index < sorted.length - 1) ? 'border-bottom border-secondary' : '';
+
+                    return `
+                        <div class="activity-item d-flex align-items-center py-2 px-3 ${borderClass}">
+                            <div class="activity-icon entry me-3">
+                                <i class="fas fa-arrow-up"></i> </div>
+                            <div>
+                                <h6 class="text-white mb-1">${entry.nama}</h6>
+                                <small class="text-secondary">${entry.nim} • ${entry.jurusan} • ${entry.waktu} • ${aksesUpper}</small>
+                            </div>
+                        </div>`;
+                }).join('');
+            });
+        }
+
+        // Fungsi helper untuk update statistik okupansi Motor
+        function updateOccupancyStatsMotor(occupied, total) {
+            const rate = total > 0 ? Math.round((occupied / total) * 100) : 0;
+            if (occupancyRateEl) occupancyRateEl.textContent = `${rate}%`;
+            if (progressBar) progressBar.style.width = `${rate}%`;
+        }
+
+        // Fungsi toggle chart untuk Motor
+        window.toggleChartMotor = function (mode) { // Ganti nama fungsi toggleChart
+            document.querySelectorAll('.btn-group-motor .btn').forEach(btn => btn.classList.remove('active')); // Sesuaikan selektor button group
+            document.querySelector(`.btn-motor[onclick="toggleChartMotor('${mode}')"]`)?.classList.add('active'); // Sesuaikan selektor button
+
+            window.currentChartModeMotor = mode; // Gunakan currentChartModeMotor
+            if (mode === 'hourly') {
+                updateHourlyChartMotor(window.latestHourlyMapMotor || {});
+            } else if (mode === 'weekly') {
+                updateWeeklyChartMotor(window.latestWeeklyCountMotor || []);
+            }
+        };
+    }
+
+    // Fungsi update chart mingguan untuk Motor
+    function updateWeeklyChartMotor(data) {
+        if (window.usageChartMotorInstance) { // Gunakan usageChartMotorInstance
+            window.usageChartMotorInstance.data = {
+                labels: ['Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu', 'Minggu'],
+                datasets: [{
+                    label: 'Total Masuk',
+                    data,
+                    backgroundColor: [
+                        chartColors.secondary,
+                        chartColors.primary,
+                        chartColors.success,
+                        chartColors.warning,
+                        chartColors.info,
+                        `${chartColors.secondary}AA`,
+                        `${chartColors.primary}AA`
+                    ],
+                    borderColor: [
+                        chartColors.secondary,
+                        chartColors.primary,
+                        chartColors.success,
+                        chartColors.warning,
+                        chartColors.info,
+                        chartColors.secondary,
+                        chartColors.primary
+                    ],
+                    borderWidth: 1
+                }]
+            };
+            window.usageChartMotorInstance.options.scales.y.max = Math.max(...data, 5) + 2;
+            window.usageChartMotorInstance.type = 'bar';
+            window.usageChartMotorInstance.update();
+        }
+    }
+
+    // Fungsi update chart per jam untuk Motor
+    function updateHourlyChartMotor(hourlyMap) {
+        if (window.usageChartMotorInstance) { // Gunakan usageChartMotorInstance
+            const labels = [];
+            const values = [];
+
+            const startHour = parseInt(('06:00').split(':')[0]);
+            const endHour = parseInt(('24:00').split(':')[0]);
+
+            // Gunakan jam operasional spesifik untuk motor
+            // const startHour = parseInt((window.jamOperasionalMulaiMotor || '06:00').split(':')[0]);
+            // const endHour = parseInt((window.jamOperasionalSelesaiMotor || '18:00').split(':')[0]);
+
+            for (let hour = startHour; hour <= endHour; hour++) {
+                const label = `${hour.toString().padStart(2, '0')}:00`;
+                labels.push(label);
+                values.push(hourlyMap[hour.toString().padStart(2, '0')] || 0);
+            }
+
+            window.usageChartMotorInstance.data = {
+                labels,
+                datasets: [{
+                    label: 'Motor Parkir',
+                    data: values,
+                    borderColor: chartColors.secondary,
+                    backgroundColor: (context) => {
+                        const chart = context.chart;
+                        const {ctx, chartArea} = chart;
+                        if (!chartArea) return null;
+                        const gradient = ctx.createLinearGradient(0, chartArea.bottom, 0, chartArea.top);
+                        gradient.addColorStop(0, `${chartColors.secondary}00`);
+                        gradient.addColorStop(1, `${chartColors.secondary}40`);
+                        return gradient;
+                    },
+                    fill: true,
+                    tension: 0.4,
+                    borderWidth: 3,
+                    pointBackgroundColor: chartColors.secondary,
+                    pointBorderColor: '#fff',
+                    pointBorderWidth: 2,
+                    pointRadius: 6,
+                    pointHoverRadius: 8,
+                }]
+            };
+
+            window.usageChartMotorInstance.options.scales.y.max = Math.max(...values, 5);
+            window.usageChartMotorInstance.type = 'line';
+            window.usageChartMotorInstance.update();
+        }
+    }
+
     // --- Portal Management ---
     const jadwalRef = ref(db, 'jadwal_sistem');
     async function loadJadwalData() {
@@ -659,8 +1809,79 @@
         Swal.fire({ icon: 'success', title: 'Berhasil!', text: `Jadwal ${jenis} berhasil diupdate.`, timer: 1500, showConfirmButton: false });
     }
 
-    // --- Initial Load ---
     document.addEventListener('DOMContentLoaded', () => {
+        // --- Chart for Mobil ---
+        const ctxMobil = document.getElementById('usageChartMobil')?.getContext('2d');
+        if (ctxMobil) {
+            window.usageChartMobilInstance = new Chart(ctxMobil, {
+                type: 'line',
+                data: {
+                    labels: [],
+                    datasets: []
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { display: false }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            max: 5,
+                            ticks: { color: '#a0aec0' },
+                            grid: { color: 'rgba(255,255,255,0.08)', drawBorder: false }
+                        },
+                        x: {
+                            ticks: { color: '#a0aec0' },
+                            grid: { color: 'rgba(255,255,255,0.08)', drawBorder: false }
+                        }
+                    }
+                }
+            });
+        }
+        // Initialize default chart mode for Mobil
+        window.currentChartMode = 'hourly';
+        // Setup the Mobil dashboard
+        setupDashboardMobil();
+
+        // --- Chart for Motor ---
+        const ctxMotor = document.getElementById('usageChartMotor')?.getContext('2d'); // Get context for Motor chart
+        if (ctxMotor) {
+            window.usageChartMotorInstance = new Chart(ctxMotor, { // Create instance for Motor
+                type: 'line',
+                data: {
+                    labels: [],
+                    datasets: []
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { display: false }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            max: 5,
+                            ticks: { color: '#a0aec0' },
+                            grid: { color: 'rgba(255,255,255,0.08)', drawBorder: false }
+                        },
+                        x: {
+                            ticks: { color: '#a0aec0' },
+                            grid: { color: 'rgba(255,255,255,0.08)', drawBorder: false }
+                        }
+                    }
+                }
+            });
+        }
+        // Initialize default chart mode for Motor
+        window.currentChartModeMotor = 'hourly'; // Set specific mode variable for Motor
+        // Setup the Motor dashboard
+        setupDashboardMotor();
+
+
+        // Load other shared data after charts are ready
         loadMahasiswaData();
         setupParkingListeners('Motor');
         setupParkingListeners('Mobil');
