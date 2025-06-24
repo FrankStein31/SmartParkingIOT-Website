@@ -1282,10 +1282,10 @@
                         <div class="row gy-5">
                             <div class="col-md-6">
                                 <h5 class="mb-4 text-light"><i class="fas fa-motorcycle me-2"></i>Portal Motor</h5>
-                                <div class="mb-3"><label class="form-label">Jam Mulai</label><input type="time"
+                                <!-- <div class="mb-3"><label class="form-label">Jam Mulai</label><input type="time"
                                         class="form-control" id="motor_jam_mulai"></div>
                                 <div class="mb-3"><label class="form-label">Jam Selesai</label><input
-                                        type="time" class="form-control" id="motor_jam_selesai"></div>
+                                        type="time" class="form-control" id="motor_jam_selesai"></div> -->
                                 <div class="mb-3"><label class="form-label">Status Operasional</label><select
                                         class="form-select" id="motor_operasional">
                                         <option value="on">On</option>
@@ -1296,10 +1296,10 @@
                             </div>
                             <div class="col-md-6">
                                 <h5 class="mb-4 text-light"><i class="fas fa-car me-2"></i>Portal Mobil</h5>
-                                <div class="mb-3"><label class="form-label">Jam Mulai</label><input type="time"
+                                <!-- <div class="mb-3"><label class="form-label">Jam Mulai</label><input type="time"
                                         class="form-control" id="mobil_jam_mulai"></div>
                                 <div class="mb-3"><label class="form-label">Jam Selesai</label><input
-                                        type="time" class="form-control" id="mobil_jam_selesai"></div>
+                                        type="time" class="form-control" id="mobil_jam_selesai"></div> -->
                                 <div class="mb-3"><label class="form-label">Status Operasional</label><select
                                         class="form-select" id="mobil_operasional">
                                         <option value="on">On</option>
@@ -2841,7 +2841,7 @@
 
                 if (data) {
                     Object.values(data).forEach(mhs => {
-                        jurusanCount[mhs.Jurusan] = (jurusanCount[mhs.Jurusan] || 0) + 1;
+                        jurusanCount[mhs.Jurusan || mhs.jurusan] = (jurusanCount[mhs.Jurusan || mhs.jurusan] || 0) + 1;
                     });
 
 
@@ -3263,20 +3263,20 @@
             });
         }
         async function updateJadwal(jenis) {
-            const jamMulai = document.getElementById(`${jenis}_jam_mulai`).value;
-            const jamSelesai = document.getElementById(`${jenis}_jam_selesai`).value;
+            // const jamMulai = document.getElementById(`${jenis}_jam_mulai`).value;
+            // const jamSelesai = document.getElementById(`${jenis}_jam_selesai`).value;
             const operasional = document.getElementById(`${jenis}_operasional`).value;
-            if (!jamMulai || !jamSelesai) {
-                Swal.fire({
-                    icon: 'warning',
-                    title: 'Input Tidak Lengkap!',
-                    text: 'Jam mulai dan selesai harus diisi!'
-                });
-                return;
-            }
+            // if (!jamMulai || !jamSelesai) {
+            //     Swal.fire({
+            //         icon: 'warning',
+            //         title: 'Input Tidak Lengkap!',
+            //         text: 'Jam mulai dan selesai harus diisi!'
+            //     });
+            //     return;
+            // }
             await set(child(jadwalRef, jenis), {
-                jam_mulai: jamMulai,
-                jam_selesai: jamSelesai,
+                // jam_mulai: jamMulai,
+                // jam_selesai: jamSelesai,
                 operasional
             });
             Swal.fire({
