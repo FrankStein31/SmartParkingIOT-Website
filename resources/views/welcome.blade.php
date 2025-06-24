@@ -828,9 +828,6 @@
         .bg-gradient-success {
             background: linear-gradient(45deg, #28a745, #1e7e34);
         }
-
-        #noDataMobilHourlyMessage {
-        }
     </style>
 </head>
 
@@ -2169,7 +2166,7 @@
             const recentActivityContainer = document.getElementById('recentActivityMotor');
 
             let accessChartMotor;
-            let departmentChartMotor;
+            let departmentChart;
 
             // Quick Stats untuk Motor
             const availableSlotEl = document.getElementById('currentAvailableSlotsMotor');
@@ -2426,8 +2423,8 @@
                             chartColors.danger
                         ][i % 6]);
 
-                        if (!departmentChartMotor) {
-                            departmentChartMotor = new Chart(departmentChartCtx, {
+                        if (!departmentChart) {
+                            departmentChart = new Chart(departmentChartCtx, {
                                 type: 'bar',
                                 data: {
                                     labels,
@@ -2692,7 +2689,7 @@
         }
 
         function updateWeeklyChartMotor(data) {
-            const chartCanvas = document.getElementById('usageChartMtor');
+            const chartCanvas = document.getElementById('usageChartMotor');
             const noDataHourlyMessageEl = document.getElementById('noDataMotorHourlyMessage');
             const noDataWeeklyMessageEl = document.getElementById('noDataMotorWeeklyMessage');
 
@@ -2705,7 +2702,7 @@
                 noDataWeeklyMessageEl.style.display = 'none';
                 noDataHourlyMessageEl.style.display = 'none';
 
-                window.usageChartMobilInstance.data = {
+                window.usageChartMotorInstance.data = {
                     labels,
                     datasets: [{
                         label: 'Motor Parkir Mingguan',
@@ -2732,9 +2729,9 @@
                         barThickness: 20,
                     }]
                 };
-                window.usageChartMobilInstance.options.scales.y.max = Math.max(...values, 5);
-                window.usageChartMobilInstance.type = 'bar';
-                window.usageChartMobilInstance.update();
+                window.usageChartMotorInstance.options.scales.y.max = Math.max(...values, 5);
+                window.usageChartMotorInstance.type = 'bar';
+                window.usageChartMotorInstance.update();
             } else {
                 chartCanvas.style.display = 'none';
                 noDataWeeklyMessageEl.style.display = 'flex';
@@ -2769,7 +2766,7 @@
                     chartCanvas.style.display = 'block';
                     noDataMessageEl.style.display = 'none';
 
-                    window.usageChartMobilInstance.data = {
+                    window.usageChartMotorInstance.data = {
                         labels,
                         datasets: [{
                             label: 'Motor Parkir',
@@ -2794,9 +2791,9 @@
                             pointHoverRadius: 10,
                         }]
                     };
-                    window.usageChartMobilInstance.options.scales.y.max = Math.max(...values, 5);
-                    window.usageChartMobilInstance.type = 'line';
-                    window.usageChartMobilInstance.update();
+                    window.usageChartMotorInstance.options.scales.y.max = Math.max(...values, 5);
+                    window.usageChartMotorInstance.type = 'line';
+                    window.usageChartMotorInstance.update();
 
                 } else {
                     chartCanvas.style.display = 'none';
@@ -3351,7 +3348,19 @@
                         responsive: true,
                         maintainAspectRatio: false,
                         plugins: {
-                            legend: { display: false }
+                            legend: { display: false },
+                            datalabels: {
+                                color: '#FFFFFF',
+                                font: {
+                                    size: 12
+                                },
+                                formatter: (value, context) => {
+                                    if (value > 0) {
+                                        return value;
+                                    }
+                                    return '';
+                                }
+                            }
                         },
                         scales: {
                             y: {
@@ -3368,9 +3377,7 @@
                     }
                 });
             }
-            // Initialize default chart mode for Motor
-            window.currentChartModeMotor = 'hourly'; // Set specific mode variable for Motor
-            // Setup the Motor dashboard
+            window.currentChartModeMotor = 'hourly';
             setupDashboardMotor();
 
             loadMahasiswaData();
