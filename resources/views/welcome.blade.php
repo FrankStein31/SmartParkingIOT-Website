@@ -7,7 +7,8 @@
     <title>Smart Parking IOT - Ultimate Dashboard</title>
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.0/font/bootstrap-icons.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.0/font/bootstrap-icons.min.css"
+        rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
 
@@ -25,10 +26,14 @@
             --border-color: rgba(255, 255, 255, 0.1);
             --text-primary: #ffffff;
             --text-secondary: #a0aec0;
-            --success-color: #10b981; /* Green */
-            --warning-color: #f59e0b; /* Orange */
-            --danger-color: #ef4444; /* Red */
-            --info-color: #3b82f6; /* Blue */
+            --success-color: #10b981;
+            /* Green */
+            --warning-color: #f59e0b;
+            /* Orange */
+            --danger-color: #ef4444;
+            /* Red */
+            --info-color: #3b82f6;
+            /* Blue */
         }
 
         html,
@@ -77,6 +82,7 @@
             transition: color 0.3s ease;
             cursor: pointer;
         }
+
         .nav-link:hover,
         .navbar-brand:hover,
         .nav-link.active {
@@ -93,16 +99,21 @@
             border: 1px solid var(--border-color);
             border-radius: 0.75rem;
         }
+
         .dropdown-item.active,
         .dropdown-item:active {
-            color: var(--secondary-color); /* This makes the text of the active dropdown item your theme's secondary color */
+            color: var(--secondary-color);
+            /* This makes the text of the active dropdown item your theme's secondary color */
             text-decoration: none;
-            background-color: var(--bg-light-transparent); /* This sets the background of the active dropdown item to your theme's light transparent background */
+            background-color: var(--bg-light-transparent);
+            /* This sets the background of the active dropdown item to your theme's light transparent background */
         }
+
         .dropdown-item {
             color: var(--text-secondary);
             cursor: pointer;
         }
+
         .dropdown-item:hover {
             background-color: var(--bg-light-transparent);
             color: var(--secondary-color);
@@ -117,6 +128,7 @@
             transition: all 0.3s ease;
             font-weight: 600;
         }
+
         .btn-dashboard-nav:hover {
             background: transparent;
             color: var(--secondary-color);
@@ -148,6 +160,7 @@
                 opacity: 0;
                 transform: translateY(20px);
             }
+
             to {
                 opacity: 1;
                 transform: translateY(0);
@@ -161,19 +174,20 @@
             align-items: center;
             justify-content: center;
             padding-top: 80px;
-            background: linear-gradient(
-                    135deg,
+            background: linear-gradient(135deg,
                     var(--primary-color) 0%,
-                    var(--bg-dark) 100%
-            );
+                    var(--bg-dark) 100%);
         }
+
         .hero-section .display-3 {
             font-weight: 700;
         }
+
         .hero-section .lead {
             font-size: 1.25rem;
             color: var(--text-secondary);
         }
+
         .btn-cta {
             background: var(--secondary-color);
             color: var(--bg-dark);
@@ -185,6 +199,7 @@
             letter-spacing: 1px;
             cursor: pointer;
         }
+
         .btn-cta:hover {
             transform: translateY(-5px);
             box-shadow: 0 10px 20px rgba(38, 208, 206, 0.2);
@@ -202,6 +217,7 @@
             box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.15);
             margin-bottom: 2.5rem;
         }
+
         .content-card .card-header {
             background: transparent;
             border-bottom: 1px solid var(--border-color);
@@ -221,6 +237,7 @@
             color: var(--text-secondary);
             font-weight: 500;
         }
+
         .form-control,
         .form-select {
             background-color: rgba(0, 0, 0, 0.25);
@@ -229,6 +246,7 @@
             padding: 0.75rem 1rem;
             border-radius: 0.5rem;
         }
+
         .form-control:focus,
         .form-select:focus {
             background-color: rgba(0, 0, 0, 0.3);
@@ -236,14 +254,17 @@
             border-color: var(--secondary-color);
             box-shadow: 0 0 0 0.25rem rgba(38, 208, 206, 0.25);
         }
+
         .modal-content {
             background-color: #1e293b;
             border: 1px solid var(--secondary-color);
             border-radius: 1rem;
         }
+
         .table {
             color: var(--text-secondary);
         }
+
         .table thead th {
             color: var(--text-primary);
             border: none;
@@ -251,10 +272,12 @@
             text-transform: uppercase;
             letter-spacing: 0.5px;
         }
+
         .table tbody tr {
             border-color: var(--border-color);
         }
-        .table > :not(caption) > * > * {
+
+        .table> :not(caption)>*>* {
             padding: 1rem;
         }
 
@@ -267,26 +290,32 @@
             border: 1px solid var(--border-color);
             transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
+
         .slot-card:hover {
             transform: translateY(-5px);
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
         }
+
         .slot-card .slot-icon {
             font-size: 2.5rem;
         }
+
         .slot-card .slot-number {
             font-size: 1.5rem;
             font-weight: 600;
             color: var(--text-primary);
             margin-top: 1rem;
         }
+
         .slot-card .slot-status {
             font-weight: 500;
         }
+
         .slot-card.available .slot-icon,
         .slot-card.available .slot-status {
             color: #34d399;
         }
+
         .slot-card.occupied .slot-icon,
         .slot-card.occupied .slot-status {
             color: #f87171;
@@ -295,19 +324,25 @@
         /* --- Pusat Pemantauan Dashboard Parkir Motor dan Mobil --- */
         .glass-card {
             background: var(--bg-light-transparent);
-            backdrop-filter: blur(12px); /* Slightly more blur */
+            backdrop-filter: blur(12px);
+            /* Slightly more blur */
             border: 1px solid var(--border-color);
-            border-radius: 18px; /* Slightly more rounded */
-            transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1); /* Smoother transition */
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2); /* Initial subtle shadow */
+            border-radius: 18px;
+            /* Slightly more rounded */
+            transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+            /* Smoother transition */
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            /* Initial subtle shadow */
             display: flex;
             flex-direction: column;
             height: 100%;
         }
 
         .glass-card:hover {
-            transform: translateY(-7px); /* More pronounced lift */
-            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.4); /* Stronger shadow on hover */
+            transform: translateY(-7px);
+            /* More pronounced lift */
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.4);
+            /* Stronger shadow on hover */
         }
 
         h1,
@@ -338,46 +373,46 @@
         }
 
         ::-webkit-scrollbar-thumb {
-            background: linear-gradient(
-                    180deg,
+            background: linear-gradient(180deg,
                     var(--secondary-color),
-                    var(--primary-color)
-            );
+                    var(--primary-color));
             border-radius: 10px;
         }
 
         ::-webkit-scrollbar-thumb:hover {
-            background: linear-gradient(
-                    180deg,
+            background: linear-gradient(180deg,
                     var(--secondary-color) 90,
-                    var(--primary-color) 90
-            );
+                    var(--primary-color) 90);
         }
 
         /* --- Header --- */
         .header-title {
-            background: linear-gradient(
-                    135deg,
+            background: linear-gradient(135deg,
                     var(--text-primary),
-                    var(--secondary-color)
-            );
+                    var(--secondary-color));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
             font-weight: 800;
-            font-size: 3.5rem; /* Slightly larger */
+            font-size: 3.5rem;
+            /* Slightly larger */
             text-align: center;
             margin-bottom: 0.75rem;
-            animation: fadeInDown 1s ease-out; /* Animation */
+            animation: fadeInDown 1s ease-out;
+            /* Animation */
         }
 
         .header-subtitle {
             color: var(--text-secondary);
             text-align: center;
-            font-size: 1.3rem; /* Slightly larger */
-            margin-bottom: 4rem; /* More space */
-            animation: fadeInUp 1s ease-out 0.2s forwards; /* Animation with delay */
-            opacity: 0; /* Hidden initially */
+            font-size: 1.3rem;
+            /* Slightly larger */
+            margin-bottom: 4rem;
+            /* More space */
+            animation: fadeInUp 1s ease-out 0.2s forwards;
+            /* Animation with delay */
+            opacity: 0;
+            /* Hidden initially */
         }
 
         @keyframes fadeInDown {
@@ -385,6 +420,7 @@
                 opacity: 0;
                 transform: translateY(-30px);
             }
+
             to {
                 opacity: 1;
                 transform: translateY(0);
@@ -396,6 +432,7 @@
                 opacity: 0;
                 transform: translateY(20px);
             }
+
             to {
                 opacity: 1;
                 transform: translateY(0);
@@ -405,7 +442,8 @@
         /* --- Metric Cards --- */
         .metric-card {
             text-align: center;
-            padding: 2.2rem; /* Slightly more padding */
+            padding: 2.2rem;
+            /* Slightly more padding */
             position: relative;
             overflow: hidden;
         }
@@ -416,16 +454,16 @@
             top: 0;
             left: 0;
             right: 0;
-            height: 5px; /* Thicker accent line */
-            background: linear-gradient(
-                    90deg,
+            height: 5px;
+            /* Thicker accent line */
+            background: linear-gradient(90deg,
                     var(--secondary-color),
-                    var(--primary-color)
-            );
+                    var(--primary-color));
         }
 
         .metric-number {
-            font-size: 2.8rem; /* Larger number */
+            font-size: 2.8rem;
+            /* Larger number */
             font-weight: 800;
             color: var(--text-primary);
             margin-bottom: 0.5rem;
@@ -434,40 +472,52 @@
         .metric-label {
             color: var(--text-secondary);
             font-weight: 500;
-            font-size: 1rem; /* Slightly larger label */
+            font-size: 1rem;
+            /* Slightly larger label */
             opacity: 0.8;
         }
 
         /* --- Parking Slots ENHANCED --- */
         .slot-grid {
             /* This is the container div.slot-grid in your HTML */
-            display: grid; /* Keep the grid for multiple columns */
-            grid-template-columns: repeat(
-        auto-fit,
-        minmax(140px, 1fr)
-    ); /* More flexible grid */
-            gap: 1.2rem; /* Slightly more gap */
-            flex-grow: 1; /* Important for taking remaining space in glass-card */
+            display: grid;
+            /* Keep the grid for multiple columns */
+            grid-template-columns: repeat(auto-fit,
+                    minmax(140px, 1fr));
+            /* More flexible grid */
+            gap: 1.2rem;
+            /* Slightly more gap */
+            flex-grow: 1;
+            /* Important for taking remaining space in glass-card */
         }
 
         .parking-slot {
             position: relative;
             z-index: 1;
-            padding: 1.8rem; /* More padding */
+            padding: 1.8rem;
+            /* More padding */
             border-radius: 14px;
             font-weight: 600;
             transition: all 0.3s ease;
             overflow: hidden;
             border: 2px solid transparent;
             cursor: pointer;
-            width: 100%; /* Each slot card will take full width of its grid column */
-            box-sizing: border-box; /* Ensure padding doesn't add to width */
-            display: flex; /* Make each slot a flex container */
-            flex-direction: column; /* Icon and text content will stack vertically */
-            align-items: center; /* Center horizontally */
-            justify-content: center; /* Center vertically */
-            gap: 0.8rem; /* Space between icon and text elements */
-            text-align: center; /* Center text within the slot */
+            width: 100%;
+            /* Each slot card will take full width of its grid column */
+            box-sizing: border-box;
+            /* Ensure padding doesn't add to width */
+            display: flex;
+            /* Make each slot a flex container */
+            flex-direction: column;
+            /* Icon and text content will stack vertically */
+            align-items: center;
+            /* Center horizontally */
+            justify-content: center;
+            /* Center vertically */
+            gap: 0.8rem;
+            /* Space between icon and text elements */
+            text-align: center;
+            /* Center text within the slot */
         }
 
         .parking-slot.available {
@@ -484,53 +534,65 @@
 
         /* Style for the car icon */
         .parking-slot .slot-icon {
-            font-size: 3.5rem; /* Larger icon size */
-            color: rgba(255, 255, 255, 0.25); /* More visible, yet subtle */
+            font-size: 3.5rem;
+            /* Larger icon size */
+            color: rgba(255, 255, 255, 0.25);
+            /* More visible, yet subtle */
             opacity: 0.9;
-            margin-bottom: 0.5rem; /* Space between icon and info */
+            margin-bottom: 0.5rem;
+            /* Space between icon and info */
         }
 
         /* Text information for the slot (e.g., "Slot 1") */
         .parking-slot .slot-info {
-            font-size: 1.2rem; /* Larger slot info */
-            margin-bottom: 0.4rem; /* Reduced margin for tighter look */
+            font-size: 1.2rem;
+            /* Larger slot info */
+            margin-bottom: 0.4rem;
+            /* Reduced margin for tighter look */
             font-weight: 700;
         }
 
         /* Status text for the slot (e.g., "Kosong") */
         .parking-slot .slot-status {
-            font-size: 0.95rem; /* Slightly larger status */
+            font-size: 0.95rem;
+            /* Slightly larger status */
             opacity: 0.95;
             font-weight: 500;
         }
 
         /* Additional details for occupied slots */
         .parking-slot .slot-details {
-            font-size: 0.75rem; /* Slightly larger details */
-            margin-top: 0.7rem; /* Space after status */
+            font-size: 0.75rem;
+            /* Slightly larger details */
+            margin-top: 0.7rem;
+            /* Space after status */
             opacity: 0.85;
             line-height: 1.4;
         }
 
         /* Override hover style for parking-slot */
         .parking-slot:hover {
-            transform: translateY(-3px) scale(1.02); /* Slight lift and scale on hover */
+            transform: translateY(-3px) scale(1.02);
+            /* Slight lift and scale on hover */
             box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
-            border-color: var(--secondary-color); /* Highlight on border */
+            border-color: var(--secondary-color);
+            /* Highlight on border */
         }
 
         .system-health {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding: 1.2rem; /* More padding */
+            padding: 1.2rem;
+            /* More padding */
             background: rgba(16, 185, 129, 0.1);
             border: 1px solid rgba(16, 185, 129, 0.3);
             border-radius: 12px;
-            margin-top: 2rem; /* More space */
+            margin-top: 2rem;
+            /* More space */
         }
 
-        .system-health > div:first-child {
+        .system-health>div:first-child {
             display: flex;
             align-items: center;
         }
@@ -548,8 +610,10 @@
 
         .status-online {
             background: var(--secondary-color);
-            box-shadow: 0 0 12px rgba(38, 208, 206, 0.7); /* Stronger glow */
-            animation: pulse 2s infinite cubic-bezier(0.4, 0, 0.6, 1); /* Smoother pulse */
+            box-shadow: 0 0 12px rgba(38, 208, 206, 0.7);
+            /* Stronger glow */
+            animation: pulse 2s infinite cubic-bezier(0.4, 0, 0.6, 1);
+            /* Smoother pulse */
         }
 
         .status-offline {
@@ -561,10 +625,12 @@
                 opacity: 1;
                 transform: scale(1);
             }
+
             50% {
                 opacity: 0.7;
                 transform: scale(1.05);
             }
+
             100% {
                 opacity: 1;
                 transform: scale(1);
@@ -577,7 +643,8 @@
             flex-grow: 1;
             height: auto;
             max-height: 640px;
-            padding: 1.5rem; /* More padding */
+            padding: 1.5rem;
+            /* More padding */
         }
 
         .btn-group .btn {
@@ -590,11 +657,9 @@
         }
 
         .btn-group .btn.active {
-            background: linear-gradient(
-                    90deg,
+            background: linear-gradient(90deg,
                     var(--secondary-color),
-                    var(--primary-color)
-            );
+                    var(--primary-color));
             color: var(--text-primary);
             border-color: transparent;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
@@ -608,20 +673,22 @@
         /* --- Quick Stats --- */
         .quick-stats {
             display: grid;
-            grid-template-columns: repeat(
-        auto-fit,
-        minmax(130px, 1fr)
-    ); /* Adjusted grid */
-            gap: 1.2rem; /* More gap */
+            grid-template-columns: repeat(auto-fit,
+                    minmax(130px, 1fr));
+            /* Adjusted grid */
+            gap: 1.2rem;
+            /* More gap */
             position: relative;
             overflow: hidden;
         }
 
         .quick-stat-item {
             text-align: center;
-            padding: 1.5rem; /* More padding */
+            padding: 1.5rem;
+            /* More padding */
             background: rgba(255, 255, 255, 0.05);
-            border-radius: 12px; /* More rounded */
+            border-radius: 12px;
+            /* More rounded */
             /* border: 1px solid var(--border-color); Ini adalah border solid standar */
             transition: all 0.3s ease;
             /* Penting: Set position ke relative agar pseudo-element ::before bisa diposisikan absolut di dalamnya */
@@ -637,14 +704,16 @@
             top: 0;
             left: 0;
             right: 0;
-            height: 8px; /* Tebal garis */
-            background: linear-gradient(
-                    90deg,
+            height: 8px;
+            /* Tebal garis */
+            background: linear-gradient(90deg,
                     var(--secondary-color),
-                    var(--primary-color)
-            ); /* Gradien untuk garis */
-            border-top-left-radius: 12px; /* Ikuti border-radius induk */
-            border-top-right-radius: 12px; /* Ikuti border-radius induk */
+                    var(--primary-color));
+            /* Gradien untuk garis */
+            border-top-left-radius: 12px;
+            /* Ikuti border-radius induk */
+            border-top-right-radius: 12px;
+            /* Ikuti border-radius induk */
         }
 
         .quick-stat-item:hover {
@@ -654,13 +723,15 @@
         }
 
         .quick-stat-number {
-            font-size: 1.8rem; /* Larger number */
+            font-size: 1.8rem;
+            /* Larger number */
             font-weight: 700;
             color: var(--secondary-color);
         }
 
         .quick-stat-label {
-            font-size: 0.9rem; /* Slightly larger label */
+            font-size: 0.9rem;
+            /* Slightly larger label */
             color: var(--text-secondary);
             margin-top: 0.4rem;
             opacity: 0.9;
@@ -670,13 +741,16 @@
         .activity-item {
             display: flex;
             align-items: center;
-            padding: 1.2rem; /* More padding */
-            border-bottom: 1px solid rgba(255, 255, 255, 0.08); /* Lighter border */
+            padding: 1.2rem;
+            /* More padding */
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            /* Lighter border */
             transition: all 0.3s ease;
         }
 
         .activity-item:last-child {
-            border-bottom: none; /* No border on last item */
+            border-bottom: none;
+            /* No border on last item */
         }
 
         .activity-item:hover {
@@ -684,24 +758,26 @@
         }
 
         .activity-icon {
-            min-width: 45px; /* Larger icon */
-            height: 45px; /* Larger icon */
+            min-width: 45px;
+            /* Larger icon */
+            height: 45px;
+            /* Larger icon */
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            margin-right: 1.2rem; /* More space */
-            font-size: 1.4rem; /* Larger icon font */
+            margin-right: 1.2rem;
+            /* More space */
+            font-size: 1.4rem;
+            /* Larger icon font */
             color: white;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
         }
 
         .activity-icon.entry {
-            background: linear-gradient(
-                    135deg,
+            background: linear-gradient(135deg,
                     var(--secondary-color),
-                    var(--success-color)
-            );
+                    var(--success-color));
         }
 
         .activity-icon.exit {
@@ -711,29 +787,40 @@
         /* --- Alert Panel --- */
         .alert-panel {
             position: fixed;
-            top: 25px; /* Slightly lower */
-            right: 25px; /* Slightly more to the right */
-            max-width: 560px; /* Slightly wider */
+            top: 25px;
+            /* Slightly lower */
+            right: 25px;
+            /* Slightly more to the right */
+            max-width: 560px;
+            /* Slightly wider */
             z-index: 1050;
         }
 
         .custom-alert {
-            background: rgba(255, 255, 255, 0.1); /* Slightly more opaque */
-            backdrop-filter: blur(15px); /* More blur */
-            border: 1px solid rgba(255, 255, 255, 0.15); /* Slightly stronger border */
+            background: rgba(255, 255, 255, 0.1);
+            /* Slightly more opaque */
+            backdrop-filter: blur(15px);
+            /* More blur */
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            /* Slightly stronger border */
             color: var(--text-primary);
-            border-radius: 14px; /* More rounded */
-            margin-bottom: 1.2rem; /* More space between alerts */
+            border-radius: 14px;
+            /* More rounded */
+            margin-bottom: 1.2rem;
+            /* More space between alerts */
             box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
-            animation: slideIn 0.4s ease-out; /* Smoother animation */
+            animation: slideIn 0.4s ease-out;
+            /* Smoother animation */
         }
 
         .custom-alert .btn-close {
-            filter: invert(1); /* Ensure close button is visible */
+            filter: invert(1);
+            /* Ensure close button is visible */
             opacity: 0.7;
             font-size: 0.8rem;
             padding: 0.8rem;
         }
+
         .custom-alert .btn-close:hover {
             opacity: 1;
         }
@@ -742,18 +829,22 @@
         .custom-alert.alert-info {
             border-left: 5px solid var(--info-color);
         }
+
         .custom-alert.alert-warning {
             border-left: 5px solid var(--warning-color);
         }
+
         .custom-alert.alert-danger {
             border-left: 5px solid var(--danger-color);
         }
+
         .custom-alert.alert-success {
             border-left: 5px solid var(--success-color);
         }
 
         .progress-custom {
-            height: 10px; /* Thicker progress bar */
+            height: 10px;
+            /* Thicker progress bar */
             background: rgba(255, 255, 255, 0.1);
             border-radius: 5px;
             overflow: hidden;
@@ -762,13 +853,12 @@
 
         .progress-bar-custom {
             height: 100%;
-            background: linear-gradient(
-                    90deg,
+            background: linear-gradient(90deg,
                     var(--secondary-color),
-                    var(--primary-color)
-            );
+                    var(--primary-color));
             border-radius: 5px;
-            transition: width 0.5s ease-out; /* Smoother transition */
+            transition: width 0.5s ease-out;
+            /* Smoother transition */
         }
 
         /* --- Loading Spinner --- */
@@ -781,6 +871,7 @@
             animation: spin 1s linear infinite;
             margin: 2rem auto;
         }
+
         .table-dark-custom {
             background-color: black !important;
             color: white !important;
@@ -792,10 +883,12 @@
             color: white !important;
             border-color: #333 !important;
         }
+
         @keyframes spin {
             0% {
                 transform: rotate(0deg);
             }
+
             100% {
                 transform: rotate(360deg);
             }
@@ -835,14 +928,16 @@
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg">
         <div class="container">
-            <a class="navbar-brand" href="#" onclick="showSection('pusat-pemantauan-dashboard-parkir-motor')">SmartParking</a>
+            <a class="navbar-brand" href="#"
+                onclick="showSection('pusat-pemantauan-dashboard-parkir-motor')">SmartParking</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"
                     style="background-image: url(\" data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30' %3e%3cpath stroke='rgba(255,255,255,0.8)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22' /%3e%3c/svg%3e\");"></span>
             </button>
             <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
                 <ul class="navbar-nav align-items-center">
-                    <li class="nav-item"><a class="nav-link active" onclick="showSection('pusat-pemantauan-dashboard-parkir-motor')">Beranda</a></li>
+                    <li class="nav-item"><a class="nav-link active"
+                            onclick="showSection('pusat-pemantauan-dashboard-parkir-motor')">Beranda</a></li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" role="button"
                             data-bs-toggle="dropdown">Manajemen Parkir</a>
@@ -872,8 +967,10 @@
             <div class="container">
                 <div class="d-flex justify-content-end align-items-center pb-4">
                     <div class="btn-group btn-group-sm" role="group" id="dashboardSectionToggleButtons">
-                        <button type="button" class="btn btn-outline-light active" onclick="showSection('pusat-pemantauan-dashboard-parkir-motor')">Dashboard Motor</button>
-                        <button type="button" class="btn btn-outline-light" onclick="showSection('pusat-pemantauan-dashboard-parkir-mobil')">Dashboard Mobil</button>
+                        <button type="button" class="btn btn-outline-light active"
+                            onclick="showSection('pusat-pemantauan-dashboard-parkir-motor')">Dashboard Motor</button>
+                        <button type="button" class="btn btn-outline-light"
+                            onclick="showSection('pusat-pemantauan-dashboard-parkir-mobil')">Dashboard Mobil</button>
                     </div>
                 </div>
                 <div class="row mb-5">
@@ -887,7 +984,8 @@
                     <div class="col-lg-7 col-md-12 mb-4 mb-lg-4">
                         <div class="glass-card h-100 d-flex flex-column gap-3">
                             <div class="p-4 border-bottom border-secondary">
-                                <h5 class="text-white mb-0"><i class="fa-solid fa-motorcycle me-2"></i>Status Slot Parkir</h5>
+                                <h5 class="text-white mb-0"><i class="fa-solid fa-motorcycle me-2"></i>Status Slot
+                                    Parkir</h5>
                             </div>
                             <div class="slot-grid px-4" id="slotGridMotor"></div>
                             <div class="pb-4 px-4">
@@ -908,47 +1006,57 @@
                         <div class="row h-100">
                             <div class="col-6 mb-4">
                                 <div class="glass-card metric-card h-100">
-                                    <div class="d-flex flex-column align-items-center justify-content-center h-100 text-center">
+                                    <div
+                                        class="d-flex flex-column align-items-center justify-content-center h-100 text-center">
                                         <div class="metric-number" id="occupancyRateMotor">0%</div>
                                         <div class="metric-label">
                                             <i class="fa-solid fa-chart-pie me-2"></i>Tingkat Okupansi
                                         </div>
                                         <div class="progress-custom mt-3 w-100">
-                                            <div class="progress-bar-custom" id="progressBarMotor" style="width: 0%"></div>
+                                            <div class="progress-bar-custom" id="progressBarMotor" style="width: 0%">
+                                            </div>
                                         </div>
-                                        <small class="text-secondary d-block mt-2 w-100" style="font-size: 0.75rem;">Persentase slot terisi dari total</small>
+                                        <small class="text-secondary d-block mt-2 w-100"
+                                            style="font-size: 0.75rem;">Persentase slot terisi dari total</small>
                                     </div>
                                 </div>
                             </div>
                             <div class="col-6 mb-4">
                                 <div class="glass-card metric-card h-100">
                                     <div class="d-flex flex-column align-items-center justify-content-center h-100">
-                                        <div class="metric-number" style="color: var(--success-color);" id="todayEntryMotor">0</div>
+                                        <div class="metric-number" style="color: var(--success-color);"
+                                            id="todayEntryMotor">0</div>
                                         <div class="metric-label">
                                             <i class="fa-solid fa-right-to-bracket me-2"></i>Kendaraan Masuk Hari Ini
                                         </div>
-                                        <small class="text-secondary d-block mt-2" style="font-size: 0.75rem;">Total mobil masuk per hari ini</small>
+                                        <small class="text-secondary d-block mt-2" style="font-size: 0.75rem;">Total
+                                            mobil masuk per hari ini</small>
                                     </div>
                                 </div>
                             </div>
                             <div class="col-6">
                                 <div class="glass-card metric-card h-100">
                                     <div class="d-flex flex-column align-items-center justify-content-center h-100">
-                                        <div class="metric-number" style="color: var(--warning-color);" id="peakHourMotor">--:--</div>
+                                        <div class="metric-number" style="color: var(--warning-color);"
+                                            id="peakHourMotor">--:--</div>
                                         <div class="metric-label">
                                             <i class="fa-solid fa-clock me-2"></i>Jam Masuk Paling Ramai
                                         </div>
-                                        <small class="text-secondary d-block mt-2 text-center" style="font-size: 0.75rem;">Waktu paling banyak kendaraan masuk hari ini</small>
+                                        <small class="text-secondary d-block mt-2 text-center"
+                                            style="font-size: 0.75rem;">Waktu paling banyak kendaraan masuk hari
+                                            ini</small>
                                     </div>
                                 </div>
                             </div>
                             <div class="col-6">
                                 <div class="glass-card metric-card h-100">
-                                    <div class="metric-number" style="color: var(--info-color);" id="lastEntryTimeMotor">--:--</div>
+                                    <div class="metric-number" style="color: var(--info-color);"
+                                        id="lastEntryTimeMotor">--:--</div>
                                     <div class="metric-label">
                                         <i class="fa-solid fa-clock me-2"></i>Kendaraan Masuk Terakhir
                                     </div>
-                                    <small class="text-secondary d-block mt-2" style="font-size: 0.75rem;">Berdasarkan waktu masuk terakhir hari ini</small>
+                                    <small class="text-secondary d-block mt-2" style="font-size: 0.75rem;">Berdasarkan
+                                        waktu masuk terakhir hari ini</small>
                                 </div>
                             </div>
                         </div>
@@ -958,19 +1066,24 @@
                 <div class="row mb-5">
                     <div class="col-lg-8 col-md-12 mb-4">
                         <div class="glass-card h-100">
-                            <div class="d-flex justify-content-between align-items-center p-4 border-bottom border-secondary">
+                            <div
+                                class="d-flex justify-content-between align-items-center p-4 border-bottom border-secondary">
                                 <h5 class="text-white mb-0"><i class="bi bi-graph-up me-2"></i>Penggunaan Parkir</h5>
                                 <div class="btn-group btn-group-sm" role="group" id="chartToggleButtonsMotor">
-                                    <button type="button" class="btn btn-outline-light active" onclick="toggleChartMotor('hourly')">Per Jam</button>
-                                    <button type="button" class="btn btn-outline-light" onclick="toggleChartMotor('weekly')">Mingguan</button>
+                                    <button type="button" class="btn btn-outline-light active"
+                                        onclick="toggleChartMotor('hourly')">Per Jam</button>
+                                    <button type="button" class="btn btn-outline-light"
+                                        onclick="toggleChartMotor('weekly')">Mingguan</button>
                                 </div>
                             </div>
                             <div class="chart-container" style="height: 380px;">
                                 <canvas id="usageChartMotor"></canvas>
-                                <div id="noDataMotorHourlyMessage" style="display: none; text-align: center; color: #a0aec0; font-size: 1.1em; height: 100%; justify-content: center; align-items: center;">
+                                <div id="noDataMotorHourlyMessage"
+                                    style="display: none; text-align: center; color: #a0aec0; font-size: 1.1em; height: 100%; justify-content: center; align-items: center;">
                                     Tidak Ada Data Per Jam
                                 </div>
-                                <div id="noDataMotorWeeklyMessage" style="display: none; text-align: center; color: #a0aec0; font-size: 1.1em; height: 100%; justify-content: center; align-items: center;">
+                                <div id="noDataMotorWeeklyMessage"
+                                    style="display: none; text-align: center; color: #a0aec0; font-size: 1.1em; height: 100%; justify-content: center; align-items: center;">
                                     Tidak Ada Data Mingguan
                                 </div>
                             </div>
@@ -1023,7 +1136,8 @@
                             </div>
                             <div class="chart-container">
                                 <canvas id="departmentChartMotor" style="height: 300px;"></canvas>
-                                <div id="noDataDepartmentMotorMessage" style="display: none; text-align: center; color: #a0aec0; font-size: 1.1em; height: 100%; display: flex; justify-content: center; align-items: center;">
+                                <div id="noDataDepartmentMotorMessage"
+                                    style="display: none; text-align: center; color: #a0aec0; font-size: 1.1em; height: 100%; display: flex; justify-content: center; align-items: center;">
                                     Tidak Ada Data Jurusan
                                 </div>
                             </div>
@@ -1035,7 +1149,8 @@
                     <div class="col-lg-12 col-md-12 mb-4">
                         <div class="glass-card h-100">
                             <div class="p-4 border-bottom border-secondary">
-                                <h5 class="text-white mb-0"><i class="bi bi-clock-history me-2"></i>Aktivitas Terbaru</h5>
+                                <h5 class="text-white mb-0"><i class="bi bi-clock-history me-2"></i>Aktivitas Terbaru
+                                </h5>
                             </div>
                             <div id="recentActivityMotor" style="max-height: 680px; overflow-y: auto;"></div>
                         </div>
@@ -1049,8 +1164,10 @@
             <div class="container">
                 <div class="d-flex justify-content-end align-items-center pb-4">
                     <div class="btn-group btn-group-sm" role="group" id="dashboardSectionToggleButtons">
-                        <button type="button" class="btn btn-outline-light" onclick="showSection('pusat-pemantauan-dashboard-parkir-motor')">Dashboard Motor</button>
-                        <button type="button" class="btn btn-outline-light active" onclick="showSection('pusat-pemantauan-dashboard-parkir-mobil')">Dashboard Mobil</button>
+                        <button type="button" class="btn btn-outline-light"
+                            onclick="showSection('pusat-pemantauan-dashboard-parkir-motor')">Dashboard Motor</button>
+                        <button type="button" class="btn btn-outline-light active"
+                            onclick="showSection('pusat-pemantauan-dashboard-parkir-mobil')">Dashboard Mobil</button>
                     </div>
                 </div>
                 <div class="row mb-5">
@@ -1064,7 +1181,8 @@
                     <div class="col-lg-7 col-md-12 mb-4 mb-lg-4">
                         <div class="glass-card h-100 d-flex flex-column gap-3">
                             <div class="p-4 border-bottom border-secondary">
-                                <h5 class="text-white mb-0"><i class="bi bi-car-front me-2"></i>Status Slot Parkir</h5>
+                                <h5 class="text-white mb-0"><i class="bi bi-car-front me-2"></i>Status Slot Parkir
+                                </h5>
                             </div>
                             <div class="slot-grid px-4" id="slotGridMobil"></div>
                             <div class="pb-4 px-4">
@@ -1085,47 +1203,57 @@
                         <div class="row h-100">
                             <div class="col-6 mb-4">
                                 <div class="glass-card metric-card h-100">
-                                    <div class="d-flex flex-column align-items-center justify-content-center h-100 text-center">
+                                    <div
+                                        class="d-flex flex-column align-items-center justify-content-center h-100 text-center">
                                         <div class="metric-number" id="occupancyRateMobil">0%</div>
                                         <div class="metric-label">
                                             <i class="fa-solid fa-chart-pie me-2"></i>Tingkat Okupansi
                                         </div>
                                         <div class="progress-custom mt-3 w-100">
-                                            <div class="progress-bar-custom" id="progressBarMobil" style="width: 0%"></div>
+                                            <div class="progress-bar-custom" id="progressBarMobil" style="width: 0%">
+                                            </div>
                                         </div>
-                                        <small class="text-secondary d-block mt-2 w-100" style="font-size: 0.75rem;">Persentase slot terisi dari total</small>
+                                        <small class="text-secondary d-block mt-2 w-100"
+                                            style="font-size: 0.75rem;">Persentase slot terisi dari total</small>
                                     </div>
                                 </div>
                             </div>
                             <div class="col-6 mb-4">
                                 <div class="glass-card metric-card h-100">
                                     <div class="d-flex flex-column align-items-center justify-content-center h-100">
-                                        <div class="metric-number" style="color: var(--success-color);" id="todayEntryMobil">0</div>
+                                        <div class="metric-number" style="color: var(--success-color);"
+                                            id="todayEntryMobil">0</div>
                                         <div class="metric-label">
                                             <i class="fa-solid fa-right-to-bracket me-2"></i>Kendaraan Masuk Hari Ini
                                         </div>
-                                        <small class="text-secondary d-block mt-2" style="font-size: 0.75rem;">Total mobil masuk per hari ini</small>
+                                        <small class="text-secondary d-block mt-2" style="font-size: 0.75rem;">Total
+                                            mobil masuk per hari ini</small>
                                     </div>
                                 </div>
                             </div>
                             <div class="col-6">
                                 <div class="glass-card metric-card h-100">
                                     <div class="d-flex flex-column align-items-center justify-content-center h-100">
-                                        <div class="metric-number" style="color: var(--warning-color);" id="peakHourMobil">--:--</div>
+                                        <div class="metric-number" style="color: var(--warning-color);"
+                                            id="peakHourMobil">--:--</div>
                                         <div class="metric-label">
                                             <i class="fa-solid fa-clock me-2"></i>Jam Masuk Paling Ramai
                                         </div>
-                                        <small class="text-secondary d-block mt-2 text-center" style="font-size: 0.75rem;">Waktu paling banyak kendaraan masuk hari ini</small>
+                                        <small class="text-secondary d-block mt-2 text-center"
+                                            style="font-size: 0.75rem;">Waktu paling banyak kendaraan masuk hari
+                                            ini</small>
                                     </div>
                                 </div>
                             </div>
                             <div class="col-6">
                                 <div class="glass-card metric-card h-100">
-                                    <div class="metric-number" style="color: var(--info-color);" id="lastEntryTimeMobil">--:--</div>
+                                    <div class="metric-number" style="color: var(--info-color);"
+                                        id="lastEntryTimeMobil">--:--</div>
                                     <div class="metric-label">
                                         <i class="fa-solid fa-clock me-2"></i>Kendaraan Masuk Terakhir
                                     </div>
-                                    <small class="text-secondary d-block mt-2" style="font-size: 0.75rem;">Berdasarkan waktu masuk terakhir hari ini</small>
+                                    <small class="text-secondary d-block mt-2" style="font-size: 0.75rem;">Berdasarkan
+                                        waktu masuk terakhir hari ini</small>
                                 </div>
                             </div>
                         </div>
@@ -1135,19 +1263,24 @@
                 <div class="row mb-5">
                     <div class="col-lg-8 col-md-12 mb-4">
                         <div class="glass-card h-100">
-                            <div class="d-flex justify-content-between align-items-center p-4 border-bottom border-secondary">
+                            <div
+                                class="d-flex justify-content-between align-items-center p-4 border-bottom border-secondary">
                                 <h5 class="text-white mb-0"><i class="bi bi-graph-up me-2"></i>Penggunaan Parkir</h5>
                                 <div class="btn-group btn-group-sm" role="group" id="chartToggleButtonsMobil">
-                                    <button type="button" class="btn btn-outline-light active" onclick="toggleChartMobil('hourly')">Per Jam</button>
-                                    <button type="button" class="btn btn-outline-light" onclick="toggleChartMobil('weekly')">Mingguan</button>
+                                    <button type="button" class="btn btn-outline-light active"
+                                        onclick="toggleChartMobil('hourly')">Per Jam</button>
+                                    <button type="button" class="btn btn-outline-light"
+                                        onclick="toggleChartMobil('weekly')">Mingguan</button>
                                 </div>
                             </div>
                             <div class="chart-container" style="height: 380px;">
                                 <canvas id="usageChartMobil"></canvas>
-                                <div id="noDataMobilHourlyMessage" style="display: none; text-align: center; color: #a0aec0; font-size: 1.1em; height: 100%; justify-content: center; align-items: center;">
+                                <div id="noDataMobilHourlyMessage"
+                                    style="display: none; text-align: center; color: #a0aec0; font-size: 1.1em; height: 100%; justify-content: center; align-items: center;">
                                     Tidak Ada Data Per Jam
                                 </div>
-                                <div id="noDataMobilWeeklyMessage" style="display: none; text-align: center; color: #a0aec0; font-size: 1.1em; height: 100%; justify-content: center; align-items: center;">
+                                <div id="noDataMobilWeeklyMessage"
+                                    style="display: none; text-align: center; color: #a0aec0; font-size: 1.1em; height: 100%; justify-content: center; align-items: center;">
                                     Tidak Ada Data Mingguan
                                 </div>
                             </div>
@@ -1200,7 +1333,8 @@
                             </div>
                             <div class="chart-container">
                                 <canvas id="departmentChartMobil" style="height: 300px;"></canvas>
-                                <div id="noDataDepartmentMessage" style="display: none; text-align: center; color: #a0aec0; font-size: 1.1em; height: 100%; display: flex; justify-content: center; align-items: center;">
+                                <div id="noDataDepartmentMessage"
+                                    style="display: none; text-align: center; color: #a0aec0; font-size: 1.1em; height: 100%; display: flex; justify-content: center; align-items: center;">
                                     Tidak Ada Data Jurusan
                                 </div>
                             </div>
@@ -1212,7 +1346,8 @@
                     <div class="col-lg-12 col-md-12 mb-4">
                         <div class="glass-card h-100">
                             <div class="p-4 border-bottom border-secondary">
-                                <h5 class="text-white mb-0"><i class="bi bi-clock-history me-2"></i>Aktivitas Terbaru</h5>
+                                <h5 class="text-white mb-0"><i class="bi bi-clock-history me-2"></i>Aktivitas Terbaru
+                                </h5>
                             </div>
                             <div id="recentActivityMobil" style="max-height: 680px; overflow-y: auto;"></div>
                         </div>
@@ -1369,7 +1504,7 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.all.min.js"></script>
-{{--    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>--}}
+    {{--    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> --}}
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2"></script>
 
@@ -1436,7 +1571,8 @@
             });
 
             if (sectionId === 'pusat-pemantauan-dashboard-parkir-motor' && !foundActiveLink) {
-                document.querySelector('.nav-item .nav-link[onclick*="pusat-pemantauan-dashboard-parkir-motor"]').classList.add('active');
+                document.querySelector('.nav-item .nav-link[onclick*="pusat-pemantauan-dashboard-parkir-motor"]').classList
+                    .add('active');
             }
 
             const navbarCollapse = document.getElementById('navbarNav');
@@ -1554,7 +1690,8 @@
                     return;
                 }
 
-                let occupied = 0, total = 0;
+                let occupied = 0,
+                    total = 0;
                 Object.entries(data).forEach(([slotKey, status], index) => {
                     const slotDiv = document.createElement('div');
                     slotDiv.classList.add('parking-slot', status);
@@ -1785,7 +1922,9 @@
                                     responsive: true,
                                     maintainAspectRatio: false,
                                     plugins: {
-                                        legend: { display: false },
+                                        legend: {
+                                            display: false
+                                        },
                                         datalabels: {
                                             color: '#FFFFFF',
                                             font: {
@@ -1808,7 +1947,9 @@
                                                 color: 'rgba(255,255,255,0.08)',
                                                 drawBorder: false
                                             },
-                                            ticks: { color: '#a0aec0' },
+                                            ticks: {
+                                                color: '#a0aec0'
+                                            },
                                             max: Math.max(...values, 5)
                                         },
                                         x: {
@@ -1816,7 +1957,9 @@
                                                 color: 'rgba(255,255,255,0.08)',
                                                 drawBorder: false
                                             },
-                                            ticks: { color: '#a0aec0' }
+                                            ticks: {
+                                                color: '#a0aec0'
+                                            }
                                         }
                                     }
                                 }
@@ -1883,20 +2026,26 @@
                                 labels: aksesLabels.map(label => label.toUpperCase()),
                                 datasets: [{
                                     data: aksesPercentages,
-                                    backgroundColor: aksesLabels.includes('Tidak Ada Data') ? ['#4a5568'] : backgroundColors, // Use a grey color for no data
+                                    backgroundColor: aksesLabels.includes('Tidak Ada Data') ? [
+                                        '#4a5568'
+                                    ] : backgroundColors, // Use a grey color for no data
                                     hoverOffset: 5
                                 }]
                             },
                             options: {
                                 responsive: true,
                                 maintainAspectRatio: false,
-                                layout: { padding: 5 },
+                                layout: {
+                                    padding: 5
+                                },
                                 plugins: {
                                     legend: {
                                         position: 'bottom',
                                         labels: {
                                             color: '#a0aec0',
-                                            font: { size: 12 },
+                                            font: {
+                                                size: 12
+                                            },
                                             padding: 30
                                         }
                                     },
@@ -1904,14 +2053,20 @@
                                         padding: 12,
                                         boxPadding: 6,
                                         cornerRadius: 6,
-                                        titleFont: { size: 13 },
-                                        bodyFont: { size: 13 },
+                                        titleFont: {
+                                            size: 13
+                                        },
+                                        bodyFont: {
+                                            size: 13
+                                        },
                                         callbacks: {
                                             label: function(context) {
                                                 let label = context.label || '';
-                                                if (label === 'TIDAK ADA DATA') return label; // Don't show % for no data
+                                                if (label === 'TIDAK ADA DATA')
+                                                    return label; // Don't show % for no data
                                                 if (label) label += ': ';
-                                                if (context.parsed !== null) label += context.parsed + '%';
+                                                if (context.parsed !== null) label += context.parsed +
+                                                    '%';
                                                 return label;
                                             }
                                         }
@@ -1923,7 +2078,8 @@
                                             size: 12
                                         },
                                         formatter: (value, context) => {
-                                            if (context.chart.data.labels[context.dataIndex] === 'TIDAK ADA DATA') {
+                                            if (context.chart.data.labels[context.dataIndex] ===
+                                                'TIDAK ADA DATA') {
                                                 return '';
                                             }
                                             return `${value}%`;
@@ -1935,7 +2091,9 @@
                     } else {
                         accessChart.data.labels = aksesLabels.map(label => label.toUpperCase());
                         accessChart.data.datasets[0].data = aksesPercentages;
-                        accessChart.data.datasets[0].backgroundColor = aksesLabels.includes('Tidak Ada Data') ? ['#4a5568'] : backgroundColors;
+                        accessChart.data.datasets[0].backgroundColor = aksesLabels.includes('Tidak Ada Data') ? [
+                            '#4a5568'
+                        ] : backgroundColors;
 
                         accessChart.update();
                     }
@@ -1958,7 +2116,8 @@
                     }
 
                     const isFilled = (value) => value && value.trim() !== '' && value !== '-';
-                    const isValid = (entry) => isFilled(entry.nama) && isFilled(entry.nim) && isFilled(entry.jurusan);
+                    const isValid = (entry) => isFilled(entry.nama) && isFilled(entry.nim) && isFilled(entry
+                        .jurusan);
 
                     const now = new Date();
                     const year = now.getFullYear();
@@ -1988,7 +2147,8 @@
                     } else {
                         recentActivityContainer.innerHTML = sorted.map((entry, index) => {
                             const aksesUpper = (entry.akses || '').toUpperCase();
-                            const borderClass = (index < sorted.length - 1) ? 'border-bottom border-secondary' : '';
+                            const borderClass = (index < sorted.length - 1) ?
+                                'border-bottom border-secondary' : '';
 
                             return `
                             <div class="activity-item d-flex align-items-center py-2 px-3 ${borderClass}">
@@ -2011,7 +2171,7 @@
                 if (progressBar) progressBar.style.width = `${rate}%`;
             }
 
-            window.toggleChartMobil = function (mode) {
+            window.toggleChartMobil = function(mode) {
                 if (window.currentChartMode === mode) return;
                 window.currentChartMode = mode;
 
@@ -2117,9 +2277,13 @@
                             borderColor: chartColors.secondary,
                             backgroundColor: (context) => {
                                 const chart = context.chart;
-                                const { ctx, chartArea } = chart;
+                                const {
+                                    ctx,
+                                    chartArea
+                                } = chart;
                                 if (!chartArea) return null;
-                                const gradient = ctx.createLinearGradient(0, chartArea.bottom, 0, chartArea.top);
+                                const gradient = ctx.createLinearGradient(0, chartArea.bottom, 0, chartArea
+                                    .top);
                                 gradient.addColorStop(0, `${chartColors.secondary}00`);
                                 gradient.addColorStop(1, `${chartColors.secondary}40`);
                                 return gradient;
@@ -2212,7 +2376,8 @@
                     return;
                 }
 
-                let occupied = 0, total = 0;
+                let occupied = 0,
+                    total = 0;
                 Object.entries(data).forEach(([slotKey, status], index) => {
                     const slotDiv = document.createElement('div');
                     slotDiv.classList.add('parking-slot', status);
@@ -2234,7 +2399,8 @@
                 // Quick Stats Slot Tersedia
                 if (availableSlotEl) availableSlotEl.textContent = (total - occupied).toString();
             }, () => {
-                if (slotGrid) slotGrid.innerHTML = `<p class="text-white">❌ Gagal memuat data slot parkir motor.</p>`;
+                if (slotGrid) slotGrid.innerHTML =
+                    `<p class="text-white">❌ Gagal memuat data slot parkir motor.</p>`;
             });
 
             if (jamOperasionalEl) {
@@ -2441,7 +2607,9 @@
                                     responsive: true,
                                     maintainAspectRatio: false,
                                     plugins: {
-                                        legend: { display: false },
+                                        legend: {
+                                            display: false
+                                        },
                                         datalabels: {
                                             color: '#FFFFFF',
                                             font: {
@@ -2464,7 +2632,9 @@
                                                 color: 'rgba(255,255,255,0.08)',
                                                 drawBorder: false
                                             },
-                                            ticks: { color: '#a0aec0' },
+                                            ticks: {
+                                                color: '#a0aec0'
+                                            },
                                             max: Math.max(...values, 5)
                                         },
                                         x: {
@@ -2472,7 +2642,9 @@
                                                 color: 'rgba(255,255,255,0.08)',
                                                 drawBorder: false
                                             },
-                                            ticks: { color: '#a0aec0' }
+                                            ticks: {
+                                                color: '#a0aec0'
+                                            }
                                         }
                                     }
                                 }
@@ -2539,20 +2711,26 @@
                                 labels: aksesLabels.map(label => label.toUpperCase()),
                                 datasets: [{
                                     data: aksesPercentages,
-                                    backgroundColor: aksesLabels.includes('Tidak Ada Data') ? ['#4a5568'] : backgroundColors, // Use a grey color for no data
+                                    backgroundColor: aksesLabels.includes('Tidak Ada Data') ? [
+                                        '#4a5568'
+                                    ] : backgroundColors, // Use a grey color for no data
                                     hoverOffset: 5
                                 }]
                             },
                             options: {
                                 responsive: true,
                                 maintainAspectRatio: false,
-                                layout: { padding: 5 },
+                                layout: {
+                                    padding: 5
+                                },
                                 plugins: {
                                     legend: {
                                         position: 'bottom',
                                         labels: {
                                             color: '#a0aec0',
-                                            font: { size: 12 },
+                                            font: {
+                                                size: 12
+                                            },
                                             padding: 30
                                         }
                                     },
@@ -2560,14 +2738,20 @@
                                         padding: 12,
                                         boxPadding: 6,
                                         cornerRadius: 6,
-                                        titleFont: { size: 13 },
-                                        bodyFont: { size: 13 },
+                                        titleFont: {
+                                            size: 13
+                                        },
+                                        bodyFont: {
+                                            size: 13
+                                        },
                                         callbacks: {
                                             label: function(context) {
                                                 let label = context.label || '';
-                                                if (label === 'TIDAK ADA DATA') return label; // Don't show % for no data
+                                                if (label === 'TIDAK ADA DATA')
+                                                    return label; // Don't show % for no data
                                                 if (label) label += ': ';
-                                                if (context.parsed !== null) label += context.parsed + '%';
+                                                if (context.parsed !== null) label += context.parsed +
+                                                    '%';
                                                 return label;
                                             }
                                         }
@@ -2579,7 +2763,8 @@
                                             size: 12
                                         },
                                         formatter: (value, context) => {
-                                            if (context.chart.data.labels[context.dataIndex] === 'TIDAK ADA DATA') {
+                                            if (context.chart.data.labels[context.dataIndex] ===
+                                                'TIDAK ADA DATA') {
                                                 return '';
                                             }
                                             return `${value}%`;
@@ -2591,7 +2776,8 @@
                     } else {
                         accessChartMotor.data.labels = aksesLabels.map(label => label.toUpperCase());
                         accessChartMotor.data.datasets[0].data = aksesPercentages;
-                        accessChartMotor.data.datasets[0].backgroundColor = aksesLabels.includes('Tidak Ada Data') ? ['#4a5568'] : backgroundColors;
+                        accessChartMotor.data.datasets[0].backgroundColor = aksesLabels.includes('Tidak Ada Data') ?
+                            ['#4a5568'] : backgroundColors;
 
                         accessChartMotor.update();
                     }
@@ -2614,7 +2800,8 @@
                     }
 
                     const isFilled = (value) => value && value.trim() !== '' && value !== '-';
-                    const isValid = (entry) => isFilled(entry.nama) && isFilled(entry.nim) && isFilled(entry.jurusan);
+                    const isValid = (entry) => isFilled(entry.nama) && isFilled(entry.nim) && isFilled(entry
+                        .jurusan);
 
                     const now = new Date();
                     const year = now.getFullYear();
@@ -2644,7 +2831,8 @@
                     } else {
                         recentActivityContainer.innerHTML = sorted.map((entry, index) => {
                             const aksesUpper = (entry.akses || '').toUpperCase();
-                            const borderClass = (index < sorted.length - 1) ? 'border-bottom border-secondary' : '';
+                            const borderClass = (index < sorted.length - 1) ?
+                                'border-bottom border-secondary' : '';
 
                             return `
                             <div class="activity-item d-flex align-items-center py-2 px-3 ${borderClass}">
@@ -2667,7 +2855,7 @@
                 if (progressBar) progressBar.style.width = `${rate}%`;
             }
 
-            window.toggleChartMotor = function (mode) {
+            window.toggleChartMotor = function(mode) {
                 if (window.currentChartModeMotor === mode) return;
                 window.currentChartModeMotor = mode;
 
@@ -2774,9 +2962,13 @@
                             borderColor: chartColors.secondary,
                             backgroundColor: (context) => {
                                 const chart = context.chart;
-                                const { ctx, chartArea } = chart;
+                                const {
+                                    ctx,
+                                    chartArea
+                                } = chart;
                                 if (!chartArea) return null;
-                                const gradient = ctx.createLinearGradient(0, chartArea.bottom, 0, chartArea.top);
+                                const gradient = ctx.createLinearGradient(0, chartArea.bottom, 0, chartArea
+                                    .top);
                                 gradient.addColorStop(0, `${chartColors.secondary}00`);
                                 gradient.addColorStop(1, `${chartColors.secondary}40`);
                                 return gradient;
@@ -2982,6 +3174,11 @@
             let aksesChart = null;
             let hourlyChart = null;
 
+            // Pagination variables
+            let currentPage = 1;
+            const itemsPerPage = 10;
+            let totalEntries = [];
+
             // Get today's date in YYYY-MM-DD format
             const today = new Date();
             const todayString = today.getFullYear() + '-' +
@@ -3182,34 +3379,125 @@
                 });
             }
 
-            listEl.innerHTML = loadingSpinner;
-            slotListEl.innerHTML = '<div class="col-12"><div class="spinner"></div></div>';
+            // Pagination functions
+            function renderPagination() {
+                const totalPages = Math.ceil(totalEntries.length / itemsPerPage);
 
-            onValue(parkirRef, (snapshot) => {
-                const data = snapshot.val() || {};
-                let html = '',
-                    entries = [];
+                // Get pagination elements based on type with consistent naming
+                const paginationId = `pagination${type}`;
+                const paginationContainer = document.getElementById(paginationId);
 
-                Object.entries(data).forEach(([dateTime, value]) => {
-                    if (typeof value === 'object' && (value.nim || value.NIM)) {
-                        // Only include entries from today
-                        if (value.tanggal === todayString) {
-                            entries.push({
-                                tanggal: value.tanggal || '',
-                                waktu: value.waktu || '',
-                                nim: value.nim || value.NIM || '',
-                                nama: value.nama || value.Nama || '',
-                                jurusan: value.jurusan || value.Jurusan || '',
-                                akses: value.akses || '',
-                            });
-                        }
+                // Get info elements based on type with consistent naming
+                const showingStartId = `showingStart${type}`;
+                const showingEndId = `showingEnd${type}`;
+                const totalEntriesId = `totalEntries${type}`;
+
+                const showingStartEl = document.getElementById(showingStartId);
+                const showingEndEl = document.getElementById(showingEndId);
+                const totalEntriesEl = document.getElementById(totalEntriesId);
+
+                // Update info display
+                if (totalEntries.length > 0) {
+                    const startItem = (currentPage - 1) * itemsPerPage + 1;
+                    const endItem = Math.min(currentPage * itemsPerPage, totalEntries.length);
+
+                    if (showingStartEl) showingStartEl.textContent = startItem;
+                    if (showingEndEl) showingEndEl.textContent = endItem;
+                    if (totalEntriesEl) totalEntriesEl.textContent = totalEntries.length;
+                } else {
+                    if (showingStartEl) showingStartEl.textContent = '0';
+                    if (showingEndEl) showingEndEl.textContent = '0';
+                    if (totalEntriesEl) totalEntriesEl.textContent = '0';
+                }
+
+                // Clear pagination if no container found
+                if (!paginationContainer) {
+                    console.warn(`Pagination container not found: ${paginationId}`);
+                    return;
+                }
+
+                // Hide pagination if only one page or no data
+                if (totalPages <= 1) {
+                    paginationContainer.innerHTML = '';
+                    return;
+                }
+
+                let paginationHtml = '';
+
+                // Previous button
+                paginationHtml += `
+            <li class="page-item ${currentPage === 1 ? 'disabled' : ''}">
+                <a class="page-link" href="#" onclick="changePage${type}(${currentPage - 1}); return false;" aria-label="Previous">
+                    <i class="fas fa-chevron-left"></i>
+                </a>
+            </li>
+        `;
+
+                // Page numbers
+                const startPage = Math.max(1, currentPage - 2);
+                const endPage = Math.min(totalPages, currentPage + 2);
+
+                if (startPage > 1) {
+                    paginationHtml += `
+                <li class="page-item">
+                    <a class="page-link" href="#" onclick="changePage${type}(1); return false;">1</a>
+                </li>
+            `;
+                    if (startPage > 2) {
+                        paginationHtml += `
+                    <li class="page-item disabled">
+                        <span class="page-link">...</span>
+                    </li>
+                `;
                     }
-                });
+                }
 
-                entries.sort((a, b) => (b.tanggal + ' ' + b.waktu).localeCompare(a.tanggal + ' ' + a.waktu));
+                for (let i = startPage; i <= endPage; i++) {
+                    paginationHtml += `
+                <li class="page-item ${i === currentPage ? 'active' : ''}">
+                    <a class="page-link" href="#" onclick="changePage${type}(${i}); return false;">
+                        ${i}
+                    </a>
+                </li>
+            `;
+                }
 
-                if (entries.length) {
-                    entries.forEach(e => {
+                if (endPage < totalPages) {
+                    if (endPage < totalPages - 1) {
+                        paginationHtml += `
+                    <li class="page-item disabled">
+                        <span class="page-link">...</span>
+                    </li>
+                `;
+                    }
+                    paginationHtml += `
+                <li class="page-item">
+                    <a class="page-link" href="#" onclick="changePage${type}(${totalPages}); return false;">${totalPages}</a>
+                </li>
+            `;
+                }
+
+                // Next button
+                paginationHtml += `
+            <li class="page-item ${currentPage === totalPages ? 'disabled' : ''}">
+                <a class="page-link" href="#" onclick="changePage${type}(${currentPage + 1}); return false;" aria-label="Next">
+                    <i class="fas fa-chevron-right"></i>
+                </a>
+            </li>
+        `;
+
+                paginationContainer.innerHTML = paginationHtml;
+            }
+
+            function renderTable() {
+                const startIndex = (currentPage - 1) * itemsPerPage;
+                const endIndex = startIndex + itemsPerPage;
+                const currentEntries = totalEntries.slice(startIndex, endIndex);
+
+                let html = '';
+
+                if (currentEntries.length) {
+                    currentEntries.forEach(e => {
                         html +=
                             `<tr>
                         <td>${e.tanggal}</td>
@@ -3225,7 +3513,48 @@
                 } else {
                     html = noDataFound(6, "Tidak ada riwayat parkir hari ini.");
                 }
+
                 listEl.innerHTML = html;
+                renderPagination();
+            }
+
+            // Global function for page change (accessible from onclick)
+            window[`changePage${type}`] = function(page) {
+                const totalPages = Math.ceil(totalEntries.length / itemsPerPage);
+                if (page >= 1 && page <= totalPages) {
+                    currentPage = page;
+                    renderTable();
+                }
+            };
+
+            listEl.innerHTML = loadingSpinner;
+            slotListEl.innerHTML = '<div class="col-12"><div class="spinner"></div></div>';
+
+            onValue(parkirRef, (snapshot) => {
+                const data = snapshot.val() || {};
+                totalEntries = [];
+
+                Object.entries(data).forEach(([dateTime, value]) => {
+                    if (typeof value === 'object' && (value.nim || value.NIM)) {
+                        // Only include entries from today
+                        if (value.tanggal === todayString) {
+                            totalEntries.push({
+                                tanggal: value.tanggal || '',
+                                waktu: value.waktu || '',
+                                nim: value.nim || value.NIM || '',
+                                nama: value.nama || value.Nama || '',
+                                jurusan: value.jurusan || value.Jurusan || '',
+                                akses: value.akses || '',
+                            });
+                        }
+                    }
+                });
+
+                totalEntries.sort((a, b) => (b.tanggal + ' ' + b.waktu).localeCompare(a.tanggal + ' ' + a.waktu));
+
+                // Reset to first page when data changes
+                currentPage = 1;
+                renderTable();
 
                 updateSummaryStats(type, data);
                 updateAksesChart(data);
@@ -3303,7 +3632,9 @@
                         responsive: true,
                         maintainAspectRatio: false,
                         plugins: {
-                            legend: { display: false },
+                            legend: {
+                                display: false
+                            },
                             datalabels: {
                                 color: '#FFFFFF',
                                 font: {
@@ -3321,12 +3652,22 @@
                             y: {
                                 beginAtZero: true,
                                 max: 5,
-                                ticks: { color: '#a0aec0' },
-                                grid: { color: 'rgba(255,255,255,0.08)', drawBorder: false }
+                                ticks: {
+                                    color: '#a0aec0'
+                                },
+                                grid: {
+                                    color: 'rgba(255,255,255,0.08)',
+                                    drawBorder: false
+                                }
                             },
                             x: {
-                                ticks: { color: '#a0aec0' },
-                                grid: { color: 'rgba(255,255,255,0.08)', drawBorder: false }
+                                ticks: {
+                                    color: '#a0aec0'
+                                },
+                                grid: {
+                                    color: 'rgba(255,255,255,0.08)',
+                                    drawBorder: false
+                                }
                             }
                         }
                     }
@@ -3336,7 +3677,8 @@
             setupDashboardMobil();
 
             // --- Chart for Motor ---
-            const ctxMotor = document.getElementById('usageChartMotor')?.getContext('2d'); // Get context for Motor chart
+            const ctxMotor = document.getElementById('usageChartMotor')?.getContext(
+                '2d'); // Get context for Motor chart
             if (ctxMotor) {
                 window.usageChartMotorInstance = new Chart(ctxMotor, { // Create instance for Motor
                     type: 'line',
@@ -3348,7 +3690,9 @@
                         responsive: true,
                         maintainAspectRatio: false,
                         plugins: {
-                            legend: { display: false },
+                            legend: {
+                                display: false
+                            },
                             datalabels: {
                                 color: '#FFFFFF',
                                 font: {
@@ -3366,12 +3710,22 @@
                             y: {
                                 beginAtZero: true,
                                 max: 5,
-                                ticks: { color: '#a0aec0' },
-                                grid: { color: 'rgba(255,255,255,0.08)', drawBorder: false }
+                                ticks: {
+                                    color: '#a0aec0'
+                                },
+                                grid: {
+                                    color: 'rgba(255,255,255,0.08)',
+                                    drawBorder: false
+                                }
                             },
                             x: {
-                                ticks: { color: '#a0aec0' },
-                                grid: { color: 'rgba(255,255,255,0.08)', drawBorder: false }
+                                ticks: {
+                                    color: '#a0aec0'
+                                },
+                                grid: {
+                                    color: 'rgba(255,255,255,0.08)',
+                                    drawBorder: false
+                                }
                             }
                         }
                     }
@@ -3384,53 +3738,6 @@
             setupParkingListeners('Motor');
             setupParkingListeners('Mobil');
             loadJadwalData();
-        });
-    </script>
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const navbar = document.getElementById('mainNavbar');
-            const scrollToTopBtn = document.getElementById("scrollToTopBtn");
-            const scrollAnimateElements = document.querySelectorAll('.scroll-animate');
-
-            // Navbar Scroll Effect
-            const handleNavScroll = () => {
-                if (window.scrollY > 50) navbar.classList.add('scrolled');
-                else navbar.classList.remove('scrolled');
-            };
-
-            // Scroll to Top Button
-            const handleScrollBtn = () => {
-                if (document.body.scrollTop > 200 || document.documentElement.scrollTop > 200) {
-                    scrollToTopBtn.style.display = "block";
-                } else {
-                    scrollToTopBtn.style.display = "none";
-                }
-            };
-            scrollToTopBtn.addEventListener('click', () => window.scrollTo({
-                top: 0,
-                behavior: 'smooth'
-            }));
-
-            // Animate on Scroll
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('is-visible');
-                    }
-                });
-            }, {
-                threshold: 0.1
-            });
-            scrollAnimateElements.forEach(el => observer.observe(el));
-
-            // Event Listeners
-            window.addEventListener('scroll', () => {
-                handleNavScroll();
-                handleScrollBtn();
-            });
-
-            // Initial calls
-            document.getElementById('currentYear').textContent = new Date().getFullYear();
         });
     </script>
 </body>
